@@ -7,22 +7,22 @@ on:
 jobs:
   render:
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 60
 
     steps:
       - name: Download repository
         uses: actions/checkout@v4
 
-      - name: Install rendering dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            xvfb libgl1 libegl1 libxrender1 \
-            libxi6 libxkbcommon0 libsm6 \
-            libxext6 libxfixes3 libxxf86vm1 \
-            libgl1-mesa-dri
+            xvfb ffmpeg libgl1 libegl1 \
+            libxrender1 libxi6 libxkbcommon0 \
+            libsm6 libxext6 libxfixes3 \
+            libxxf86vm1 libgl1-mesa-dri
 
-      - name: Download Blender 5.2.3
+      - name: Download Blender
         run: |
           curl -fL --retry 3 \
             https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz \
@@ -30,23 +30,46 @@ jobs:
           mkdir -p blender-app
           tar -xf blender.tar.xz \
             -C blender-app --strip-components=1
-          blender-app/blender --version
 
-      - name: Render short test animation
+      - name: Fix Blender video settings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("elevator_animation_ready.py")
+          s = p.read_text()
+          s = s.replace(
+              "scene.render.image_settings.file_format='FFMPEG'",
+              "scene.render.image_settings.file_format='PNG'"
+          )
+          s = "\n".join(
+              line for line in s.splitlines()
+              if not line.strip().startswith("scene.render.ffmpeg.")
+          ) + "\n"
+          p.write_text(s)
+          PY
+
+      - name: Render test frames
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
-          mkdir -p "$GITHUB_WORKSPACE/Documents/AI_Shorts/Renders"
+          mkdir -p frames output
           HOME="$GITHUB_WORKSPACE" \
-          xvfb-run -a \
-            blender-app/blender -b -t 4 \
+          xvfb-run -a blender-app/blender -b -t 4 \
             --python elevator_animation_ready.py \
-            --python-expr "import bpy; bpy.context.scene.frame_end=12; bpy.context.scene.render.resolution_percentage=50; bpy.ops.render.render(animation=True)"
+            --python-expr "import bpy; s=bpy.context.scene; s.frame_end=8; s.render.resolution_percentage=50; s.render.image_settings.file_format='PNG'; s.render.filepath='$GITHUB_WORKSPACE/frames/frame_'; bpy.ops.render.render(animation=True)"
 
-      - name: Upload rendered video
+      - name: Convert frames to MP4
+        run: |
+          ffmpeg -y -framerate 24 \
+            -start_number 1 \
+            -i frames/frame_%04d.png \
+            -c:v libx264 -pix_fmt yuv420p \
+            output/elevator_test.mp4
+
+      - name: Upload finished video
         uses: actions/upload-artifact@v4
         with:
           name: elevator-cloud-test
-          path: Documents/AI_Shorts/Renders/elevator_test.mp4
+          path: output/elevator_test.mp4
           if-no-files-found: error
           retention-days: 7
