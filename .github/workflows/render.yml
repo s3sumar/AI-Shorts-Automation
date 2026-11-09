@@ -1,0 +1,52 @@
+
+name: Blender Cloud Render
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+
+      - name: Install rendering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            xvfb libgl1 libegl1 libxrender1 \
+            libxi6 libxkbcommon0 libsm6 \
+            libxext6 libxfixes3 libxxf86vm1 \
+            libgl1-mesa-dri
+
+      - name: Download Blender 5.2.3
+        run: |
+          curl -fL --retry 3 \
+            https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz \
+            -o blender.tar.xz
+          mkdir -p blender-app
+          tar -xf blender.tar.xz \
+            -C blender-app --strip-components=1
+          blender-app/blender --version
+
+      - name: Render short test animation
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/Documents/AI_Shorts/Renders"
+          HOME="$GITHUB_WORKSPACE" \
+          xvfb-run -a \
+            blender-app/blender -b -t 4 \
+            --python elevator_animation_ready.py \
+            --python-expr "import bpy; bpy.context.scene.frame_end=12; bpy.context.scene.render.resolution_percentage=50; bpy.ops.render.render(animation=True)"
+
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: elevator-cloud-test
+          path: Documents/AI_Shorts/Renders/elevator_test.mp4
+          if-no-files-found: error
+          retention-days: 7
