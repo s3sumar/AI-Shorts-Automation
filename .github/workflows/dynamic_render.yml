@@ -1,0 +1,45 @@
+name: Dynamic Blender Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: Choose episode
+        required: true
+        type: choice
+        options:
+          - '001'
+          - '002'
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb ffmpeg libgl1 libegl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxext6 libxfixes3 libxxf86vm1 libgl1-mesa-dri
+      - name: Download Blender
+        run: |
+          curl -fL --retry 3 https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz -o blender.tar.xz
+          mkdir -p blender-app
+          tar -xf blender.tar.xz -C blender-app --strip-components=1
+      - name: Render chosen episode
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          EPISODE_CONFIG: episodes/episode_${{ inputs.episode }}.json
+        run: |
+          mkdir -p frames output
+          xvfb-run -a blender-app/blender -b -t 4 --python story_scene.py --python-expr "import bpy; s=bpy.context.scene; s.frame_end=8; s.render.resolution_percentage=50; s.render.image_settings.file_format='PNG'; s.render.filepath='frames/frame_'; bpy.ops.render.render(animation=True)"
+      - name: Encode MP4
+        run: |
+          ffmpeg -y -framerate 24 -start_number 1 -i frames/frame_%04d.png -c:v libx264 -pix_fmt yuv420p output/episode_${{ inputs.episode }}.mp4
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode-${{ inputs.episode }}-test
+          path: output/*.mp4
+          if-no-files-found: error
