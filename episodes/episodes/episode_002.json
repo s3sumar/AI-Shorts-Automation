@@ -1,0 +1,10 @@
+
+{
+  "episode": 2,
+  "location": "elevator",
+  "character_color": "pale_orange",
+  "lighting": "emergency_red",
+  "floor_display": "-1",
+  "camera": "close_up",
+  "action": "turn_around"
+}
