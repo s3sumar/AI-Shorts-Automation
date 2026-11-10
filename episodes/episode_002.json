@@ -1,10 +1,8 @@
 
 {
   "episode": 2,
-  "location": "elevator",
-  "character_color": "pale_orange",
-  "lighting": "emergency_red",
-  "floor_display": "-1",
-  "camera": "close_up",
-  "action": "turn_around"
+  "opening_floor": "-1",
+  "ending_floor": "HELP",
+  "mood": "red_alert",
+  "character_color": "#E3C6AD"
 }
