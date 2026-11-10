@@ -1,10 +1,8 @@
 
 {
   "episode": 1,
-  "location": "elevator",
-  "character_color": "white",
-  "lighting": "cold_blue",
-  "floor_display": "13",
-  "camera": "slow_zoom",
-  "action": "look_around"
+  "opening_floor": "13",
+  "ending_floor": "-1",
+  "mood": "cold",
+  "character_color": "#C7D4D9"
 }
