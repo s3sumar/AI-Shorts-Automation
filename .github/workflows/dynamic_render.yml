@@ -14,7 +14,7 @@ on:
 jobs:
   render:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,13 +33,14 @@ jobs:
           EPISODE_CONFIG: episodes/episode_${{ inputs.episode }}.json
         run: |
           mkdir -p frames output
-          xvfb-run -a blender-app/blender -b -t 4 --python story_scene.py --python-expr "import bpy; s=bpy.context.scene; s.frame_end=8; s.render.resolution_percentage=50; s.render.image_settings.file_format='PNG'; s.render.filepath='frames/frame_'; bpy.ops.render.render(animation=True)"
+          xvfb-run -a blender-app/blender -b -t 4 --python story_scene.py --python-expr "import bpy; bpy.ops.render.render(animation=True)"
       - name: Encode MP4
         run: |
-          ffmpeg -y -framerate 24 -start_number 1 -i frames/frame_%04d.png -c:v libx264 -pix_fmt yuv420p output/episode_${{ inputs.episode }}.mp4
+          ffmpeg -y -framerate 12 -start_number 1 -i frames/frame_%04d.png -c:v libx264 -crf 20 -preset medium -pix_fmt yuv420p -movflags +faststart output/episode_${{ inputs.episode }}.mp4
       - name: Upload video
         uses: actions/upload-artifact@v4
         with:
-          name: episode-${{ inputs.episode }}-test
+          name: episode-${{ inputs.episode }}-animation-v2
           path: output/*.mp4
           if-no-files-found: error
+          retention-days: 7
