@@ -1,0 +1,9 @@
+{
+  "video": "artifacts/episode_001/episode_001_preview.mp4",
+  "video_report": "artifacts/episode_001/video_validation.json",
+  "video_sha256": "ee7276200bb08df48480d9ffb12a780ff16e826a6527dbabfa02528989b0cab0",
+  "passed": true,
+  "scene_passed": true,
+  "audio_passed": true,
+  "provenance": "Locally verified 45-second Episode 1; see EPISODE_001_REPORT.md"
+}

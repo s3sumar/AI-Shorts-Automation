@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "sha256": "265950bb9371d24d18ecd881abe1f72e2745c5e14394d1564c191701abb96442",
+  "story": {
+    "schema": 1,
+    "series": [
+      {
+        "id": "series_001",
+        "bible": "{\"id\": \"series_001\", \"title\": \"Below Zero\", \"premise\": \"A sealed lower floor borrows the voices of its visitors.\", \"environment\": \"lift_013\", \"season_length\": 2, \"source\": \"verified_original\", \"canon\": {\"floor\": \"-1\", \"doors\": 1, \"lighting\": \"red\", \"passenger_position\": [-0.9, -0.48, 0], \"passenger_head\": [-0.03, 0, 2.35], \"passenger_arms\": [-0.3, 0.3, 0], \"shadow_position\": [0.5, 4.85, 0], \"shadow_head\": [0.12, 0, -0.12], \"shadow_leg_l\": [-0.08, 0, 0], \"shadow_leg_r\": [0.08, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Passenger\", \"color\": \"#C7D4D9\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Listener\", \"face_revealed\": false}}, \"facts\": [\"The lower floor is sealed.\", \"The figure recognizes the passenger.\", \"Its face has not been seen.\"], \"location\": \"inside_lift\"}}",
+        "canon": "{\"floor\": \"0\", \"doors\": 1, \"lighting\": \"cold\", \"passenger_position\": [-0.4, 2.35, 0], \"passenger_head\": [0, 0, 2.35], \"passenger_arms\": [0, 0, 0], \"shadow_position\": [0.5, 4.85, 0], \"shadow_head\": [0.12, 0, -0.12], \"shadow_leg_l\": [-0.08, 0, 0], \"shadow_leg_r\": [0.08, 0, 0], \"shadow_visible\": false, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Passenger\", \"color\": \"#C7D4D9\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Listener\", \"face_revealed\": false}}, \"facts\": [\"The lower floor is sealed.\", \"The figure recognizes the passenger.\", \"Its face has not been seen.\", \"The presence borrows voices.\", \"Silence and the ground control seal it below.\", \"The passenger leaves at ground level.\"], \"location\": \"ground_corridor\"}",
+        "completed": 2,
+        "status": "complete"
+      },
+      {
+        "id": "series_002",
+        "bible": "{\"id\": \"series_002\", \"title\": \"Dead Air Dispatch\", \"premise\": \"A night courier finds a freight lift that delivers messages from tomorrow.\", \"season_length\": 2, \"environment\": \"freight_lift\", \"source\": \"offline_story_grammar\", \"canon\": {\"floor\": \"13\", \"doors\": 0, \"lighting\": \"cold\", \"passenger_position\": [-0.68, -0.8, 0], \"passenger_head\": [0, 0, -0.1], \"passenger_arms\": [0, 0, 0], \"shadow_position\": [0.5, 5.4, 0], \"shadow_head\": [0, 0, 0], \"shadow_leg_l\": [0, 0, 0], \"shadow_leg_r\": [0, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Courier\", \"color\": \"#D5CAB5\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Dispatcher\", \"face_revealed\": false}}, \"facts\": [], \"location\": \"inside_lift\"}}",
+        "canon": "{\"floor\": \"13\", \"doors\": 0, \"lighting\": \"cold\", \"passenger_position\": [-0.68, -0.8, 0], \"passenger_head\": [0, 0, -0.1], \"passenger_arms\": [0, 0, 0], \"shadow_position\": [0.5, 5.4, 0], \"shadow_head\": [0, 0, 0], \"shadow_leg_l\": [0, 0, 0], \"shadow_leg_r\": [0, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Courier\", \"color\": \"#D5CAB5\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Dispatcher\", \"face_revealed\": false}}, \"facts\": [], \"location\": \"inside_lift\"}",
+        "completed": 0,
+        "status": "active"
+      }
+    ],
+    "episodes": [
+      {
+        "uid": "series_001_e001",
+        "series_id": "series_001",
+        "ordinal": 1,
+        "number": 1,
+        "status": "verified",
+        "plan": "{\"uid\": \"series_001_e001\", \"series_id\": \"series_001\", \"ordinal\": 1, \"global_number\": 1, \"start_state\": {\"floor\": \"13\", \"doors\": 0, \"lighting\": \"cold\", \"passenger_position\": [-0.68, -0.8, 0], \"passenger_head\": [0, 0, -0.1], \"passenger_arms\": [0, 0, 0], \"shadow_position\": [0.5, 5.4, 0], \"shadow_head\": [0, 0, 0], \"shadow_leg_l\": [0, 0, 0], \"shadow_leg_r\": [0, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Passenger\", \"color\": \"#C7D4D9\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Listener\", \"face_revealed\": false}}, \"facts\": [], \"location\": \"inside_lift\"}, \"end_state\": {\"floor\": \"-1\", \"doors\": 1, \"lighting\": \"red\", \"passenger_position\": [-0.9, -0.48, 0], \"passenger_head\": [-0.03, 0, 2.35], \"passenger_arms\": [-0.3, 0.3, 0], \"shadow_position\": [0.5, 4.85, 0], \"shadow_head\": [0.12, 0, -0.12], \"shadow_leg_l\": [-0.08, 0, 0], \"shadow_leg_r\": [0.08, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Passenger\", \"color\": \"#C7D4D9\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Listener\", \"face_revealed\": false}}, \"facts\": [\"The lower floor is sealed.\", \"The figure recognizes the passenger.\", \"Its face has not been seen.\"], \"location\": \"inside_lift\"}, \"start_hash\": \"690b1b7d89be92cda5a5fe7625efc6e91e51177250cbddb615684341a878ea9f\", \"title\": \"The Floor Below Zero\", \"kind\": \"arrival\"}",
+        "evidence": "{\"video\": \"artifacts/episode_001/episode_001_preview.mp4\", \"video_report\": \"artifacts/episode_001/video_validation.json\", \"video_sha256\": \"ee7276200bb08df48480d9ffb12a780ff16e826a6527dbabfa02528989b0cab0\", \"passed\": true, \"scene_passed\": true, \"audio_passed\": true, \"provenance\": \"Locally verified 45-second Episode 1; see EPISODE_001_REPORT.md\"}",
+        "error": null
+      },
+      {
+        "uid": "series_001_e002",
+        "series_id": "series_001",
+        "ordinal": 2,
+        "number": 2,
+        "status": "verified",
+        "plan": "{\"uid\": \"series_001_e002\", \"series_id\": \"series_001\", \"series_title\": \"Below Zero\", \"ordinal\": 2, \"global_number\": 2, \"kind\": \"escape\", \"title\": \"The Door That Listens\", \"summary\": \"The passenger refuses the borrowed voice, seals the presence below, and exits at ground level.\", \"environment\": \"lift_013\", \"source\": \"offline_story_grammar\", \"start_state\": {\"floor\": \"-1\", \"doors\": 1, \"lighting\": \"red\", \"passenger_position\": [-0.9, -0.48, 0], \"passenger_head\": [-0.03, 0, 2.35], \"passenger_arms\": [-0.3, 0.3, 0], \"shadow_position\": [0.5, 4.85, 0], \"shadow_head\": [0.12, 0, -0.12], \"shadow_leg_l\": [-0.08, 0, 0], \"shadow_leg_r\": [0.08, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Passenger\", \"color\": \"#C7D4D9\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Listener\", \"face_revealed\": false}}, \"facts\": [\"The lower floor is sealed.\", \"The figure recognizes the passenger.\", \"Its face has not been seen.\"], \"location\": \"inside_lift\"}, \"end_state\": {\"floor\": \"0\", \"doors\": 1, \"lighting\": \"cold\", \"passenger_position\": [-0.4, 2.35, 0], \"passenger_head\": [0, 0, 2.35], \"passenger_arms\": [0, 0, 0], \"shadow_position\": [0.5, 4.85, 0], \"shadow_head\": [0.12, 0, -0.12], \"shadow_leg_l\": [-0.08, 0, 0], \"shadow_leg_r\": [0.08, 0, 0], \"shadow_visible\": false, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Passenger\", \"color\": \"#C7D4D9\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Listener\", \"face_revealed\": false}}, \"facts\": [\"The lower floor is sealed.\", \"The figure recognizes the passenger.\", \"Its face has not been seen.\", \"The presence borrows voices.\", \"Silence and the ground control seal it below.\", \"The passenger leaves at ground level.\"], \"location\": \"ground_corridor\"}, \"start_hash\": \"099984d66bf1c7a06dbda135c5e989337038bb94e669fa82e506c16a215171f9\", \"radio_lines\": [\"It has learned your voice.\", \"Do not answer it.\", \"Choose ground. Say nothing.\", \"Let the doors close.\", \"Zero. Hold your breath.\", \"The corridor is empty.\", \"Walk out. Do not turn around.\"], \"season_finale\": true}",
+        "evidence": "{\"passed\": true, \"scene_passed\": true, \"audio_passed\": true, \"video_sha256\": \"30c6f00ac1160de8d1ce6476799ef3e4242b0ecbc2b294b39aff6150af3e9d8a\", \"video\": \"artifacts/autonomy/series_001_e002/episode_002_preview.mp4\", \"scene\": \"artifacts/autonomy/series_001_e002/episode_002_master.blend\", \"score_hash\": \"2f22dfdee63d93c289eb8189e2d197a2c92c02bfab8f9dce775096a7894052a6\", \"video_bytes\": 2397934}",
+        "error": null
+      },
+      {
+        "uid": "series_002_e001",
+        "series_id": "series_002",
+        "ordinal": 1,
+        "number": 3,
+        "status": "planned",
+        "plan": "{\"uid\": \"series_002_e001\", \"series_id\": \"series_002\", \"series_title\": \"Dead Air Dispatch\", \"ordinal\": 1, \"global_number\": 3, \"kind\": \"arrival\", \"title\": \"The Undelivered Signal\", \"summary\": \"A new transmission draws the protagonist below ground; a faceless presence recognizes them.\", \"environment\": \"freight_lift\", \"source\": \"offline_story_grammar\", \"start_state\": {\"floor\": \"13\", \"doors\": 0, \"lighting\": \"cold\", \"passenger_position\": [-0.68, -0.8, 0], \"passenger_head\": [0, 0, -0.1], \"passenger_arms\": [0, 0, 0], \"shadow_position\": [0.5, 5.4, 0], \"shadow_head\": [0, 0, 0], \"shadow_leg_l\": [0, 0, 0], \"shadow_leg_r\": [0, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Courier\", \"color\": \"#D5CAB5\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Dispatcher\", \"face_revealed\": false}}, \"facts\": [], \"location\": \"inside_lift\"}, \"end_state\": {\"floor\": \"-1\", \"doors\": 1, \"lighting\": \"red\", \"passenger_position\": [-0.9, -0.48, 0], \"passenger_head\": [-0.03, 0, 2.35], \"passenger_arms\": [-0.3, 0.3, 0], \"shadow_position\": [0.5, 4.85, 0], \"shadow_head\": [0.12, 0, -0.12], \"shadow_leg_l\": [-0.08, 0, 0], \"shadow_leg_r\": [0.08, 0, 0], \"shadow_visible\": true, \"characters\": {\"protagonist\": {\"id\": \"passenger\", \"name\": \"Courier\", \"color\": \"#D5CAB5\"}, \"antagonist\": {\"id\": \"shadow\", \"name\": \"The Dispatcher\", \"face_revealed\": false}}, \"facts\": [\"The lower floor is sealed.\", \"The figure recognizes the passenger.\", \"Its face has not been seen.\"], \"location\": \"inside_lift\"}, \"start_hash\": \"3bb1d8079de9a8d065885144b63ab1cd4cd2ffd7be42ceb53d5776d3705781b3\", \"radio_lines\": [\"Courier. Your delivery is waiting.\", \"Do not take it below ground.\", \"The signal is moving.\", \"Someone else is on this line.\", \"That floor is sealed.\", \"Leave the recording inside.\", \"It remembers who sent you.\"], \"season_finale\": false}",
+        "evidence": null,
+        "error": null
+      }
+    ],
+    "runs": [
+      {
+        "run_key": "local-continuation-002",
+        "uid": "series_001_e002"
+      },
+      {
+        "run_key": "next-series-concept",
+        "uid": "series_002_e001"
+      }
+    ]
+  }
+}

@@ -4,5 +4,86 @@
   "opening_floor": "13",
   "ending_floor": "-1",
   "mood": "cold",
-  "character_color": "#C7D4D9"
+  "character_color": "#C7D4D9",
+  "schema_version": 2,
+  "title": "The Floor Below Zero",
+  "series": "Below Zero",
+  "duration": 45,
+  "fps": 24,
+  "resolution": [540, 960],
+  "template": "assets/elevator_template.blend",
+  "preview": {"fps": 6, "resolution": [540, 960], "samples": 16},
+  "floor_events": [
+    [0, "13"], [5.7, "12"], [7.9, "11"], [10.7, "10"],
+    [12.8, "9"], [14.6, "8"], [16.2, "7"], [17.6, "6"],
+    [18.8, "5"], [19.85, "4"], [20.8, "3"], [21.65, "2"],
+    [22.4, "1"], [23.05, "0"], [24, "8?"], [24.17, ""],
+    [24.34, "0"], [24.5, "--"], [24.67, ""], [25, "-1"]
+  ],
+  "shots": [
+    {"id":"arrival","start":0,"end":5,"lens":32,"from":[1,-5.5,2.65],"to":[0.85,-5.2,2.58],"target":[-0.1,0.8,2.02],"subject":"Passenger head"},
+    {"id":"countdown_slow","start":5,"end":9,"lens":55,"from":[0.12,-0.7,3.65],"to":[0.04,-0.5,3.7],"target":[0,1.58,3.72],"subject":"Display 13"},
+    {"id":"unease","start":9,"end":10.5,"lens":40,"from":[0.6,-2.8,2.62],"to":[0.5,-2.65,2.58],"target":[-0.65,0,2.1],"subject":"Passenger head"},
+    {"id":"countdown_fast","start":10.5,"end":24,"lens":52,"from":[0.08,-0.8,3.69],"to":[-0.04,-0.38,3.73],"target":[0,1.58,3.72],"shake":[17,24,0.009],"subject":"Display 13"},
+    {"id":"wrong_floor","start":24,"end":26,"lens":60,"from":[0,-0.55,3.72],"to":[0,-0.4,3.72],"target":[0,1.58,3.72],"shake":[24,25.9,0.006],"subject":"Display 13"},
+    {"id":"impact_reaction","start":26,"end":29,"lens":38,"from":[0.2,-2.6,2.4],"to":[0.38,-2.8,2.48],"target":[-0.72,-0.2,2.05],"shake":[26,26.5,0.04],"subject":"Passenger head"},
+    {"id":"doors","start":29,"end":34,"lens":32,"from":[0.7,-5.3,2.65],"to":[0.5,-5,2.58],"target":[-0.05,1.2,2.02],"subject":"Door header"},
+    {"id":"shoulder","start":34,"end":38,"lens":30,"from":[-1.5,-2.4,2.9],"to":[-1.4,-2,2.85],"target":[0.5,5.4,2.1],"subject":"Shadow head"},
+    {"id":"presence","start":38,"end":40.5,"lens":32,"from":[0.1,1.8,2.3],"to":[0.26,2.1,2.4],"target":[0.5,5.4,1.95],"subject":"Shadow head"},
+    {"id":"approach","start":40.5,"end":43,"lens":32,"from":[0.25,2.15,2.3],"to":[0.42,2.5,2.4],"target":[0.5,4.85,2.2],"subject":"Shadow head"},
+    {"id":"black","start":43,"end":45,"lens":35,"from":[0,0,-20],"to":[0,0,-20],"target":[0,0,-22]}
+  ],
+  "motion": {
+    "passenger.root.location": [[0,[-0.68,-0.8,0]],[1,[-0.68,-0.4,0.04]],[2.2,[-0.68,0.08,0]],[25.7,[-0.68,0.08,0]],[26,[-0.68,0.08,-0.04]],[26.25,[-0.68,-0.03,0.02]],[27,[-0.68,-0.03,0]],[35,[-0.68,-0.03,0]],[36.5,[-0.9,-0.48,0.01]],[37.2,[-0.9,-0.48,0]],[45,[-0.9,-0.48,0]]],
+    "passenger.head.rotation_euler": [[0,[0,0,-0.1]],[6,[0,0,-0.1]],[9,[-0.24,0,0.35]],[14,[-0.24,0,0.35]],[19,[-0.13,0,0.6]],[25,[-0.13,0,0.6]],[26.15,[0.18,0,-0.1]],[27.5,[-0.08,0,0.25]],[30,[-0.05,0,1.7]],[34,[-0.05,0,2.28]],[37,[-0.03,0,2.35]],[45,[-0.03,0,2.35]]],
+    "passenger.arm.L.rotation_euler": [[0,[0,0,0.1]],[2,[0,0,0]],[25,[0,0,0]],[26.2,[-0.35,-0.3,0]],[28,[-0.1,-0.12,0]],[36,[-0.3,-0.3,0]],[45,[-0.3,-0.3,0]]],
+    "passenger.arm.R.rotation_euler": [[0,[0,0,-0.1]],[2,[0,0,0]],[25,[0,0,0]],[26.2,[-0.35,0.3,0]],[28,[-0.1,0.12,0]],[36,[-0.3,0.3,0]],[45,[-0.3,0.3,0]]],
+    "shadow.root.location": [[0,[0.5,5.4,0]],[39,[0.5,5.4,0]],[40.3,[0.5,5.15,0.02]],[41.8,[0.5,4.85,0]],[45,[0.5,4.85,0]]],
+    "shadow.head.rotation_euler": [[0,[0,0,0]],[36,[0,0,0]],[39,[0.07,0,-0.08]],[42,[0.12,0,-0.12]],[45,[0.12,0,-0.12]]],
+    "shadow.body.rotation_euler": [[0,[0,0,0]],[39,[0,0,0]],[40.3,[0.018,0,0]],[41.8,[0,0,0]],[45,[0,0,0]]],
+    "shadow.leg.L.rotation_euler": [[0,[0,0,0]],[39,[0,0,0]],[40.2,[-0.35,0,0]],[41.2,[-0.28,0,0]],[42,[-0.08,0,0]],[45,[-0.08,0,0]]],
+    "shadow.leg.R.rotation_euler": [[0,[0,0,0]],[39,[0,0,0]],[40.2,[0.12,0,0]],[42,[0.08,0,0]],[45,[0.08,0,0]]]
+  },
+  "effects": {"breathing_period":3.2,"sway_start":15,"sway_end":25.8,"door_start":29.5,"door_end":35.5,"blackout":[26,26.55],"red_at":27.4,"impact_time":26,"entry_end":2.2,"fear_start":35.5,"step_start":39,"cut_black":43},
+  "lighting": {
+    "cold": [0.28,0.57,1], "emergency": [1,0.018,0.027],
+    "power": [[0,1],[17.7,1],[18,0.04],[18.12,1],[19.4,0.1],[19.53,1],[20.8,0.03],[20.94,1],[22,0.1],[22.12,0.85],[23.1,0.04],[23.24,1],[24.1,0.07],[24.24,0.75],[25.7,0.8],[26,0],[26.55,0],[26.7,0.2],[27.4,0.85],[43,0.85],[45,0.85]],
+    "lamps": {"Cold overhead lighting":510,"Soft face fill":100},
+    "emergency_rim_power": 180,
+    "tube_strength": 3
+  },
+  "facial_reactions": [[0,0],[12,0],[19,0.04],[26.2,0.075],[45,0.075]],
+  "narration": [
+    {"start":0.7,"end":4.6,"text":"Floor thirteen. Descent authorized."},
+    {"start":5.1,"end":8.4,"text":"Do not travel below ground level."},
+    {"start":13,"end":15.7,"text":"If the numbers accelerate..."},
+    {"start":16.5,"end":19.5,"text":"Do not answer the knocking."},
+    {"start":24.7,"end":26.9,"text":"That floor is sealed."},
+    {"start":31.5,"end":34.5,"text":"Keep your eyes on the doors."},
+    {"start":38,"end":40.8,"text":"That is not your reflection."}
+  ],
+  "captions": [
+    {"start":0,"end":0.65,"text":"THE FLOOR BELOW ZERO"},
+    {"start":0.7,"end":4.6,"text":"Floor thirteen.\nDescent authorized."},
+    {"start":5.1,"end":8.4,"text":"Do not travel\nbelow ground level."},
+    {"start":13,"end":15.7,"text":"If the numbers accelerate..."},
+    {"start":16.5,"end":19.5,"text":"Do not answer the knocking."},
+    {"start":24.7,"end":26.9,"text":"That floor is sealed."},
+    {"start":31.5,"end":34.5,"text":"Keep your eyes on the doors."},
+    {"start":38,"end":40.8,"text":"That is not your reflection."},
+    {"start":43.3,"end":45,"text":"IT KNOWS YOUR FLOOR.\nTO BE CONTINUED"}
+  ],
+  "audio_cues": [
+    {"type":"hum","start":0,"end":26,"gain":0.075},
+    {"type":"radio","start":0.4,"end":7.6,"gain":0.04},
+    {"type":"rumble","start":14,"end":26,"gain":0.17},
+    {"type":"flicker","start":18,"end":25.9,"gain":0.07},
+    {"type":"knock","start":18.8,"end":19.5,"gain":0.25},
+    {"type":"impact","start":26,"end":27.1,"gain":0.7},
+    {"type":"doors","start":29.5,"end":35.5,"gain":0.13},
+    {"type":"drone","start":27,"end":43,"gain":0.14},
+    {"type":"step","start":41.4,"end":42.1,"gain":0.35},
+    {"type":"sting","start":42.85,"end":44.8,"gain":0.4}
+  ],
+  "continuity": {"protagonist":"Passenger","antagonist":"The Listener","location":"Lift 013","next_hook":"The Listener recognizes the passenger; its face remains unseen."}
 }

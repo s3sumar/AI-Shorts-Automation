@@ -1,46 +1,79 @@
-name: Dynamic Blender Test
+﻿name: Dynamic Blender Animation
 
 on:
   workflow_dispatch:
     inputs:
       episode:
-        description: Choose episode
+        description: Episode (001 is the 45-second production template)
         required: true
         type: choice
-        options:
-          - '001'
-          - '002'
+        options: ['001', '002']
+      engine:
+        description: EEVEE uses Mesa software graphics; CYCLES is a slower CPU fallback
+        required: true
+        default: BLENDER_EEVEE
+        type: choice
+        options: [BLENDER_EEVEE, CYCLES]
+
+permissions:
+  contents: read
 
 jobs:
   render:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
+    env:
+      EPISODE_CONFIG: episodes/episode_${{ inputs.episode }}.json
+      EPISODE_OUTPUT: artifacts/episode_${{ inputs.episode }}
+      SCENE_BLEND: artifacts/episode_${{ inputs.episode }}/episode_${{ inputs.episode }}_master.blend
+      FRAMES_DIR: artifacts/episode_${{ inputs.episode }}/preview_frames
+      RENDER_ENGINE: ${{ inputs.engine }}
+      EPISODE_RENDER_MODE: preview
+      # No GPU required: Xvfb + Mesa/llvmpipe for EEVEE; CPU device for Cycles.
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      ENABLE_REFLECTIONS: '0'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install dependencies
+      - name: Install local production tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb ffmpeg libgl1 libegl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxext6 libxfixes3 libxxf86vm1 libgl1-mesa-dri
-      - name: Download Blender
+          sudo apt-get install -y xvfb ffmpeg espeak-ng libgl1 libegl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxext6 libxfixes3 libxxf86vm1 libgl1-mesa-dri
+          python -m pip install 'numpy>=2,<3'
+      - name: Download pinned Blender 5.2.3
         run: |
           curl -fL --retry 3 https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz -o blender.tar.xz
           mkdir -p blender-app
           tar -xf blender.tar.xz -C blender-app --strip-components=1
-      - name: Render chosen episode
-        env:
-          LIBGL_ALWAYS_SOFTWARE: '1'
-          EPISODE_CONFIG: episodes/episode_${{ inputs.episode }}.json
+          blender-app/blender --version
+      - name: Prepare original sound and narration
+        if: inputs.episode == '001'
+        run: python tools/prepare_audio.py --config "$EPISODE_CONFIG" --out "$EPISODE_OUTPUT/audio"
+      - name: Build, validate and render complete preview
         run: |
-          mkdir -p frames output
-          xvfb-run -a blender-app/blender -b -t 4 --python story_scene.py --python-expr "import bpy; bpy.ops.render.render(animation=True)"
-      - name: Encode MP4
-        run: |
-          ffmpeg -y -framerate 12 -start_number 1 -i frames/frame_%04d.png -c:v libx264 -crf 20 -preset medium -pix_fmt yuv420p -movflags +faststart output/episode_${{ inputs.episode }}.mp4
-      - name: Upload video
+          mkdir -p "$EPISODE_OUTPUT/preview_frames"
+          if [ '${{ inputs.episode }}' = '001' ]; then
+            xvfb-run -a blender-app/blender --background --factory-startup -t 4 \
+              --python-exit-code 1 --python story_scene.py \
+              --python tests/validate_episode.py --python tools/render_episode.py
+          else
+            xvfb-run -a blender-app/blender --background --factory-startup -t 4 \
+              --python-exit-code 1 --python story_scene.py \
+              --python tests/validate_scene.py --render-anim
+          fi
+      - name: Verify PNGs, encode H.264 AAC and decode entire MP4
+        run: python tools/encode_episode.py --config "$EPISODE_CONFIG" --out "$EPISODE_OUTPUT"
+      - name: Upload review artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: episode-${{ inputs.episode }}-animation-v2
-          path: output/*.mp4
+          name: episode-${{ inputs.episode }}-preview
+          path: |
+            artifacts/episode_${{ inputs.episode }}/*.mp4
+            artifacts/episode_${{ inputs.episode }}/*.blend
+            artifacts/episode_${{ inputs.episode }}/*.json
+            artifacts/episode_${{ inputs.episode }}/*.md
+            artifacts/episode_${{ inputs.episode }}/*.srt
+            artifacts/episode_${{ inputs.episode }}/audio/*.json
+            artifacts/episode_${{ inputs.episode }}/audio/*.wav
           if-no-files-found: error
           retention-days: 7

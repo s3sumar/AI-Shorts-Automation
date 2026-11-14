@@ -1,0 +1,89 @@
+name: Autonomous Shorts Production
+
+# Manual acceptance only. No schedule and no video upload step.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autonomous-story-production
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    permissions:
+      contents: write # Restricted in code to the dedicated autonomy-state branch.
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      ENABLE_REFLECTIONS: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install offline production dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth ffmpeg espeak-ng libgl1 libegl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxext6 libxfixes3 libxxf86vm1 libgl1-mesa-dri
+          python -m pip install -r requirements-production.txt
+      - name: Test director, checkpoint recovery and disabled publishing
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          python tools/check_autonomy_workflow.py
+          python tools/review_deployment.py
+      - name: Recover durable checkpoint or reviewed Episode 2 seed
+        id: restore
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/cloud_checkpoint.py restore
+      - name: Reserve this run and show shot plan
+        run: |
+          python -m autonomy.pipeline plan --settings config/cloud_preview.json --run-key "github-${GITHUB_RUN_ID}"
+          python -m autonomy.pipeline status
+      - name: Persist reservation before rendering
+        id: reservation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/cloud_checkpoint.py save
+      - name: Download pinned Blender 5.2.3
+        run: |
+          curl -fL --retry 3 --max-time 300 https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz -o blender.tar.xz
+          mkdir -p blender-app
+          tar -xf blender.tar.xz -C blender-app --strip-components=1
+          blender-app/blender --version
+      - name: Produce and verify one bounded offline preview
+        run: |
+          xvfb-run -a python -m autonomy.pipeline produce             --settings config/cloud_preview.json --run-key "github-${GITHUB_RUN_ID}"             --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg
+      - name: Persist verified result or failure for retry
+        if: always() && steps.reservation.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/cloud_checkpoint.py save
+      - name: Write run summary and expose diagnostics
+        if: always()
+        run: |
+          python tools/cloud_summary.py
+          find artifacts/autonomy -name '*.log' -type f -exec tail -n 30 {} \; || true
+      - name: Downloadable preview and recovery artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts-production-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            artifacts/autonomy/**/*.mp4
+            artifacts/autonomy/**/*.blend
+            artifacts/autonomy/**/*.json
+            artifacts/autonomy/**/*.log
+            artifacts/autonomy/**/*.srt
+            artifacts/autonomy/**/*.md
+            artifacts/autonomy/state_snapshots/*.sqlite3
+            state/story.sqlite3
+            state/story_memory.json
+          if-no-files-found: warn
+          retention-days: 30

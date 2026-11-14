@@ -1,0 +1,9 @@
+{
+  "director": {"provider": "offline", "model": null},
+  "preview": {"fps": 6, "resolution": [360, 640], "samples": 8},
+  "render": {"engine": "BLENDER_EEVEE", "threads": 4, "attempts": 3, "timeout_seconds": 900},
+  "limits": {"episodes_per_run": 1, "max_preview_frames": 270, "max_total_seconds": 1800},
+  "youtube": {"enabled": false, "privacy": "private", "made_for_kids": false},
+  "environment_library": ["lift_013", "freight_lift"],
+  "paid_services_enabled": false
+}

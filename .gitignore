@@ -218,3 +218,33 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Generated Blender frames, editable scenes, and local render validation output
+frames/
+output/
+local-renders/
+*.blend1
+
+# Local production outputs and downloaded render tooling
+artifacts/
+state/
+client_secret*.json
+youtube_token*.json
+
+# Cloud/runtime downloads, recovery databases and credentials
+blender-app/
+blender.tar.*
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.db
+*.mp4
+*.wav
+*.mp3
+*.pem
+*.key
+credentials*.json
+token*.json
+oauth*.json
+*.blend
+!assets/elevator_template.blend
