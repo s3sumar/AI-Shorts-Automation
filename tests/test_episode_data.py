@@ -50,8 +50,11 @@ class EpisodeContract(unittest.TestCase):
 
     def test_protected_workflow(self):
         import hashlib
-        digest=hashlib.sha256((ROOT/'.github/workflows/render.yml').read_bytes()).hexdigest().upper()
-        self.assertEqual(digest,'ECCF3D805068AACBF651EDF1EDEB21824AE7ADBDFFD2E989CBB2D783F1548358')
+        # Git checks out CRLF on this Windows workstation and LF on Linux.
+        # Protect the original content independently of checkout line endings.
+        content=(ROOT/'.github/workflows/render.yml').read_bytes().replace(b'\r\n',b'\n')
+        digest=hashlib.sha256(content).hexdigest().upper()
+        self.assertEqual(digest,'3BAB8CAC3CC55DAEF0B3F1E711F1576CC498EE0634FBD649E10A48B679F327CF')
 
 
 if __name__=='__main__':

@@ -15,6 +15,9 @@ else:
 lines += ['', 'Download the shorts-production artifact for videos, shot scores, validation and recovery files.',
           'Durable checkpoint history is on the autonomy-state branch. API conflicts fail closed.']
 text='\n'.join(lines)+'\n'
+out=root/'artifacts/autonomy'
+out.mkdir(parents=True,exist_ok=True)
+(out/'run_summary.md').write_text(text,encoding='utf-8')
 print(text)
 if os.environ.get('GITHUB_STEP_SUMMARY'):
     with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as stream:
