@@ -1,0 +1,21 @@
+{
+  "revision": "episode3_director_v3_draft",
+  "status": "noncanonical_quality_revision",
+  "originality": "Original courier, parcel, lift and sealed-floor plot. No supplied-reference characters, dialogue, graphics, sound or distinctive plot mechanism is reused.",
+  "narration": [
+    {"start":0.15,"end":2.0,"text":"The lift knows her name.","pace":1.12},
+    {"start":2.3,"end":4.7,"text":"She hasn't touched a button.","pace":1.10},
+    {"start":5.0,"end":8.8,"text":"Yesterday, someone escaped the floor below zero.","pace":1.08},
+    {"start":9.0,"end":12.3,"text":"A courier receives the same warning.","pace":1.10},
+    {"start":14.6,"end":17.4,"text":"Delivered. But she hasn't let go.","pace":1.08,"phrases":[{"text":"Delivered.","pause_after":0.25},{"text":"But she hasn't let go.","pause_after":0.08}]},
+    {"start":17.7,"end":20.0,"text":"The numbers accelerate.","pace":1.10},
+    {"start":20.4,"end":23.2,"text":"Now the radio has gone silent.","pace":1.07},
+    {"start":24.3,"end":26.2,"text":"That floor was sealed.","pace":1.08},
+    {"start":27.5,"end":29.4,"text":"No one called this floor.","pace":1.00},
+    {"start":29.7,"end":32.6,"text":"The doors open on their own.","pace":1.10},
+    {"start":34.2,"end":37.5,"text":"Someone is waiting. Looking straight at her.","pace":1.07,"phrases":[{"text":"Someone is waiting.","pause_after":0.25},{"text":"Looking straight at her.","pause_after":0.08}]},
+    {"start":39.5,"end":42.2,"text":"It isn't waiting for the parcel.","pace":1.08},
+    {"start":42.4,"end":44.8,"text":"It remembers who sent her.","pace":1.08}
+  ],
+  "review_status":"Voice, added parcel clue, pacing and cinematic appeal require human approval. Canon is not advanced."
+}

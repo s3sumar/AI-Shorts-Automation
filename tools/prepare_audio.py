@@ -15,6 +15,8 @@ from pathlib import Path
 import numpy as np
 
 ROOT=Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0,str(ROOT))
 SR=24000
 
 
@@ -42,6 +44,16 @@ def timestamp(t,sep=','):
 
 def prepare(config,out):
     c=json.loads(config.read_text(encoding='utf-8'))
+    if c.get('audio_production',{}).get('schema')==2:
+        from soundstage.pipeline import prepare as cinematic_prepare
+        settings=json.loads((ROOT/c['audio_production']['narrator_settings']).read_text())
+        ffmpeg=os.environ.get('FFMPEG_BIN') or shutil.which('ffmpeg')
+        if not ffmpeg:
+            raise RuntimeError('Cinematic mixing needs FFmpeg; set FFMPEG_BIN')
+        report=cinematic_prepare(c,out,settings,ffmpeg,c['audio_production'].get('direction'))
+        print(json.dumps({'duration':report['duration'],'voice_source':report['voice_source'],
+                          'loudness':report['loudness'],'readiness':report['readiness']}))
+        return report
     out.mkdir(parents=True,exist_ok=True)
     voices=out/'voice'
     voices.mkdir(exist_ok=True)

@@ -1,0 +1,24 @@
+{
+  "revision": "episode3_return_to_sender_v4_review",
+  "status": "noncanonical_editorial_revision",
+  "title": "Return to Sender",
+  "logline": "A courier cannot stop a lift descending past the lobby. Her refusal to hand over a parcel exposes what the delivery actually is.",
+  "narration": [
+    {"start":0.15,"end":4.5,"speaker":"narrator","text":"Her parcel says delivered. It's still in her hand.","pace":1.0,"phrases":[{"text":"Her parcel says delivered.","pause_after":0.18},{"text":"It's still in her hand.","pause_after":0.08}]},
+    {"start":5.15,"end":8.5,"speaker":"narrator","text":"She only needs the lobby.","pace":1.0},
+    {"start":9.1,"end":10.4,"speaker":"courier","text":"Dispatch?","pace":1.0},
+    {"start":10.7,"end":14.2,"speaker":"narrator","text":"The lift is speeding up.","pace":1.0},
+    {"start":14.65,"end":17.45,"speaker":"courier","text":"Delivery complete? I'm still holding it.","pace":0.96,"phrases":[{"text":"Delivery complete?","pause_after":0.12},{"text":"I'm still holding it.","pause_after":0.08}]},
+    {"start":17.7,"end":19.9,"speaker":"courier","text":"Dispatch? Can you hear me?","pace":0.96},
+    {"start":20.15,"end":22.35,"speaker":"courier","text":"Stop. Come on.","pace":1.0,"phrases":[{"text":"Stop.","pause_after":0.22},{"text":"Come on.","pause_after":0.08}]},
+    {"start":22.65,"end":23.95,"speaker":"narrator","text":"It passes zero.","pace":0.94},
+    {"start":25.05,"end":26.0,"speaker":"narrator","text":"Minus one.","pace":0.94},
+    {"start":26.7,"end":28.9,"speaker":"courier","text":"That floor's been sealed.","pace":1.0},
+    {"start":34.6,"end":37.6,"speaker":"courier","text":"No. I'm taking this back.","pace":1.0,"phrases":[{"text":"No.","pause_after":0.2},{"text":"I'm taking this back.","pause_after":0.08}]},
+    {"start":40.6,"end":41.9,"speaker":"dispatcher","text":"Keep it.","pace":1.12},
+    {"start":43.1,"end":44.9,"speaker":"dispatcher","text":"You're the delivery.","pace":1.08}
+  ],
+  "caption_policy": "Use synthesis phoneme durations for this new take, reject unmappable words rather than silently falling back. Human listening review remains required.",
+  "originality": "Original courier/lift/parcel story. No reference plot, characters, voice, dialogue, footage or music is reused.",
+  "checkpoint_policy": "Draft only: preserve production identity and canonical physical endpoints; do not write story memory. The new reveal needs editorial approval before any future continuity update."
+}

@@ -12,6 +12,8 @@ def compile_plan(plan,settings):
     c=json.loads((ROOT/'episodes/episode_001.json').read_text(encoding='utf-8'))
     c.update(episode=plan['global_number'],title=plan['title'],series=plan['series_title'])
     c['preview']=copy.deepcopy(settings['preview'])
+    if settings.get('audio',{}).get('mode')=='cinematic':
+        c['audio_production']={'schema':2,'narrator_settings':settings['audio']['narrator_settings']}
     c['character_color']=plan['start_state']['characters']['protagonist']['color']
     c['environment']={'id':plan['environment']}
     c['production']={'uid':plan['uid'],'series_id':plan['series_id'],'ordinal':plan['ordinal'],
@@ -24,6 +26,9 @@ def compile_plan(plan,settings):
     c['captions'].append({'start':43.3,'end':45,'text':'THE SIGNAL IS SEALED.\nEND OF '+plan['series_title'].upper()
                           if plan['season_finale'] else 'THE SIGNAL REMEMBERS.\nTO BE CONTINUED'})
     if plan['kind']=='arrival':
+        if settings.get('directing',{}).get('profile')=='original_lift_v1':
+            from production.directing import lift_director_pass
+            c=lift_director_pass(c)
         return c
     state=plan['start_state']
     end=plan['end_state']

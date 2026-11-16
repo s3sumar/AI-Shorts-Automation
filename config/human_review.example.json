@@ -1,0 +1,14 @@
+{
+  "media_sha256": "REPLACE_WITH_THE_EXACT_REVIEWED_VIDEO_SHA256",
+  "reviewed_by": "",
+  "reviewed_at": "",
+  "checks": {
+    "voice_naturalness": "pending",
+    "story_connection": "pending",
+    "pacing": "pending",
+    "visual_appeal": "pending",
+    "phone_listening": "pending",
+    "headphone_listening": "pending"
+  },
+  "notes": "Do not approve checks you have not performed. Changed media invalidates this review."
+}

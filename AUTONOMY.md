@@ -1,11 +1,19 @@
 # Autonomous Shorts production foundation
 
+Current priority: **Episode 3 production-quality review**. New local/cloud episode
+generation is paused; technical verification is separate from public readiness.
+See [PRODUCTION_QUALITY.md](PRODUCTION_QUALITY.md) for the new audio system,
+voice auditions, quality gate and remaining reviews. The successful cloud
+Episode 3 test remains preserved; the sections below describe the foundation.
+
 Two complete consecutive 45-second previews are saved locally. The runner
 planned/compiled the continuation, reused the existing assets, verified its
 rendered endpoints against canon, and advanced story memory only after video
 validation. It then created a new series concept and first-episode plan.
-Nothing was pushed, uploaded to YouTube or published. Scheduled execution and
-private uploads remain disabled by default.
+The foundation was subsequently deployed and the global Episode 3 cloud test
+succeeded. Latest quality revisions are source-only deployments; generated
+previews stay local. No YouTube video was uploaded or published. Scheduled
+execution and private uploads remain disabled by default.
 
 ## Deliverables
 

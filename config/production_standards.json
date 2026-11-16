@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "episode_generation_paused": true,
+  "minimum_resolution": [1080, 1920],
+  "allowed_fps": [24, 30],
+  "minimum_episode_seconds": 40,
+  "native_frame_evidence_required": true,
+  "sample_rate": 48000,
+  "audio_channels": 2,
+  "integrated_lufs": -16,
+  "loudness_tolerance_lu": 1,
+  "true_peak_ceiling_dbtp": -1,
+  "minimum_speech_over_bed_db": 8,
+  "required_human_reviews": ["voice_naturalness", "story_connection", "pacing", "visual_appeal", "phone_listening", "headphone_listening"],
+  "public_publishing_enabled": false,
+  "paid_services_enabled": false,
+  "development_previews_are_production_ready": false
+}

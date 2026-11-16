@@ -1,0 +1,5 @@
+# Optional, free local CPU word alignment; not needed by the default cloud workflow.
+faster-whisper==1.2.1
+# Optional exact synthesis alignment. The voice model is patched only in memory.
+onnx==1.23.2
+Pillow>=11,<13

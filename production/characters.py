@@ -3,7 +3,7 @@ import bpy
 from .common import empty,sphere,box,material
 
 
-def passenger(s,color):
+def passenger(s,color,cohesive_details=False):
     skin=material('Passenger | porcelain',color,.43,.04)
     joints=material('Passenger | flexible joints',(.12,.17,.21),.65)
     eyes=material('Passenger | obsidian eyes',(.008,.012,.019),.32)
@@ -17,8 +17,8 @@ def passenger(s,color):
     brows=[]
     limbs={}
     for side,label in [(-1,'L'),(1,'R')]:
-        sphere('Passenger eye '+label,(side*.16,-.366,.17),(.066,.045,.082),eyes,head)
-        brow=box('Passenger brow '+label,(side*.16,-.357,.32),(.16,.045,.035),eyes,head,.008)
+        sphere('Passenger eye '+label,(side*.16,-.33 if cohesive_details else -.366,.17),(.066,.045,.082),eyes,head)
+        brow=box('Passenger brow '+label,(side*.16,-.30 if cohesive_details else -.357,.32),(.16,.045,.035),eyes,head,.008)
         brow.rotation_euler.y=side*.14
         brows.append(brow)
         arm=empty(s,'Passenger shoulder '+label,(side*.34,0,1.55),breath)

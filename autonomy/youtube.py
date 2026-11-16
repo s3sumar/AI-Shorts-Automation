@@ -12,6 +12,7 @@ from .contracts import ROOT,digest,file_digest,write_json,identifier
 
 def prepare_upload(out,evidence,plan):
     job={'video':evidence['video'],'video_sha256':evidence['video_sha256'],'episode_uid':plan['uid'],
+        'production_readiness':evidence.get('quality_status','NOT_READY'),
         'approved':False,'metadata':{'snippet':{'title':(plan['series_title']+' | '+plan['title'])[:100],
         'description':plan['summary']+'\nOriginal stylized 3D suspense animation.',
         'categoryId':'24','defaultLanguage':'en','tags':['3D animation','suspense',plan['series_title']]},

@@ -1,4 +1,22 @@
-ï»¿# AI Shorts Automation â€” Below Zero
+# AI Shorts Automation - Below Zero
+
+**Quality review in progress (2026-11-15).** Rendering success is not publication
+approval. New episode generation is paused locally and in Actions while Episode 3 narration,
+sound, mixing and native HD visuals are reviewed. See
+[PRODUCTION_QUALITY.md](PRODUCTION_QUALITY.md) for three voice auditions, the
+before/after preview, measured audio/render costs and the NOT_READY gate.
+No scheduling, public publishing or paid provider is enabled.
+
+The supplied reference was analyzed on November 15. See
+[CINEMATIC_REFERENCE_ANALYSIS.md](CINEMATIC_REFERENCE_ANALYSIS.md) for the original
+directing improvements, a native 720p/24 FPS test, measured results and remaining
+quality gaps. Reference footage, dialogue, character designs and audio are not
+production assets.
+
+[Episode 3: Return to Sender](EPISODE_3_SCRIPT_REVIEW.md) contains the complete
+45-second editorial revision and 15-shot breakdown. It is a review draft with
+three short native 720p/24 FPS clips; it does not replace published/checkpoint
+canon or enable new production runs.
 
 The autonomous foundation and two consecutive episode previews are now available.
 See [AUTONOMY.md](AUTONOMY.md) for the director, persistent memory, production

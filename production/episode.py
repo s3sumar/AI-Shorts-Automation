@@ -119,6 +119,9 @@ def motion(s,c,r,brows):
     sway.extend([(frame(b),(0,0,0)),(frame(impact+.12),(.09,0,0)),(frame(impact+.6),(-.03,0,0)),
                  (frame(impact+1.2),(0,0,0)),(frame(duration),(0,0,0))])
     animate(r['passenger.root'],'rotation_euler',sway,'EP01 | passenger sway and impact')
+    if c.get('directing',{}).get('body_turn'):
+        animate(r['passenger.root'],'rotation_euler',[(frame(t),value) for t,value in c['directing']['body_turn']],
+                'EP01 | anticipation and torso turn')
     for sign,label in [(-1,'L'),(1,'R')]:
         fear=c['effects']['fear_start']
         entry=c['effects']['entry_end']
@@ -127,7 +130,7 @@ def motion(s,c,r,brows):
             (frame(fear+1.7),(0,0,0)),(frame(duration),(0,0,0))],'EP01 | passenger step '+label)
     for brow in brows:
         loc=brow.location.copy()
-        animate(brow,'location',[(frame(t),loc+Vector((0,0,lift))) for t,lift in c['facial_reactions']],
+        animate(brow,'location',[(frame(t),loc+Vector((0,.55*lift if c.get('directing',{}).get('cohesive_face_details') else 0,lift))) for t,lift in c['facial_reactions']],
             'EP01 | '+brow.name+' expression')
     for name,sign in [('Door left',-1),('Door right',1)]:
         keys=[(1,(sign*.625,1.83,1.75)),
@@ -204,7 +207,8 @@ def cameras(s,c):
                 envelope=max(min((t-a)*3,1,(b-t)*3),0)
                 loc+=Vector((math.sin(f*1.7),math.cos(f*1.3)*.3,math.sin(f*2.2)))*amp*envelope
             o.location=loc
-            aim(o,shot['target'])
+            target=Vector(shot['target']).lerp(Vector(shot.get('target_to',shot['target'])),u)
+            aim(o,target)
             keys.append((f,tuple(loc)))
             rotations.append((f,tuple(o.rotation_euler)))
         animate(o,'location',keys,'EP01 | '+shot['id']+' camera')
@@ -287,10 +291,29 @@ def build(root,config_path):
     bg.inputs['Strength'].default_value=.06
     environment(s,root,c)
     rgb=tuple(int(c['character_color'][i:i+2],16)/255 for i in (1,3,5))
-    rigs,brows=passenger(s,rgb)
+    rigs,brows=passenger(s,rgb,c.get('directing',{}).get('cohesive_face_details',False))
     rigs.update(antagonist(s))
+    if c.get('directing',{}).get('parcel'):
+        kraft=material('Courier | kraft parcel',(.29,.16,.07),.7)
+        parcel=box('Courier parcel',(.16,-.19,-.75),(.28,.22,.24),kraft,rigs['passenger.arm.R'],.008)
+        paper=material('Courier | label paper',(.8,.76,.62),.8)
+        label=box('Courier parcel label',(.16,-.305,-.75),(.24,.004,.09),paper,rigs['passenger.arm.R'],0)
+        ink=unlit('Courier | label ink',(.015,.025,.03))
+        stamp=text(s,'Courier parcel stamp','DELIVERED',(.16,-.308,-.75),.034,ink,rigs['passenger.arm.R'])
+        stamp.rotation_euler.x=math.pi/2
+    if c.get('directing',{}).get('intercom_light'):
+        status=material('Radio | status pulse',(.08,.6,.72),.4,0,0)
+        box('Radio status light',(1.6,1.465,2.65),(.065,.02,.055),status,bevel=.004)
+        socket=next(n for n in status.node_tree.nodes if n.type=='BSDF_PRINCIPLED').inputs['Emission Strength']
+        for t,value in c['directing']['radio_light']:
+            socket.default_value=value;socket.keyframe_insert('default_value',frame=frame(t))
+        status.node_tree.animation_data.action.name='EP01 | radio status pulse'
+        status.node_tree.animation_data.action.use_fake_user=True
     display(s,c)
     motion(s,c,rigs,brows)
+    if c.get('directing',{}).get('performance_v4'):
+        from .acting import apply_story_performance
+        apply_story_performance(s,c,rigs,brows)
     lighting(s,c)
     cams=cameras(s,c)
     captions(s,c,cams)

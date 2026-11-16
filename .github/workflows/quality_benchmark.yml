@@ -1,0 +1,71 @@
+name: Cinematic Quality Benchmark
+
+# Read-only fixed-story benchmark. No schedule, checkpoints or uploads to services.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cinematic-quality-benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      ENABLE_REFLECTIONS: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install offline tools
+        id: preflight
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth ffmpeg espeak-ng fonts-dejavu-core libgl1 libegl1 libxrender1 libxi6 libxkbcommon0 libsm6 libxext6 libxfixes3 libxxf86vm1 libgl1-mesa-dri
+          python -m pip install -r requirements-production.txt
+          python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Download Blender 5.2.3
+        id: blender
+        run: |
+          curl -fL --retry 3 --max-time 300 https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz -o blender.tar.xz
+          mkdir -p blender-app
+          tar -xf blender.tar.xz -C blender-app --strip-components=1
+      - name: Baseline clip
+        run: |
+          xvfb-run -a python tools/benchmark_quality.py --mode baseline --profile original --samples 4 --out artifacts/quality/baseline_180p --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg
+      - name: Matched original and balanced 720p probes
+        run: |
+          xvfb-run -a python tools/benchmark_quality.py --mode probe --profile original --samples 16 --out artifacts/quality/probe_original --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg --max-seconds 120
+          xvfb-run -a python tools/benchmark_quality.py --mode probe --profile balanced --samples 16 --out artifacts/quality/probe_balanced --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg --max-seconds 120
+      - name: Native 720p 24 FPS quality clip
+        run: |
+          xvfb-run -a python tools/benchmark_quality.py --mode native --profile balanced --samples 16 --out artifacts/quality/native_720p24 --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg --max-seconds 2400
+      - name: Cut-aware hybrid quality clip
+        if: always() && !cancelled() && steps.preflight.outcome == 'success' && steps.blender.outcome == 'success'
+        run: |
+          xvfb-run -a python tools/benchmark_quality.py --mode hybrid --profile balanced --samples 16 --out artifacts/quality/hybrid_720p24 --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg --max-seconds 1800
+      - name: Compare measured quality and speed
+        if: always()
+        run: python tools/report_quality.py --ffmpeg ffmpeg
+      - name: Downloadable benchmarks and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-benchmark-${{ github.run_id }}
+          path: |
+            artifacts/quality/**/*.mp4
+            artifacts/quality/**/*.json
+            artifacts/quality/**/*.log
+            artifacts/quality/**/*.srt
+            artifacts/quality/**/part_*/frame_0001.png
+          retention-days: 14
+          if-no-files-found: warn

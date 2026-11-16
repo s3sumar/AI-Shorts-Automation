@@ -71,7 +71,17 @@ def probe(path):
         za,zb=child(data,*stbl,b'stsz')
         samples=struct.unpack_from('>I',data,za+8)[0]
         track={'type':media_type,'duration':duration/timescale,'samples':samples}
+        da,db=child(data,*stbl,b'stsd')
+        codec,entry_start,entry_end=next(atoms(data,da+8,db))
+        track['codec']=codec.decode('ascii')
+        if media_type=='soun':
+            track['channels']=struct.unpack_from('>H',data,entry_start+16)[0]
+            track['sample_rate']=struct.unpack_from('>I',data,entry_start+24)[0]>>16
         if media_type=='vide':
+            sa,sb=child(data,*stbl,b'stts')
+            entries=struct.unpack_from('>I',data,sa+4)[0]
+            timing=[struct.unpack_from('>II',data,sa+8+8*i) for i in range(entries)]
+            track['constant_frame_rate']=bool(timing) and len({delta for count,delta in timing})==1 and sum(count for count,delta in timing)==samples
             ta,tb=child(data,a,b,b'tkhd')
             width,height=struct.unpack_from('>II',data,tb-8)
             track.update(width=width/65536,height=height/65536,fps=samples/(duration/timescale))

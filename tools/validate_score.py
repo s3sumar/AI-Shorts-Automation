@@ -79,6 +79,11 @@ for sh in c['shots']:
             allowed.add('Indicator housing')
         if obj.name=='Passenger head':
             allowed.update(['Passenger eye L','Passenger eye R','Passenger nose','Passenger brow L','Passenger brow R'])
+            allowed.update(['Passenger pupil L','Passenger pupil R','Passenger mouth'])
+        if obj.name=='Courier parcel':
+            allowed.update(['Courier parcel label','Courier parcel stamp'])
+        if obj.name=='Emergency stop button' and 20.7<=t<=21.5:
+            allowed.update(o.name for o in s.objects if o.name.startswith(('Courier left finger','Courier left palm')))
         assert name in allowed,(sh['id'],t,obj.name,'occluded by',name)
 checks.append('Representative shot rays: no unintended primary-subject occlusion')
 for obj in [o for o in s.objects if o.get('safe_caption')]:

@@ -8,11 +8,21 @@ import subprocess
 import sys
 import time
 import datetime
+import textwrap
 from pathlib import Path
 from .contracts import ROOT,digest,file_digest,write_json
 from .compiler import compile_plan
 from .director import LocalModel
 from .store import Memory
+
+
+def apply_cinematic_captions(c,audio):
+    c['captions']=[dict(v,text='\n'.join(textwrap.wrap(v['text'],30))) for v in audio['captions']]
+    last=max(v['end'] for v in c['captions'])
+    endcard=max(c['effects']['cut_black'],last+.25)
+    if c['duration']-endcard>=1:
+        c['captions'].append({'start':endcard,'end':c['duration'],'text':'TO BE CONTINUED.'})
+    return c
 
 
 def benchmark(out):
@@ -55,9 +65,37 @@ def verify_outputs(out,c,ffmpeg):
     result=subprocess.run([ffmpeg,'-v','error','-i',str(path),'-f','null','-'],capture_output=True,text=True,timeout=180)
     if result.returncode or result.stderr.strip():
         raise ValueError('Final video decode failed')
+    from quality.production_gate import save_report,collect
+    # Legacy/cloud previews remain valid development evidence, never public-ready.
+    facts={
+        'video':{'width':stream['width'],'height':stream['height'],'frames':stream['samples'],
+                 'duration':stream['duration'],'fps':stream['fps']},
+        'full_decode_passed':True,'narration':audio['narration'],'scene_continuity_passed':True,
+        'media_sha256':file_digest(path)}
+    if audio.get('schema')!=2:
+        facts=collect(path,ffmpeg,audio,{},c['captions'],True,(ROOT/c['template']).is_file(),False)
+    if audio.get('schema')==2:
+        records=json.loads((out/'frame_timings.json').read_text())
+        frames=sorted(r['master_frame'] for r in records)
+        contiguous=frames==list(range(1,round(c['duration']*c['fps'])+1))
+        duplicates=0; previous=None
+        for index,f in enumerate(frames,1):
+            png=out/'preview_frames'/f'frame_{index:04d}.png'
+            checksum=file_digest(png)
+            shot=next(sh for sh in c['shots'] if sh['start']<=(f-1)/c['fps']<sh['end'])
+            if checksum==previous and shot['id']!='black' and not shot.get('allow_static'):
+                duplicates+=1
+            previous=checksum
+        narrator=json.loads((ROOT/c['audio_production']['narrator_settings']).read_text())
+        facts=collect(path,ffmpeg,audio,{'native':contiguous,'source_frames':len(frames),
+            'contiguous':contiguous,'duplicate_moving_frames':duplicates,'source_resolution':c['preview']['resolution']},c['captions'],True,
+            (ROOT/c['template']).is_file(),narrator.get('identity_approved',False))
+    review_path=out/'human_quality_review.json'
+    review=json.loads(review_path.read_text()) if review_path.exists() else None
+    quality=save_report(out/'production_quality_gate.json',facts,review)
     return {'passed':True,'scene_passed':True,'audio_passed':True,'video_sha256':file_digest(path),
             'video':path.relative_to(ROOT).as_posix(),'scene':(out/f'episode_{c["episode"]:03d}_master.blend').relative_to(ROOT).as_posix(),
-            'score_hash':digest(c),'video_bytes':path.stat().st_size}
+            'score_hash':digest(c),'video_bytes':path.stat().st_size,'quality_status':quality['status']}
 
 
 def produce(memory,row,settings,blender,ffmpeg,output_root=None):
@@ -78,6 +116,11 @@ def produce(memory,row,settings,blender,ffmpeg,output_root=None):
         raise ValueError('Preview exceeds frame budget')
     write_json(out/'story_plan.json',plan)
     config=out/'episode.json'
+    existing_audio=out/'audio/audio_manifest.json'
+    if c.get('audio_production') and existing_audio.exists():
+        prior_audio=json.loads(existing_audio.read_text())
+        if prior_audio.get('schema')==2:
+            apply_cinematic_captions(c,prior_audio)
     if config.exists() and digest(json.loads(config.read_text()))!=digest(c) and any(out.glob('*.blend')):
         raise ValueError('Existing master has a different score; preserve it and use a new development run')
     write_json(config,c)
@@ -86,6 +129,7 @@ def produce(memory,row,settings,blender,ffmpeg,output_root=None):
     env.update(EPISODE_CONFIG=str(config),EPISODE_OUTPUT=str(out),SCENE_BLEND=str(master),
                EPISODE_RENDER_MODE='preview',MAX_PREVIEW_FRAMES=str(settings['limits']['max_preview_frames']),
                RENDER_ENGINE=settings['render']['engine'])
+    env['FFMPEG_BIN']=ffmpeg
     # Never let an inherited variable authorize replacing a master in this runner.
     env.pop('ALLOW_REBUILD',None)
     started=time.monotonic()
@@ -107,6 +151,10 @@ def produce(memory,row,settings,blender,ffmpeg,output_root=None):
         audio=json.loads((out/'audio/audio_manifest.json').read_text())
         if any(v['status']!='synthesized' for v in audio['narration']):
             raise RuntimeError('Offline narration unavailable; install espeak-ng or authorize Windows speech. Timing files were preserved.')
+        if audio.get('schema')==2:
+            # Generated output config only: source episode JSON is never rewritten.
+            apply_cinematic_captions(c,audio)
+            write_json(config,c)
         command=[blender,'--background']
         if master.exists():
             command+=[str(master)]
@@ -155,6 +203,9 @@ def main():
     settings=json.loads((ROOT/a.settings).read_text())
     if settings['paid_services_enabled'] or settings['limits']['episodes_per_run']!=1:
         p.error('This version permits one bounded episode per run and no paid service provider')
+    standards=json.loads((ROOT/'config/production_standards.json').read_text())
+    if a.command in ['plan','produce'] and standards.get('episode_generation_paused',True):
+        p.error('New episode generation is paused for Episode 3 quality review. Use isolated benchmark tools; owner approval is required to unpause.')
     memory=Memory(ROOT/a.state)
     try:
         if a.command=='bootstrap':

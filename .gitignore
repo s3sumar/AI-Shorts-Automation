@@ -248,3 +248,27 @@ token*.json
 oauth*.json
 *.blend
 !assets/elevator_template.blend
+
+# Neural voice weights and audio runtime libraries are downloaded explicitly.
+*.onnx
+*.onnx_data
+*.download
+
+# Local secrets and additional generated media / render containers
+.env.*
+!.env.example
+secrets*.json
+credentials*.yaml
+credentials*.yml
+*.p12
+*.pfx
+*.blend[0-9]*
+*.exr
+*.mov
+*.mkv
+*.avi
+*.webm
+*.m4a
+*.flac
+*.ogg
+*.7z

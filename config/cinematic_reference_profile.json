@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "source_evidence_sha256": "a1e602dcf0d41ea84e1b249f9a52400c5eb51224686a8c399ea6fdf5ca9ec42a",
+  "scope": "General production principles only. Reference video, transcript, characters, graphics, voice and music are not production assets.",
+  "narration": {
+    "reference_estimated_words_per_minute": 156.66,
+    "measurement": "Local ASR of a partial desktop recording; approximate, not a voice naturalness rating",
+    "guidance": "Use concrete actions and concise clauses; justify long silent holds with visible progression. Do not force every story to match the same word rate.",
+    "voice_cloning": false
+  },
+  "editing": {"max_unbroken_counter_insert_seconds": 4, "coverage": ["spatial context", "character reaction", "important object", "threat reveal"], "cut_on_meaning_not_every_word": true},
+  "captions": {"max_words_per_chunk": 4, "max_characters_per_line": 30, "accent_colour": "8DE3F4", "require_spoken_word_preservation": true, "estimated_word_timing_requires_review": true},
+  "performance": ["anticipation before response", "clear eye-line", "torso participates in head turns", "hands interact with story props", "emotional poses remain readable on a phone"],
+  "lighting": ["readable subject separation", "motivated practical lighting", "colour/contrast escalation tied to story events"],
+  "originality": {"reuse_reference_media": false, "reuse_reference_dialogue": false, "clone_reference_voice": false, "copy_character_designs": false, "beat_for_beat_remake": false}
+}

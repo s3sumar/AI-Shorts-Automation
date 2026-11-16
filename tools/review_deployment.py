@@ -13,7 +13,8 @@ def review(staged=False):
     command=['git','diff','--cached','--name-only','--diff-filter=ACMR','-z'] if staged else ['git','ls-files','--cached','--others','--exclude-standard','-z']
     paths=subprocess.check_output(command,cwd=ROOT).decode().split('\0')
     paths=sorted(set(p for p in paths if p))
-    forbidden={'.mp4','.wav','.mp3','.png','.sqlite3','.db','.exe','.dll','.zip','.xz','.pem','.key'}
+    forbidden={'.mp4','.wav','.mp3','.png','.sqlite3','.db','.exe','.dll','.zip','.xz','.pem','.key','.onnx','.onnx_data','.whl','.safetensors'}
+    forbidden.update({'.mov','.mkv','.avi','.webm','.m4a','.flac','.ogg','.exr','.p12','.pfx','.7z'})
     patterns=[r'gh[pousr]_[A-Za-z0-9]{30,}',r'github_pat_[A-Za-z0-9_]{30,}',
               r'AIza[0-9A-Za-z_-]{30,}',r'sk-proj-[A-Za-z0-9_-]{20,}',
               r'-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----',
@@ -22,9 +23,11 @@ def review(staged=False):
         path=Path(name)
         if path.parts[0] in ['artifacts','state','blender-app','output','frames','local-renders'] or path.suffix.lower() in forbidden:
             raise ValueError('Generated/sensitive file in deployment: '+name)
-        if path.name.startswith(('.env','client_secret','youtube_token')) or (path.suffix=='.blend' and name!='assets/elevator_template.blend'):
+        if (path.name.lower().startswith(('.env','client_secret','youtube_token','credentials','secrets','oauth','token')) and path.name!='.env.example') or (path.suffix=='.blend' and name!='assets/elevator_template.blend'):
             raise ValueError('Unexpected sensitive or binary file: '+name)
         data=subprocess.check_output(['git','show',':'+name],cwd=ROOT) if staged else (ROOT/name).read_bytes()
+        if len(data)>1024*1024 and name!='assets/elevator_template.blend':
+            raise ValueError('Unexpected large deployment file: '+name)
         if b'\x00' in data[:8192]:
             if name!='assets/elevator_template.blend':
                 raise ValueError('Unexpected binary file: '+name)
@@ -37,7 +40,8 @@ def review(staged=False):
     required=['autonomy/checkpoint.py','autonomy/pipeline.py','production/episode.py',
               'assets/elevator_template.blend','config/story_checkpoint.json','config/cloud_preview.json',
               'tools/cloud_checkpoint.py','.github/workflows/autonomous_production.yml',
-              'requirements-production.txt','episodes/episode_001.json','legacy_story_scene.py']
+              'requirements-production.txt','episodes/episode_001.json','legacy_story_scene.py',
+              'config/production_standards.json','quality/production_gate.py','soundstage/pipeline.py']
     for name in required:
         if not (ROOT/name).is_file():
             raise ValueError('Required deployment file missing: '+name)
