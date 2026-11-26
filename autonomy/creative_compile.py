@@ -26,6 +26,7 @@ def compile_creative(ep,bible,memory,registry=None,voice_library=None):
     missing_worlds=sorted(settings-set(registry['environments']))
     multi_world=len({shot['environment_id'] for shot in ep['shots']})>1
     audio={'duration':45,'fps':24,'title':ep['title'],'narration':copy.deepcopy(ep['narration']),
+        'narrative_treatment':copy.deepcopy(ep['suspense']),
         'sound_events':copy.deepcopy(ep['sound_events']),
         'production':{'series_id':bible['id'],'ordinal':ep['episode'],'script_sha256':digest(ep)},
         'audio_production':{'schema':3,'narrator_settings':'config/voice_cast_local.json','cast_lock':lock}}

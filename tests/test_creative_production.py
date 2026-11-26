@@ -112,6 +112,19 @@ class CreativeProductionTests(unittest.TestCase):
         self.assertLess(fitted['narration'][0]['pace'],library['delivery_profiles']['storytelling']['pace'])
         self.assertEqual(fitted['narration'][0]['text'],score['narration'][0]['text'])
 
+    def test_platform_timing_slack_stays_inside_original_beat_and_keeps_words(self):
+        from autonomy.creative_media import fit_dialogue
+        library=json.loads((ROOT/'config/voice_cast_local.json').read_text())
+        line=copy.deepcopy(self.e['narration'][2]);line['pace']=.75
+        score={'narration':[line],'narrative_treatment':self.e['suspense']}
+        take={'words':[{'end':3.5038}],'duration':3.6643}
+        with patch('soundstage.casting.VoiceCast') as cast,patch('soundstage.take_cache.seed_takes',return_value=[]):
+            cast.return_value.render_line.return_value=take
+            fitted=fit_dialogue(score,library,self.folder,'unused')
+        actual=fitted['narration'][0]
+        self.assertGreater(actual['end'],line['end']);self.assertLessEqual(actual['end'],11.78)
+        self.assertEqual(actual['text'],line['text']);self.assertEqual(actual['start'],line['start'])
+
     def test_fast_seven_word_caption_uses_readable_group_without_lost_words(self):
         from soundstage.aligned_captions import build
         words='Can you make it reach our street?'.split()

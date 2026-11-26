@@ -11,6 +11,7 @@ import os
 import shutil
 import subprocess
 import time
+import math
 from pathlib import Path
 from .contracts import ROOT,digest,file_digest,write_json
 from .creative_contract import validate_episode
@@ -23,6 +24,7 @@ def fit_dialogue(score,library,out,ffmpeg,reuse_sources=()):
     (out/'timing_probe').mkdir(parents=True,exist_ok=True)
     score=copy.deepcopy(score);cast=VoiceCast(library,score,ffmpeg,out/'timing_probe');sources=[];changes=[]
     for i,line in enumerate(score['narration']):
+        authored_end=line['end']
         seed_takes([line],library,out/'timing_probe'/f'line_{i:02d}',reuse_sources)
         pace=resolve_delivery(library,line)[2]['pace']
         for attempt in range(3):
@@ -38,7 +40,18 @@ def fit_dialogue(score,library,out,ffmpeg,reuse_sources=()):
                 sources.append(folder.parent.parent);break
             revised=round(max(.75,pace*min(permitted/max(spoken,.01),
                 tail_limit/max(total,.01))*.97),4)
-            if revised>=pace or attempt==2:raise ValueError('Dialogue needs a writing revision; cannot fit cue '+line['id'])
+            if revised>=pace or attempt==2:
+                treatment=score.get('narrative_treatment',{})
+                beat_id=treatment.get('cue_links',{}).get(line['id'],{}).get('beat')
+                beat=next((b for b in treatment.get('beats',[]) if b['id']==beat_id),None)
+                ceiling=min(authored_end+.25,next_start-.03,beat['end']-.02 if beat else authored_end)
+                needed=line['start']+max(spoken,total-library['timing']['max_tail_overrun_seconds'])+.02
+                if beat and needed<=ceiling and total<=next_start-line['start']-.03:
+                    line['end']=math.ceil(needed*1000)/1000
+                    changes.append({'cue':line['id'],'from_end':authored_end,'to_end':line['end'],
+                        'reason':'measured platform variation; borrow <=250ms of existing silence inside the same beat'})
+                    sources.append(folder.parent.parent);break
+                raise ValueError('Dialogue needs a writing revision; cannot fit cue '+line['id'])
             changes.append({'cue':line['id'],'from_pace':pace,'to_pace':revised,'reason':'measured engine speech overrun'})
             pace=revised;line['pace']=pace
         else:raise ValueError('Unresolved dialogue timing')
@@ -81,6 +94,9 @@ def produce(bible,episode,memory,out,blender,ffmpeg,resolution=(180,320),fps=2,m
                     if receipts:line['pace']=json.loads(receipts[-1].read_text())['delivery_controls']['pace']
             reuse_sources=[reuse_audio]+list((previous/'timing_probe').glob('line_*'))
         score=fit_dialogue(score,library,out,ffmpeg,reuse_sources)
+        performance_episode=copy.deepcopy(episode);performance_episode['narration']=copy.deepcopy(score['narration'])
+        validate_episode(performance_episode,bible,memory)
+        write_json(out/'performance_episode.json',performance_episode)
         write_json(out/'audio_score.json',score)
         from soundstage.pipeline import prepare
         audio=prepare(score,out/'audio',library,ffmpeg)

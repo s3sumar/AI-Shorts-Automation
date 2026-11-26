@@ -178,4 +178,5 @@ def build(config,storyboard,episode,bible,audio,out):
 
 if __name__=='__main__':
     args=sys.argv[sys.argv.index('--')+1:];folder=Path(args[0]).resolve()
-    build(*[json.loads((folder/name).read_text()) for name in ['render_config.json','blender_storyboard.json','episode.json','series_bible.json','audio/audio_manifest.json']],folder/'creative_master.blend')
+    episode_file='performance_episode.json' if (folder/'performance_episode.json').exists() else 'episode.json'
+    build(*[json.loads((folder/name).read_text()) for name in ['render_config.json','blender_storyboard.json',episode_file,'series_bible.json','audio/audio_manifest.json']],folder/'creative_master.blend')
