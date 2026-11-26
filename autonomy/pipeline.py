@@ -1,3 +1,4 @@
+
 """Bounded, resumable production orchestration. No remote inference or uploads by default."""
 import argparse
 import json
@@ -20,7 +21,7 @@ def apply_cinematic_captions(c,audio):
     c['captions']=[dict(v,text='\n'.join(textwrap.wrap(v['text'],30))) for v in audio['captions']]
     last=max(v['end'] for v in c['captions'])
     endcard=max(c['effects']['cut_black'],last+.25)
-    if c['duration']-endcard>=1:
+    if not audio.get('voice_cast') and c['duration']-endcard>=1:
         c['captions'].append({'start':endcard,'end':c['duration'],'text':'TO BE CONTINUED.'})
     return c
 
@@ -87,9 +88,11 @@ def verify_outputs(out,c,ffmpeg):
                 duplicates+=1
             previous=checksum
         narrator=json.loads((ROOT/c['audio_production']['narrator_settings']).read_text())
+        voice_approved=(all(narrator['voices'][line['voice_id']].get('identity_approved',False) for line in audio['narration'])
+                        if audio.get('voice_cast') else narrator.get('identity_approved',False))
         facts=collect(path,ffmpeg,audio,{'native':contiguous,'source_frames':len(frames),
             'contiguous':contiguous,'duplicate_moving_frames':duplicates,'source_resolution':c['preview']['resolution']},c['captions'],True,
-            (ROOT/c['template']).is_file(),narrator.get('identity_approved',False))
+            (ROOT/c['template']).is_file(),voice_approved)
     review_path=out/'human_quality_review.json'
     review=json.loads(review_path.read_text()) if review_path.exists() else None
     quality=save_report(out/'production_quality_gate.json',facts,review)
@@ -191,7 +194,12 @@ def produce(memory,row,settings,blender,ffmpeg,output_root=None):
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('command',choices=['bootstrap','plan','produce','status'])
+    p.add_argument('command',choices=['bootstrap','plan','produce','status','creative-review'])
+    p.add_argument('--creative-brief',default='')
+    p.add_argument('--creative-settings',default='config/creative_director.json')
+    p.add_argument('--creative-bible')
+    p.add_argument('--creative-memory')
+    p.add_argument('--review-out')
     p.add_argument('--state',default='state/story.sqlite3')
     p.add_argument('--settings',default='config/autonomy.json')
     p.add_argument('--run-key',default='manual-preview')
@@ -200,6 +208,16 @@ def main():
     p.add_argument('--trusted-seed',action='store_true',help='Bootstrap from checked-in verified provenance when local seed media is absent')
     p.add_argument('--output-root',default='artifacts/autonomy',help='Separate test media from existing completed masters')
     a=p.parse_args()
+    if a.command=='creative-review':
+        if not a.creative_brief or not a.review_out:
+            p.error('Creative review needs --creative-brief and an isolated --review-out')
+        # Separate review lane: no production database, reservation, render or
+        # checkpoint finalizer is entered, even while production is paused.
+        from tools.creative_director import run
+        run(argparse.Namespace(settings=ROOT/a.creative_settings,out=ROOT/a.review_out,
+            brief=a.creative_brief,bible=Path(a.creative_bible) if a.creative_bible else None,
+            memory=Path(a.creative_memory) if a.creative_memory else None))
+        return
     settings=json.loads((ROOT/a.settings).read_text())
     if settings['paid_services_enabled'] or settings['limits']['episodes_per_run']!=1:
         p.error('This version permits one bounded episode per run and no paid service provider')

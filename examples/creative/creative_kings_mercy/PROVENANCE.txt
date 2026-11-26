@@ -1,0 +1,1 @@
+Assistant-authored original review script. Not a hosted-provider output. Structural validation passed. Human editorial/listening review pending. No audio or animation generated. Never used as a production fallback.

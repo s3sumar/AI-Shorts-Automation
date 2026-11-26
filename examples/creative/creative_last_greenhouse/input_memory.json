@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "series_id": "creative_last_greenhouse",
+  "bible_sha256": "f429b9a31c374eaa1bc00a1f19bb2350548f94158ef7f2c99b5ab1f2b4695243",
+  "next_episode": 1,
+  "voice_cast": {
+    "schema": 1,
+    "series_id": "creative_last_greenhouse",
+    "cast_id": "local_public_domain_cast_v1",
+    "roles": {
+      "narrator": "john_storyteller_v1",
+      "protagonist": "lj_character_v1",
+      "antagonist": "norman_figure_v1"
+    },
+    "fingerprints": {
+      "narrator": "70ae76c4afa4735e9d1b1ac5b3cfce9ec60450bc9eb368fb418d6750014e7026",
+      "protagonist": "dfe8600b0bb2697e2aa32509bb1d4ee83b988019956ca139db93f920e9920844",
+      "antagonist": "7139db9130625a64d1f2d3b02392bf5e44ff2ee2837b48eb01886730953510b9"
+    }
+  },
+  "facts": {
+    "grow_lights": {
+      "statement": "The tree is under full grow lights in a lunar greenhouse.",
+      "status": "observed",
+      "basis": "colony setup"
+    }
+  },
+  "beliefs": {},
+  "audience_knows": [],
+  "audience_believes": [],
+  "characters": {
+    "mara": {
+      "knows": [
+        "grow_lights"
+      ],
+      "beliefs": [],
+      "goal": {
+        "id": "goal_mara",
+        "description": "Diagnose the last tree without sacrificing the colony."
+      }
+    },
+    "habitat": {
+      "knows": [
+        "grow_lights"
+      ],
+      "beliefs": [],
+      "goal": {
+        "id": "goal_habitat",
+        "description": "Keep the colony alive under a rapidly shrinking oxygen budget."
+      }
+    }
+  },
+  "unresolved": [
+    "central"
+  ],
+  "resolved": [],
+  "history": []
+}

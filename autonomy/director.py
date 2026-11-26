@@ -28,7 +28,7 @@ class LocalModel:
     def generate(self,prompt):
         request=urllib.request.Request(self.endpoint+'/api/generate',data=json.dumps({
             'model':self.model,'prompt':prompt,'format':'json','stream':False,
-            'options':{'temperature':.55,'num_predict':600}}).encode(),headers={'Content-Type':'application/json'})
+            'options':{'temperature':.55,'num_predict':4096}}).encode(),headers={'Content-Type':'application/json'})
         with urllib.request.urlopen(request,timeout=60) as response:
             result=json.load(response)
         return json.loads(result['response'])
@@ -65,8 +65,12 @@ def new_series(index,model=None):
             raise ValueError('Model concept too long')
         title,premise=response['title'],response['premise']
         source='local_llm'
+    from .dialogue import initial_voice_lock
     return {'id':f'series_{index:03d}','title':title,'premise':premise,'season_length':2,
-        'environment':environment,'source':source,'canon':initial_state(protagonist,antagonist,color)}
+        'voice_cast':initial_voice_lock(f'series_{index:03d}'),
+        'environment':environment,'source':source,
+        'story_context':{'archetype':'delivery_trap' if protagonist=='Courier' else 'voice_trap','strategy':'withdrawal' if index%2==0 else 'verification'},
+        'canon':initial_state(protagonist,antagonist,color)}
 
 
 def plan_episode(series,ordinal,global_number,model=None):
@@ -90,17 +94,13 @@ def plan_episode(series,ordinal,global_number,model=None):
                'Let the doors close.','Zero. Hold your breath.','The corridor is empty.','Walk out. Do not turn around.']
         summary='The passenger refuses the borrowed voice, seals the presence below, and exits at ground level.'
     source='offline_story_grammar'
-    if model:
-        result=model.generate('Write original radio dialogue for this fixed suspense scene. Return JSON containing '
-            'title and radio_lines (exactly 7 strings, each at most 8 words). Do not alter the plot. '
-            +json.dumps({'series':series['title'],'canon':start,'outcome':end,'outline':summary}))
-        title=result.get('title','')
-        lines=result.get('radio_lines',[])
-        if any(len(line.split())>8 for line in lines if isinstance(line,str)):
-            raise ValueError('Local model dialogue exceeds timing budget')
-        source='local_llm'
     plan={'uid':f'{series["id"]}_e{ordinal:03d}','series_id':series['id'],'series_title':series['title'],
         'ordinal':ordinal,'global_number':global_number,'kind':kind,'title':title,'summary':summary,
         'environment':series['environment'],'source':source,'start_state':start,'end_state':end,
         'start_hash':digest(start),'radio_lines':lines,'season_finale':ordinal==series['season_length']}
+    from .dialogue import initial_voice_lock
+    plan['voice_cast']=copy.deepcopy(series.get('voice_cast') or initial_voice_lock(series['id']))
+    plan['story_context']=copy.deepcopy(series.get('story_context',{}))
+    from .screenwriter import attach_story
+    attach_story(plan,model)
     return validate_plan(plan)

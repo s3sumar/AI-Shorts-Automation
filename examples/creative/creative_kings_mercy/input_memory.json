@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "series_id": "creative_kings_mercy",
+  "bible_sha256": "c03abf5ccc3b1634ad3a7169170ea5fa7e2bad42fe725330fd3599cebc2b9900",
+  "next_episode": 1,
+  "voice_cast": {
+    "schema": 1,
+    "series_id": "creative_kings_mercy",
+    "cast_id": "local_public_domain_cast_v1",
+    "roles": {
+      "narrator": "john_storyteller_v1",
+      "protagonist": "lj_character_v1",
+      "antagonist": "norman_figure_v1"
+    },
+    "fingerprints": {
+      "narrator": "70ae76c4afa4735e9d1b1ac5b3cfce9ec60450bc9eb368fb418d6750014e7026",
+      "protagonist": "dfe8600b0bb2697e2aa32509bb1d4ee83b988019956ca139db93f920e9920844",
+      "antagonist": "7139db9130625a64d1f2d3b02392bf5e44ff2ee2837b48eb01886730953510b9"
+    }
+  },
+  "facts": {
+    "pardon_owned": {
+      "statement": "Ivo has obtained a royal pardon for his imprisoned sister.",
+      "status": "observed",
+      "basis": "paid document in his hand"
+    }
+  },
+  "beliefs": {},
+  "audience_knows": [],
+  "audience_believes": [],
+  "characters": {
+    "ivo": {
+      "knows": [
+        "pardon_owned"
+      ],
+      "beliefs": [],
+      "goal": {
+        "id": "goal_ivo",
+        "description": "Find his sister and bring her home alive."
+      }
+    },
+    "clerk": {
+      "knows": [
+        "pardon_owned"
+      ],
+      "beliefs": [],
+      "goal": {
+        "id": "goal_clerk",
+        "description": "Keep her post and avoid punishment while deciding whether to help Ivo."
+      }
+    }
+  },
+  "unresolved": [
+    "central"
+  ],
+  "resolved": [],
+  "history": []
+}

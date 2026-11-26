@@ -24,7 +24,8 @@ def chunks(cue,words,max_words=4,max_chars=30):
             output.append(group);group=[]
         group.append((text,w))
     if group: output.append(group)
-    if len(output)>1 and len(output[-1])==1 and len(output[-2])>2:
+    if (len(output)>1 and len(output[-1])<len(output[-2])-1
+            and len(' '.join([output[-2][-1][0]]+[v[0] for v in output[-1]]))<=max_chars):
         output[-1].insert(0,output[-2].pop())
     cues=[]
     for group in output:

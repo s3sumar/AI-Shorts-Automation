@@ -7,6 +7,13 @@ CATEGORIES={'environment','footstep','movement','mechanical','doors','radio','al
 
 
 def event_plan(c):
+    if 'sound_events' in c:
+        events=c['sound_events']
+        for event in events:
+            if (event['category'] not in CATEGORIES or not 0<=event['start']<event['end']<=c['duration']
+                    or not 0<=event['gain']<=1 or not -1<=event.get('pan',0)<=1):
+                raise ValueError('Invalid authored environmental sound event')
+        return sorted(events,key=lambda e:e['start'])
     end=c['duration']
     events=[{'category':'environment','start':0,'end':end,'gain':.075,'anchor':'scene duration'},
             {'category':'mechanical','start':0,'end':c['effects']['impact_time'],'gain':.06,'anchor':'descent until impact'},

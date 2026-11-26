@@ -1,0 +1,36 @@
+{
+  "revision": "episode3_word_choice_v5_draft",
+  "status": "writing_review_only_not_integrated",
+  "title": "Return to Sender",
+  "based_on": "config/episode3_director_v4.json",
+  "priority": "Narrative clarity, specific word choice and character agency; retain the existing sound approach.",
+  "logline": "A courier tries to cancel a delivery that has already been marked complete. The lift carries her to the person who ordered it.",
+  "narration": [
+    {"start":0.15,"end":4.5,"speaker":"narrator","text":"The label says delivered. She hasn't handed it to anyone.","pace":1.0,"phrases":[{"text":"The label says delivered.","pause_after":0.18},{"text":"She hasn't handed it to anyone.","pause_after":0.08}]},
+    {"start":5.15,"end":8.5,"speaker":"narrator","text":"She's taking it to the lobby.","pace":1.0},
+    {"start":9.1,"end":10.4,"speaker":"courier","text":"Dispatch?","pace":1.0},
+    {"start":10.7,"end":14.2,"speaker":"courier","text":"Who marked this delivered?","pace":1.0},
+    {"start":14.65,"end":17.45,"speaker":"courier","text":"Cancel it. I'm taking it back.","pace":0.96,"phrases":[{"text":"Cancel it.","pause_after":0.12},{"text":"I'm taking it back.","pause_after":0.08}]},
+    {"start":17.7,"end":19.9,"speaker":"courier","text":"Can you hear me?","pace":0.96},
+    {"start":20.15,"end":22.35,"speaker":"courier","text":"Stop. Please.","pace":1.0,"phrases":[{"text":"Stop.","pause_after":0.22},{"text":"Please.","pause_after":0.08}]},
+    {"start":22.65,"end":23.95,"speaker":"narrator","text":"Past the lobby.","pace":0.94},
+    {"start":25.05,"end":26.0,"speaker":"narrator","text":"Minus one.","pace":0.94},
+    {"start":26.7,"end":28.9,"speaker":"courier","text":"That floor is sealed.","pace":1.0},
+    {"start":34.6,"end":37.6,"speaker":"courier","text":"I'm not handing it over.","pace":1.0},
+    {"start":40.6,"end":41.9,"speaker":"dispatcher","text":"Keep it.","pace":1.12},
+    {"start":43.1,"end":44.9,"speaker":"dispatcher","text":"You're the delivery.","pace":1.08}
+  ],
+  "editorial_changes": [
+    "State the visible contradiction immediately, without inventing a signature, name or unseen event.",
+    "Replace commentary about speed with a question that motivates the following parcel insert.",
+    "Replace the repeated holding-the-parcel observation with a concrete cancellation attempt.",
+    "Call dispatch once, then let the unanswered request and failed control press escalate.",
+    "Name the missed destination rather than merely reading the display's zero.",
+    "Make the refusal explicit so Keep it directly answers her choice.",
+    "Retain the concise final reversal and the speech-free opening-door reveal."
+  ],
+  "timing_status": "Windows inherited from v4 for planning only. New spoken durations, captions and mouth-envelope timing have NOT been generated or verified.",
+  "integration_status": "No production entry point selects this draft. Existing MP4s and scenes still use v4.",
+  "checkpoint_policy": "No state changes. The proposed reveal remains noncanonical pending editorial review.",
+  "automation_policy": "No scheduling, uploads, paid services, cloud runs, commits or pushes are authorized by this writing draft."
+}

@@ -1,0 +1,11 @@
+{
+  "provider": "openrouter_free",
+  "writer_model": "google/gemma-4-31b-it:free",
+  "critic_model": "baidu/ernie-5.5-flash-preview:free",
+  "paid_services_enabled": false,
+  "allow_model_fallback": false,
+  "max_calls": 16,
+  "max_output_tokens": 10000,
+  "max_revisions": 2,
+  "approval_threshold": 4
+}

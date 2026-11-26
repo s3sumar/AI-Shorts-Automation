@@ -1,0 +1,946 @@
+{
+  "schema": 1,
+  "series_id": "creative_last_greenhouse",
+  "episode": 1,
+  "duration": 45,
+  "prior_memory_sha256": "4c7d9dfedc99c8c67fd1e126f077cd48dd7e1cdda627af33eeb55e9e3986e0fb",
+  "title": "The Last Greenhouse - Episode 1",
+  "synopsis": "A botanist must decide whether destroying the last terrestrial tree will save her colony or kill her. It is not merely mirroring Mara; Habitat claims it is breathing for her.",
+  "narration": [
+    {
+      "id": "hook",
+      "start": 0.15,
+      "end": 5,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "The colony's last tree had stopped making oxygen. It was using theirs.",
+      "phrases": [
+        {
+          "text": "The colony's last tree had stopped making oxygen. It was using theirs.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "start": 5.4,
+      "end": 8.4,
+      "speaker": "mara",
+      "role": "protagonist",
+      "emotion": "uneasy",
+      "text": "How long do we have?",
+      "phrases": [
+        {
+          "text": "How long do we have?",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "answer",
+      "start": 8.8,
+      "end": 12,
+      "speaker": "habitat",
+      "role": "antagonist",
+      "emotion": "unsettling",
+      "text": "Eleven minutes. Burn the roots.",
+      "phrases": [
+        {
+          "text": "Eleven minutes. Burn the roots.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "meaning",
+      "start": 12.5,
+      "end": 17,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "Mara had grown it from Earth's last seed. She asked for one test.",
+      "phrases": [
+        {
+          "text": "Mara had grown it from Earth's last seed. She asked for one test.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "choose",
+      "start": 17.4,
+      "end": 19.7,
+      "speaker": "mara",
+      "role": "protagonist",
+      "emotion": "resolute",
+      "text": "Isolate the chamber. Read its pulse.",
+      "phrases": [
+        {
+          "text": "Isolate the chamber. Read its pulse.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "start": 20,
+      "end": 24,
+      "speaker": "habitat",
+      "role": "antagonist",
+      "emotion": "unsettling",
+      "text": "It's breathing in time with you.",
+      "phrases": [
+        {
+          "text": "It's breathing in time with you.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "reframe",
+      "start": 24.4,
+      "end": 28.8,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "She'd expected a broken sensor. Now she needed it to be one.",
+      "phrases": [
+        {
+          "text": "She'd expected a broken sensor. Now she needed it to be one.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "test",
+      "start": 29.2,
+      "end": 31.8,
+      "speaker": "mara",
+      "role": "protagonist",
+      "emotion": "afraid",
+      "text": "Cut the link to my suit.",
+      "phrases": [
+        {
+          "text": "Cut the link to my suit.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "consequence",
+      "start": 32.2,
+      "end": 37,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "She held her breath. Her chest rose anyway.",
+      "phrases": [
+        {
+          "text": "She held her breath. Her chest rose anyway.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "plea",
+      "start": 37.4,
+      "end": 40.2,
+      "speaker": "mara",
+      "role": "protagonist",
+      "emotion": "terrified",
+      "text": "What happens if I leave?",
+      "phrases": [
+        {
+          "text": "What happens if I leave?",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "start": 42,
+      "end": 44.9,
+      "speaker": "habitat",
+      "role": "antagonist",
+      "emotion": "unsettling",
+      "text": "It isn't copying you. It's breathing for you.",
+      "phrases": [
+        {
+          "text": "It isn't copying you. It's breathing for you.",
+          "pause_after": 0.08
+        }
+      ]
+    }
+  ],
+  "suspense": {
+    "schema": 1,
+    "archetype": "original_last_greenhouse",
+    "strategy": "Test the apparent solution and accept a concrete cost when it fails.",
+    "strategy_description": "A botanist must decide whether destroying the last terrestrial tree will save her colony or kill her.",
+    "facts": {
+      "grow_lights": {
+        "statement": "The tree is under full grow lights in a lunar greenhouse.",
+        "status": "observed",
+        "basis": "colony setup"
+      },
+      "debt": {
+        "statement": "The tree consumes the colony oxygen, and Habitat gives eleven minutes.",
+        "status": "observed",
+        "basis": "hook,ask,answer"
+      },
+      "isolation": {
+        "statement": "Mara chooses an isolation test over immediate incineration.",
+        "status": "observed",
+        "basis": "meaning,choose"
+      },
+      "matching": {
+        "statement": "The chamber records respiration matching Mara.",
+        "status": "observed",
+        "basis": "result"
+      },
+      "link_cut": {
+        "statement": "Mara orders the suit data link cut.",
+        "status": "observed",
+        "basis": "reframe,test"
+      },
+      "involuntary": {
+        "statement": "Mara cannot keep her chest still when she holds her breath.",
+        "status": "observed",
+        "basis": "consequence"
+      },
+      "departure": {
+        "statement": "Mara asks what leaving would do to her.",
+        "status": "observed",
+        "basis": "plea"
+      },
+      "human_link": {
+        "statement": "Habitat claims the tree is sustaining Mara respiration.",
+        "status": "claim",
+        "basis": "final",
+        "earliest_reveal": 41.8
+      }
+    },
+    "beliefs": {
+      "assumption": "This is a technical failure she can isolate without a personal cost."
+    },
+    "goals": {
+      "goal_mara": "Diagnose the last tree without sacrificing the colony.",
+      "goal_habitat": "Keep the colony alive under a rapidly shrinking oxygen budget.",
+      "urgent": "Find whether her body depends on the tree before allowing its destruction.",
+      "cliff_goal": "Find a way to save the colony without severing her own breathing."
+    },
+    "questions": {
+      "open": {
+        "question": "Why is the tree sustaining Mara, and what would burning it do to her?",
+        "arises_from": [
+          "human_link"
+        ]
+      }
+    },
+    "initial": {
+      "audience_knows": [],
+      "protagonist_knows": [
+        "grow_lights"
+      ],
+      "audience_believes": [],
+      "protagonist_believes": [],
+      "goal": "goal_mara"
+    },
+    "beats": [
+      {
+        "id": "beat_0",
+        "start": 0,
+        "end": 12.3,
+        "tension": 2,
+        "cues": [
+          "hook",
+          "ask",
+          "answer"
+        ],
+        "reveals": [
+          {
+            "fact": "debt",
+            "at": 11.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Mara sees falling oxygen reserves beneath bright grow lights."
+          }
+        ],
+        "belief_changes": [
+          {
+            "at": 0,
+            "who": [
+              "audience",
+              "protagonist"
+            ],
+            "remove": [],
+            "add": [
+              "assumption"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "beat_1",
+        "start": 12.3,
+        "end": 20,
+        "tension": 3,
+        "cues": [
+          "meaning",
+          "choose"
+        ],
+        "reveals": [
+          {
+            "fact": "isolation",
+            "at": 19.65,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "She reaches for the isolation control rather than the incinerator."
+          }
+        ],
+        "choices": [
+          {
+            "id": "isolate",
+            "at": 19.6,
+            "goal": "goal_mara",
+            "action": "Isolate the chamber and compare biological readings.",
+            "reason": "A test might save the seed and still protect the colony.",
+            "evidence": "She reaches for the isolation control rather than the incinerator.",
+            "requires_known": [
+              "grow_lights"
+            ],
+            "based_on_beliefs": [
+              "assumption"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "beat_2",
+        "start": 20,
+        "end": 24.2,
+        "tension": 5,
+        "cues": [
+          "result"
+        ],
+        "reveals": [
+          {
+            "fact": "matching",
+            "at": 23.8,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Chamber pulse lights match the suit monitor."
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "isolate",
+            "at": 23.9,
+            "effect": "The tree and Mara appear synchronized.",
+            "meaning": "Her attempt to save it makes the anomaly personal."
+          }
+        ]
+      },
+      {
+        "id": "beat_3",
+        "start": 24.2,
+        "end": 32,
+        "tension": 6,
+        "cues": [
+          "reframe",
+          "test"
+        ],
+        "reveals": [
+          {
+            "fact": "link_cut",
+            "at": 31.7,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "She removes the suit data cable; the chamber remains independent."
+          }
+        ],
+        "goal_after": "urgent",
+        "goal_change_at": 24.2,
+        "choices": [
+          {
+            "id": "cut_link",
+            "at": 31.6,
+            "goal": "urgent",
+            "action": "Disconnect the suit link to test a sensor fault.",
+            "reason": "Removing the suspected false source should disprove a biological link.",
+            "evidence": "She removes the suit data cable; the chamber remains independent.",
+            "requires_known": [
+              "grow_lights"
+            ],
+            "based_on_beliefs": [
+              "assumption"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "beat_4",
+        "start": 32,
+        "end": 37.2,
+        "tension": 8,
+        "cues": [
+          "consequence"
+        ],
+        "reveals": [
+          {
+            "fact": "involuntary",
+            "at": 36.8,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Her hand stops on her chest as it rises against her deliberate breath hold."
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "cut_link",
+            "at": 36.9,
+            "effect": "The physical response persists without the data link.",
+            "meaning": "The sensor explanation cannot account for what her body does."
+          }
+        ],
+        "surprise": {
+          "contradicts_belief": "assumption",
+          "revealed_by": "involuntary"
+        },
+        "belief_changes": [
+          {
+            "at": 36.8,
+            "who": [
+              "audience",
+              "protagonist"
+            ],
+            "remove": [
+              "assumption"
+            ],
+            "add": []
+          }
+        ]
+      },
+      {
+        "id": "beat_5",
+        "start": 37.2,
+        "end": 41.8,
+        "tension": 9,
+        "cues": [
+          "plea"
+        ],
+        "reveals": [
+          {
+            "fact": "departure",
+            "at": 40,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "She looks from the exit to the sealed tree."
+          }
+        ]
+      },
+      {
+        "id": "beat_6",
+        "start": 41.8,
+        "end": 45,
+        "tension": 10,
+        "cues": [
+          "final"
+        ],
+        "reveals": [
+          {
+            "fact": "human_link",
+            "at": 44.8,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "A matching respiration trace shows an unresolved physical link."
+          }
+        ],
+        "goal_after": "cliff_goal",
+        "goal_change_at": 44.85
+      }
+    ],
+    "cue_links": {
+      "hook": {
+        "beat": "beat_0",
+        "purpose": "context",
+        "context_facts": [
+          "debt"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_mara"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The tree consumes the colony oxygen, and Habitat gives eleven minutes. Changes the character options rather than merely inventorying action."
+      },
+      "ask": {
+        "beat": "beat_0",
+        "purpose": "reaction",
+        "context_facts": [
+          "debt"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_mara"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The tree consumes the colony oxygen, and Habitat gives eleven minutes. Changes the character options rather than merely inventorying action."
+      },
+      "answer": {
+        "beat": "beat_0",
+        "purpose": "answer",
+        "context_facts": [
+          "debt"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_mara"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The tree consumes the colony oxygen, and Habitat gives eleven minutes. Changes the character options rather than merely inventorying action."
+      },
+      "meaning": {
+        "beat": "beat_1",
+        "purpose": "interpretation",
+        "context_facts": [
+          "isolation"
+        ],
+        "beliefs": [
+          "assumption"
+        ],
+        "goals": [
+          "goal_mara"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Mara chooses an isolation test over immediate incineration. Changes the character options rather than merely inventorying action."
+      },
+      "choose": {
+        "beat": "beat_1",
+        "purpose": "decision",
+        "context_facts": [
+          "isolation"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_mara"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Mara chooses an isolation test over immediate incineration. Changes the character options rather than merely inventorying action."
+      },
+      "result": {
+        "beat": "beat_2",
+        "purpose": "answer",
+        "context_facts": [
+          "matching"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_mara"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The chamber records respiration matching Mara. Changes the character options rather than merely inventorying action."
+      },
+      "reframe": {
+        "beat": "beat_3",
+        "purpose": "interpretation",
+        "context_facts": [
+          "link_cut"
+        ],
+        "beliefs": [
+          "assumption"
+        ],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Mara orders the suit data link cut. Changes the character options rather than merely inventorying action."
+      },
+      "test": {
+        "beat": "beat_3",
+        "purpose": "decision",
+        "context_facts": [
+          "link_cut"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Mara orders the suit data link cut. Changes the character options rather than merely inventorying action."
+      },
+      "consequence": {
+        "beat": "beat_4",
+        "purpose": "interpretation",
+        "context_facts": [
+          "involuntary"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Mara cannot keep her chest still when she holds her breath. Changes the character options rather than merely inventorying action."
+      },
+      "plea": {
+        "beat": "beat_5",
+        "purpose": "reaction",
+        "context_facts": [
+          "departure"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Mara asks what leaving would do to her. Changes the character options rather than merely inventorying action."
+      },
+      "final": {
+        "beat": "beat_6",
+        "purpose": "answer",
+        "context_facts": [
+          "human_link"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Habitat claims the tree is sustaining Mara respiration. Changes the character options rather than merely inventorying action."
+      }
+    },
+    "protected_lines": {
+      "hook": "The colony's last tree had stopped making oxygen. It was using theirs.",
+      "final": "It isn't copying you. It's breathing for you."
+    },
+    "cliffhanger": {
+      "cue_id": "final",
+      "fact": "human_link",
+      "payoff_of": [
+        "debt",
+        "matching"
+      ],
+      "reframes_belief": "assumption",
+      "unresolved": [
+        "open"
+      ]
+    }
+  },
+  "shots": [
+    {
+      "id": "shot_0",
+      "start": 0,
+      "end": 12.3,
+      "environment_id": "lunar_greenhouse",
+      "framing": "wide",
+      "camera_move": "dolly",
+      "subject": "mara",
+      "action": "Mara sees falling oxygen reserves beneath bright grow lights.",
+      "motivation": "The tree consumes the colony oxygen, and Habitat gives eleven minutes.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "debt"
+      ],
+      "cue_ids": [
+        "hook",
+        "ask",
+        "answer"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "look",
+          "start": 0.2,
+          "end": 12.100000000000001,
+          "target": "mara"
+        }
+      ]
+    },
+    {
+      "id": "shot_1",
+      "start": 12.3,
+      "end": 20,
+      "environment_id": "lunar_greenhouse",
+      "framing": "medium",
+      "camera_move": "static",
+      "subject": "sealed_chamber",
+      "action": "She reaches for the isolation control rather than the incinerator.",
+      "motivation": "Mara chooses an isolation test over immediate incineration.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "isolation"
+      ],
+      "cue_ids": [
+        "meaning",
+        "choose"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "reach",
+          "start": 12.5,
+          "end": 19.8,
+          "target": "sealed_chamber"
+        }
+      ]
+    },
+    {
+      "id": "shot_2",
+      "start": 20,
+      "end": 24.2,
+      "environment_id": "lunar_greenhouse",
+      "framing": "detail",
+      "camera_move": "pan",
+      "subject": "mara",
+      "action": "Chamber pulse lights match the suit monitor.",
+      "motivation": "The chamber records respiration matching Mara.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "matching"
+      ],
+      "cue_ids": [
+        "result"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "point",
+          "start": 20.2,
+          "end": 24.0,
+          "target": "mara"
+        }
+      ]
+    },
+    {
+      "id": "shot_3",
+      "start": 24.2,
+      "end": 32,
+      "environment_id": "lunar_greenhouse",
+      "framing": "close",
+      "camera_move": "dolly",
+      "subject": "suit_link",
+      "action": "She removes the suit data cable; the chamber remains independent.",
+      "motivation": "Mara orders the suit data link cut.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "link_cut"
+      ],
+      "cue_ids": [
+        "reframe",
+        "test"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "reach",
+          "start": 24.4,
+          "end": 31.8,
+          "target": "suit_link"
+        }
+      ]
+    },
+    {
+      "id": "shot_4",
+      "start": 32,
+      "end": 37.2,
+      "environment_id": "lunar_greenhouse",
+      "framing": "medium",
+      "camera_move": "static",
+      "subject": "mara",
+      "action": "Her hand stops on her chest as it rises against her deliberate breath hold.",
+      "motivation": "Mara cannot keep her chest still when she holds her breath.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "involuntary"
+      ],
+      "cue_ids": [
+        "consequence"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "recoil",
+          "start": 32.2,
+          "end": 37.0,
+          "target": "mara"
+        }
+      ]
+    },
+    {
+      "id": "shot_5",
+      "start": 37.2,
+      "end": 41.8,
+      "environment_id": "lunar_greenhouse",
+      "framing": "close",
+      "camera_move": "pan",
+      "subject": "suit_link",
+      "action": "She looks from the exit to the sealed tree.",
+      "motivation": "Mara asks what leaving would do to her.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "departure"
+      ],
+      "cue_ids": [
+        "plea"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "look",
+          "start": 37.400000000000006,
+          "end": 41.599999999999994,
+          "target": "suit_link"
+        }
+      ]
+    },
+    {
+      "id": "shot_6",
+      "start": 41.8,
+      "end": 45,
+      "environment_id": "lunar_greenhouse",
+      "framing": "detail",
+      "camera_move": "dolly",
+      "subject": "mara",
+      "action": "A matching respiration trace shows an unresolved physical link.",
+      "motivation": "Habitat claims the tree is sustaining Mara respiration.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [],
+      "cue_ids": [
+        "final"
+      ],
+      "performances": [
+        {
+          "actor": "mara",
+          "action": "look",
+          "start": 42.0,
+          "end": 44.8,
+          "target": "mara"
+        }
+      ]
+    }
+  ],
+  "counterpart_state": {
+    "id": "habitat",
+    "learns": [
+      {
+        "at": 11.9,
+        "fact": "debt",
+        "evidence": "Mara sees falling oxygen reserves beneath bright grow lights."
+      },
+      {
+        "at": 19.65,
+        "fact": "isolation",
+        "evidence": "She reaches for the isolation control rather than the incinerator."
+      },
+      {
+        "at": 23.8,
+        "fact": "matching",
+        "evidence": "Chamber pulse lights match the suit monitor."
+      },
+      {
+        "at": 31.7,
+        "fact": "link_cut",
+        "evidence": "She removes the suit data cable; the chamber remains independent."
+      },
+      {
+        "at": 36.8,
+        "fact": "involuntary",
+        "evidence": "Her hand stops on her chest as it rises against her deliberate breath hold."
+      },
+      {
+        "at": 40,
+        "fact": "departure",
+        "evidence": "She looks from the exit to the sealed tree."
+      },
+      {
+        "at": 44.8,
+        "fact": "human_link",
+        "evidence": "A matching respiration trace shows an unresolved physical link."
+      },
+      {
+        "at": 0,
+        "fact": "debt",
+        "evidence": "Habitat observes colony oxygen sensors before answering."
+      },
+      {
+        "at": 19.9,
+        "fact": "matching",
+        "evidence": "Habitat reads the isolated chamber pulse before speaking."
+      },
+      {
+        "at": 41.9,
+        "fact": "human_link",
+        "evidence": "Habitat infers a respiratory link from the independent physiological test."
+      }
+    ],
+    "beliefs": [],
+    "goal": "goal_habitat"
+  },
+  "line_knowledge": {
+    "ask": [
+      "grow_lights"
+    ],
+    "answer": [
+      "debt"
+    ],
+    "choose": [
+      "debt"
+    ],
+    "result": [
+      "matching"
+    ],
+    "test": [
+      "matching"
+    ],
+    "plea": [
+      "involuntary"
+    ],
+    "final": [
+      "human_link"
+    ]
+  },
+  "resolved_mysteries": [],
+  "sound_events": [
+    {
+      "category": "environment",
+      "start": 0,
+      "end": 45,
+      "gain": 0.025
+    },
+    {
+      "category": "transition",
+      "start": 24.2,
+      "end": 24.599999999999998,
+      "gain": 0.04
+    },
+    {
+      "category": "cliffhanger",
+      "start": 44.9,
+      "end": 45,
+      "gain": 0.04
+    }
+  ],
+  "visual_events": [
+    {
+      "target": "oxygen_meter",
+      "at": 20,
+      "property": "text",
+      "value": "RESPIRATION LINK\nSIGNAL ACTIVE"
+    }
+  ]
+}

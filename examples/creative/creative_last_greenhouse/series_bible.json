@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "id": "creative_last_greenhouse",
+  "title": "The Last Greenhouse",
+  "genre": "Ecological science-fiction mystery",
+  "logline": "A botanist must decide whether destroying the last terrestrial tree will save her colony or kill her.",
+  "central_conflict": "A botanist must decide whether destroying the last terrestrial tree will save her colony or kill her.",
+  "theme": "A well-meant attempt to help carries a cost that forces a more difficult choice.",
+  "characters": [
+    {
+      "id": "mara",
+      "role": "protagonist",
+      "name": "Mara",
+      "personality": "Resourceful, emotionally invested, prepared to risk a clear cost.",
+      "desire": "Diagnose the last tree without sacrificing the colony.",
+      "flaw": "She treats preserving the last forest as a promise she cannot break.",
+      "voice_direction": "Natural and specific; composed intent turns to alarm through the consequences.",
+      "initial_knows": [
+        "grow_lights"
+      ]
+    },
+    {
+      "id": "habitat",
+      "role": "antagonist",
+      "name": "Habitat",
+      "personality": "A distinct counterpart with a practical objective, not a generic warning voice.",
+      "desire": "Keep the colony alive under a rapidly shrinking oxygen budget.",
+      "flaw": "Trusts procedure or immediate appearances before testing the implication.",
+      "voice_direction": "Clearly different timbre; measured, then personally unsettled by evidence.",
+      "initial_knows": [
+        "grow_lights"
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "id": "lunar_greenhouse",
+      "description": "A botanist must decide whether destroying the last terrestrial tree will save her colony or kill her. A readable, original setting with visible cause and effect.",
+      "required_assets": [
+        "tree",
+        "sealed_chamber",
+        "oxygen_meter",
+        "suit_link"
+      ]
+    }
+  ],
+  "initial_facts": {
+    "grow_lights": {
+      "statement": "The tree is under full grow lights in a lunar greenhouse.",
+      "status": "observed",
+      "basis": "colony setup"
+    }
+  },
+  "mysteries": {
+    "central": {
+      "question": "Why is the tree sustaining Mara, and what would burning it do to her?",
+      "writer_only_answer": "The seed was engineered as a living respiratory graft for the original expedition. Mara inherited the graft; restoring photosynthesis requires separating an emergency symbiosis safely.",
+      "reveal_episode": 3
+    }
+  },
+  "season_arc": [
+    {
+      "episode": 1,
+      "goal": "Diagnose the last tree without sacrificing the colony.",
+      "conflict": "A botanist must decide whether destroying the last terrestrial tree will save her colony or kill her.",
+      "turn": "It is not merely mirroring Mara; Habitat claims it is breathing for her.",
+      "payoff": "The first method fails and exposes the larger problem.",
+      "resolves": []
+    },
+    {
+      "episode": 2,
+      "goal": "Keep Mara breathing while restoring enough oxygen for the colony.",
+      "conflict": "Habitat can sever the respiratory graft, but the emergency procedure may kill the last tree and its irreplaceable seed.",
+      "turn": "A founder medical record links Mara inherited respiratory condition to the experimental seed stock.",
+      "payoff": "A temporary closed-loop mask buys time but confirms that a simple incineration order was never safe.",
+      "resolves": []
+    },
+    {
+      "episode": 3,
+      "goal": "Separate the emergency graft without sacrificing the forest or colony.",
+      "conflict": "The only available growth chamber must be converted into a respiratory bypass, ending Mara promise to keep the original tree intact.",
+      "turn": "The seed was designed as a living respiratory graft; Mara inherited a dependence the colony medical records concealed.",
+      "payoff": "Mara accepts the loss of the original tree to preserve its viable cuttings and sustain the people; Habitat must expose the hidden experiment.",
+      "resolves": [
+        "central"
+      ]
+    }
+  ]
+}

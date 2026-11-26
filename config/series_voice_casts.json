@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "scope": "Voice identity metadata only; not an episode checkpoint. Explicit review is required to recast an established series.",
+  "series": {
+    "series_002": {
+      "schema": 1,
+      "series_id": "series_002",
+      "cast_id": "local_public_domain_cast_v1",
+      "roles": {
+        "narrator": "john_storyteller_v1",
+        "protagonist": "lj_character_v1",
+        "antagonist": "norman_figure_v1"
+      },
+      "fingerprints": {
+        "narrator": "70ae76c4afa4735e9d1b1ac5b3cfce9ec60450bc9eb368fb418d6750014e7026",
+        "protagonist": "dfe8600b0bb2697e2aa32509bb1d4ee83b988019956ca139db93f920e9920844",
+        "antagonist": "7139db9130625a64d1f2d3b02392bf5e44ff2ee2837b48eb01886730953510b9"
+      }
+    }
+  }
+}

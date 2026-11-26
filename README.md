@@ -1,11 +1,27 @@
 # AI Shorts Automation - Below Zero
 
+**November 26 integration update:** the creative development pipeline now produces
+complete original-world Blender previews with three voices, subtitles, durable
+reservations/recovery and verified-media commits. Three actual 45-second blockout
+movies and a native 720p/24 FPS probe are saved locally. Episode 3 also has a new
+"I ordered you" audio revision. See [AUTOMATION_STATUS.md](AUTOMATION_STATUS.md)
+for exact files, operation and remaining credential/production-quality blockers.
+The detailed elevator work is preserved; development success does not enable
+publishing, paid services or unattended scheduling.
+
+
 **Quality review in progress (2026-11-15).** Rendering success is not publication
 approval. New episode generation is paused locally and in Actions while Episode 3 narration,
 sound, mixing and native HD visuals are reviewed. See
 [PRODUCTION_QUALITY.md](PRODUCTION_QUALITY.md) for three voice auditions, the
 before/after preview, measured audio/render costs and the NOT_READY gate.
 No scheduling, public publishing or paid provider is enabled.
+
+**Multi-voice audio is implemented locally (November 21).** The narrator, courier
+and figure use distinct pinned local voices, per-line delivery controls and
+engine-timed subtitles. See the first section of
+[PRODUCTION_QUALITY.md](PRODUCTION_QUALITY.md) for the actual 45-second audio,
+reproduction steps, reusable casting and autonomous-pipeline integration.
 
 The supplied reference was analyzed on November 15. See
 [CINEMATIC_REFERENCE_ANALYSIS.md](CINEMATIC_REFERENCE_ANALYSIS.md) for the original
@@ -130,3 +146,22 @@ No push or workflow dispatch was performed. `render.yml` is unchanged.
 Episode 002 keeps its existing eight-second schema-1 behavior through
 `legacy_story_scene.py` and `tests/validate_scene.py`. It is not a newly authored
 45-second sequel. Existing ten-second tools and their checks remain separate.
+
+
+The suspense screenwriter now produces a treatment before multi-voice dialogue:
+separate audience/character knowledge and beliefs, motivated choices, consequences,
+reveal timing, escalating stakes and a connected cliffhanger. It preserves proposed
+narrative memory through the existing verified-checkpoint mechanism. See
+`PRODUCTION_QUALITY.md` for the two Episode 3 review scripts, audio-only comparison,
+structural test scope and offline/local-model limitations. These drafts have not
+replaced canonical production state; generation remains paused.
+
+
+A separate model-authored creative path now creates original series/season arcs,
+episodes, information-state treatments and structured storyboards before bounded
+writer/critic revision. Run `python -m autonomy.pipeline creative-review` with an
+isolated output and brief. It requires `OPENROUTER_API_KEY`, enforces free-only
+routing and never advances production state. The manual cloud review workflow
+needs no laptop or Blender. See [CREATIVE_DIRECTOR.md](CREATIVE_DIRECTOR.md) for
+provider evaluation, three original review scripts, test evidence and the current
+credential/new-environment blockers. The working production workflow stays paused.

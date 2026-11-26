@@ -1,0 +1,67 @@
+name: AI Creative Writing Review
+
+# Isolated editorial review. No production reservation, schedule or media upload.
+on:
+  workflow_dispatch:
+    inputs:
+      brief:
+        description: Original genre, setting and creative direction
+        type: string
+        required: true
+      existing_series:
+        description: Optional creative_ ID with an accepted checkpoint on autonomy-state
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: creative-writing-review
+  cancel-in-progress: false
+
+jobs:
+  writing:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      CREATIVE_BRIEF: ${{ inputs.brief }}
+      EXISTING_SERIES: ${{ inputs.existing_series }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify free-only configuration and credential presence
+        run: |
+          python -c "import os,json; c=json.load(open('config/creative_director.json')); assert c['paid_services_enabled'] is False and c['allow_model_fallback'] is False; assert os.environ.get('OPENROUTER_API_KEY'), 'Add the OPENROUTER_API_KEY repository Actions secret. No model request has been made.'"
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-production.txt
+      - name: Check creative contracts and provider safeguards offline
+        run: python -m unittest discover -s tests -p 'test_creative*.py' -v
+      - name: Write, critique and revise one original review episode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$EXISTING_SERIES" ]; then
+            python tools/recover_creative_memory.py --series "$EXISTING_SERIES" --out artifacts/creative_recovered
+            python -m autonomy.pipeline creative-review --creative-brief "$CREATIVE_BRIEF" --creative-bible artifacts/creative_recovered/bible.json --creative-memory artifacts/creative_recovered/memory.json --review-out "artifacts/creative_cloud/${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          else
+            python -m autonomy.pipeline creative-review --creative-brief "$CREATIVE_BRIEF" --review-out "artifacts/creative_cloud/${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          fi
+      - name: Expose status and approval limits
+        if: always()
+        run: |
+          echo "Creative review only. No render, production checkpoint, schedule or video upload." >> "$GITHUB_STEP_SUMMARY"
+          find artifacts/creative_cloud -name run_status.json -exec cat {} \; 2>/dev/null || true
+      - name: Download scripts, critiques and proposed memory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: creative-writing-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/creative_cloud/
+          if-no-files-found: warn
+          retention-days: 14

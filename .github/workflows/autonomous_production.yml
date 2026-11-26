@@ -3,6 +3,12 @@ name: Autonomous Shorts Production
 # Manual acceptance only. No schedule and no video upload step.
 on:
   workflow_dispatch:
+    inputs:
+      audio_profile:
+        description: Local voice profile (production pause still applies)
+        type: choice
+        default: legacy
+        options: [legacy, cast]
 
 permissions:
   contents: read
@@ -20,6 +26,7 @@ jobs:
     env:
       LIBGL_ALWAYS_SOFTWARE: '1'
       ENABLE_REFLECTIONS: '0'
+      PRODUCTION_SETTINGS: ${{ inputs.audio_profile == 'cast' && 'config/multivoice_preview.json' || 'config/cloud_preview.json' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,6 +44,13 @@ jobs:
           python -m unittest discover -s tests -p 'test_*.py' -v
           python tools/check_autonomy_workflow.py
           python tools/review_deployment.py
+      - name: Prepare optional pinned local voice cast
+        if: inputs.audio_profile == 'cast'
+        run: |
+          python -c "import json; s=json.load(open('config/production_standards.json')); assert not s['episode_generation_paused'], 'Production remains paused; owner approval is required before running production'"
+          python -m pip install -r requirements-voice-cast.txt
+          python tools/setup_voice_cast.py --settings config/voice_cast_local.json
+          python -c "import subprocess; r=subprocess.run(['ffmpeg','-hide_banner','-filters'],capture_output=True,text=True,check=True); assert 'rubberband' in r.stdout, 'FFmpeg rubberband filter is required'"
       - name: Recover durable checkpoint or reviewed Episode 2 seed
         id: restore
         env:
@@ -44,7 +58,7 @@ jobs:
         run: python tools/cloud_checkpoint.py restore
       - name: Reserve this run and show shot plan
         run: |
-          python -m autonomy.pipeline plan --settings config/cloud_preview.json --run-key "github-${GITHUB_RUN_ID}"
+          python -m autonomy.pipeline plan --settings "$PRODUCTION_SETTINGS" --run-key "github-${GITHUB_RUN_ID}"
           python -m autonomy.pipeline status
       - name: Persist reservation before rendering
         id: reservation
@@ -59,7 +73,7 @@ jobs:
           blender-app/blender --version
       - name: Produce and verify one bounded offline preview
         run: |
-          xvfb-run -a python -m autonomy.pipeline produce             --settings config/cloud_preview.json --run-key "github-${GITHUB_RUN_ID}"             --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg
+          xvfb-run -a python -m autonomy.pipeline produce --settings "$PRODUCTION_SETTINGS" --run-key "github-${GITHUB_RUN_ID}" --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg
       - name: Persist verified result or failure for retry
         if: always() && steps.reservation.outcome == 'success'
         env:

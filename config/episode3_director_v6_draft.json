@@ -1,0 +1,37 @@
+{
+  "revision": "episode3_narrator_and_character_v6_draft",
+  "status": "writing_and_casting_direction_only_not_integrated",
+  "title": "Return to Sender",
+  "based_on": "config/episode3_director_v5_draft.json",
+  "audience_contract": {
+    "make_clear": ["The courier is taking a parcel to the lobby.", "Its delivered status contradicts her experience.", "Her attempt to cancel and stop the lift fails.", "The sealed floor contains a figure who wants her rather than the parcel."],
+    "leave_open": ["Who arranged the delivery?", "Why was this courier chosen?", "Can she refuse or escape?"]
+  },
+  "voice_cast_plan": {
+    "status": "Planned roles only; no new voice has been selected, synthesized or approved.",
+    "require_distinct_narrator_and_courier_identities": true,
+    "narrator": {"voice_slot":"storyteller","direction":"Calm, clear storyteller. Establish the goal and connect cause to consequence. Controlled concern without acting as the frightened courier. Do not reveal hidden motives early."},
+    "courier": {"voice_slot":"courier","direction":"A different recognizable voice. Start uncertain, become frustrated, then breathless and scared. Speak to dispatch or the figure with a concrete intention. Fear grows; avoid constant shouting."},
+    "dispatcher": {"voice_slot":"figure","direction":"A third brief voice if the figure speaks. Quiet and unhurried. Answer her refusal directly; keep its face and larger purpose unknown."}
+  },
+  "narration": [
+    {"start":0.15,"end":4.5,"speaker":"narrator","text":"The label said delivered. She hadn't handed it to anyone.","phrases":[{"text":"The label said delivered.","pause_after":0.18},{"text":"She hadn't handed it to anyone.","pause_after":0.08}]},
+    {"start":5.15,"end":8.6,"speaker":"narrator","text":"She was supposed to leave it in the lobby."},
+    {"start":9.1,"end":10.4,"speaker":"courier","text":"Dispatch?"},
+    {"start":10.7,"end":14.2,"speaker":"narrator","text":"No answer. And the lift was speeding up.","phrases":[{"text":"No answer.","pause_after":0.2},{"text":"And the lift was speeding up.","pause_after":0.08}]},
+    {"start":14.65,"end":17.45,"speaker":"courier","text":"Cancel it. I'm taking it back.","phrases":[{"text":"Cancel it.","pause_after":0.12},{"text":"I'm taking it back.","pause_after":0.08}]},
+    {"start":17.7,"end":19.9,"speaker":"courier","text":"Hello? Can you hear me?"},
+    {"start":20.15,"end":22.35,"speaker":"courier","text":"Stop. Please stop.","phrases":[{"text":"Stop.","pause_after":0.22},{"text":"Please stop.","pause_after":0.08}]},
+    {"start":22.65,"end":25.95,"speaker":"narrator","text":"It passed the lobby. The next floor was sealed.","phrases":[{"text":"It passed the lobby.","pause_after":0.16},{"text":"The next floor was sealed.","pause_after":0.08}]},
+    {"start":26.7,"end":28.9,"speaker":"courier","text":"Please. Take me back up.","phrases":[{"text":"Please.","pause_after":0.14},{"text":"Take me back up.","pause_after":0.08}]},
+    {"start":34.15,"end":36.8,"speaker":"narrator","text":"Someone was waiting. She stepped back.","phrases":[{"text":"Someone was waiting.","pause_after":0.18},{"text":"She stepped back.","pause_after":0.08}]},
+    {"start":37.1,"end":39.5,"speaker":"courier","text":"I'm not giving you the parcel."},
+    {"start":40.6,"end":41.9,"speaker":"dispatcher","text":"Keep it."},
+    {"start":43.1,"end":44.9,"speaker":"dispatcher","text":"You're the delivery."}
+  ],
+  "direction": "Narrator gives essential context; courier expresses intention and rising fear; figure supplies the final reversal. Leave the opening doors speech-free from 29 to 34 seconds. A viewer should understand the present danger while wondering about the larger mystery.",
+  "timing_status": "Planned cue windows only. Speech duration, separate voice casting, captions and mouth-envelope timing have not been generated or verified. Edit wording or windows rather than truncate speech.",
+  "integration_status": "No entry point selects this draft. Current previews still use v4 and one temporary voice; the proposed distinct cast is not implemented by these speaker labels.",
+  "checkpoint_policy": "Writing review only; do not change story memory or activate production.",
+  "automation_policy": "No new synthesis, renders, uploads, scheduling, paid services, commits or pushes."
+}

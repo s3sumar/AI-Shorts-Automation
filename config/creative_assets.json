@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "assets": {
+    "pardon": {
+      "factory": "paper",
+      "position": [
+        -0.7,
+        0.8,
+        0.93
+      ],
+      "quality": "development_blockout"
+    },
+    "transfer_book": {
+      "factory": "book",
+      "position": [
+        0.2,
+        1.1,
+        0.94
+      ],
+      "quality": "development_blockout"
+    },
+    "royal_seal": {
+      "factory": "seal",
+      "position": [
+        0.2,
+        0.85,
+        1.06
+      ],
+      "quality": "development_blockout"
+    },
+    "knife": {
+      "factory": "knife",
+      "position": [
+        0.9,
+        0.8,
+        0.96
+      ],
+      "quality": "development_blockout"
+    },
+    "watch_bell": {
+      "factory": "box",
+      "position": [
+        2,
+        2.8,
+        2.4
+      ],
+      "quality": "development_blockout"
+    },
+    "empty_cell": {
+      "factory": "cell",
+      "position": [
+        -2.6,
+        2.5,
+        0
+      ],
+      "quality": "development_blockout"
+    },
+    "tree": {
+      "factory": "tree",
+      "position": [
+        0,
+        2,
+        0.1
+      ],
+      "quality": "development_blockout"
+    },
+    "sealed_chamber": {
+      "factory": "chamber",
+      "position": [
+        0,
+        1.8,
+        0
+      ],
+      "quality": "development_blockout"
+    },
+    "oxygen_meter": {
+      "factory": "box",
+      "position": [
+        1,
+        1,
+        0.99
+      ],
+      "quality": "development_blockout"
+    },
+    "suit_link": {
+      "factory": "box",
+      "position": [
+        -0.85,
+        -0.1,
+        1.2
+      ],
+      "quality": "development_blockout"
+    },
+    "living_map": {
+      "factory": "map",
+      "position": [
+        0,
+        1,
+        0.94
+      ],
+      "quality": "development_blockout"
+    },
+    "pen": {
+      "factory": "knife",
+      "position": [
+        0.8,
+        0.9,
+        1
+      ],
+      "quality": "development_blockout"
+    },
+    "eraser": {
+      "factory": "box",
+      "position": [
+        -0.6,
+        1,
+        1
+      ],
+      "quality": "development_blockout"
+    },
+    "window": {
+      "factory": "window",
+      "position": [
+        0,
+        3.85,
+        2.4
+      ],
+      "quality": "development_blockout"
+    },
+    "town_bridge": {
+      "factory": "bridge",
+      "position": [
+        0.3,
+        1.1,
+        1.1
+      ],
+      "quality": "development_blockout"
+    },
+    "town_well": {
+      "factory": "well",
+      "position": [
+        -0.3,
+        1.1,
+        1.1
+      ],
+      "quality": "development_blockout"
+    },
+    "river": {
+      "factory": "river",
+      "position": [
+        0,
+        1,
+        1.03
+      ],
+      "quality": "development_blockout"
+    },
+    "family_house": {
+      "factory": "house",
+      "position": [
+        0.5,
+        1.4,
+        1.1
+      ],
+      "quality": "development_blockout"
+    }
+  },
+  "environments": {
+    "royal_record_room": {
+      "adapter": "creative_scene_v1",
+      "quality": "development_blockout"
+    },
+    "lunar_greenhouse": {
+      "adapter": "creative_scene_v1",
+      "quality": "development_blockout"
+    },
+    "map_workshop": {
+      "adapter": "creative_scene_v1",
+      "quality": "development_blockout"
+    }
+  },
+  "note": "Original CPU-practical blockout adapters; not publication-ready cinematic assets. Unknown settings/props remain blocked."
+}

@@ -50,4 +50,13 @@ def validate_plan(plan):
         for key in ['passenger_position','passenger_head','shadow_position','shadow_head','shadow_leg_l','shadow_leg_r']:
             if len(state[key])!=3 or not all(isinstance(v,(float,int)) and math.isfinite(v) and abs(v)<20 for v in state[key]):
                 raise ValueError('Invalid rig state')
+    if 'dialogue' in plan:
+        from soundstage.voice_contract import validate_dialogue
+        validate_dialogue(plan['dialogue'])
+    if 'suspense' in plan:
+        from .suspense import validate_story
+        validate_story(plan['suspense'],plan['dialogue'])
+        continuity=plan['suspense']['continuity']
+        if continuity['start_state']!=plan['start_state'] or continuity['end_state']!=plan['end_state']:
+            raise ValueError('Screenplay treatment changed canonical staging')
     return plan

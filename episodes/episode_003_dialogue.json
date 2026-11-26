@@ -1,0 +1,32 @@
+{
+  "schema":1,
+  "revision":"return_to_sender_multivoice_v1",
+  "title":"Return to Sender",
+  "based_on":"config/episode3_director_v6_draft.json",
+  "status":"implemented_audio_review_revision_not_canonical",
+  "writing_pass":[
+    "Open on the impossible delivery status and immediately state the contradiction.",
+    "Give the courier a relatable goal: her final stop before home.",
+    "Replace the narrator's obvious speed commentary with the courier's question and cancellation attempt.",
+    "Explain why descending below the lobby is dangerous instead of reading the display aloud.",
+    "Introduce an expected recipient, preserving ambiguity about what was actually ordered.",
+    "Make the refusal and the figure's answer a direct exchange; preserve the final reversal."
+  ],
+  "narration":[
+    {"id":"delivery_status","start":0.15,"end":4.5,"speaker":"narrator","role":"narrator","emotion":"storytelling","text":"Her last delivery was marked complete. She was still holding it.","phrases":[{"text":"Her last delivery was marked complete.","pause_after":0.20},{"text":"She was still holding it.","pause_after":0.08}]},
+    {"id":"normal_goal","start":5.15,"end":8.6,"speaker":"narrator","role":"narrator","emotion":"storytelling","text":"The lobby was her last stop before home."},
+    {"id":"first_call","start":9.1,"end":10.4,"speaker":"passenger","role":"protagonist","emotion":"uneasy","text":"Dispatch?"},
+    {"id":"delivery_question","start":10.7,"end":14.2,"speaker":"passenger","role":"protagonist","emotion":"uneasy","text":"Who marked this delivered?"},
+    {"id":"cancel_delivery","start":14.65,"end":17.45,"speaker":"passenger","role":"protagonist","emotion":"afraid","text":"Cancel it. I'm taking it back.","phrases":[{"text":"Cancel it.","pause_after":0.15},{"text":"I'm taking it back.","pause_after":0.08}]},
+    {"id":"lost_contact","start":17.7,"end":19.9,"speaker":"passenger","role":"protagonist","emotion":"afraid","text":"Hello? Can you hear me?","phrases":[{"text":"Hello?","pause_after":0.10},{"text":"Can you hear me?","pause_after":0.08}]},
+    {"id":"failed_stop","start":20.15,"end":22.35,"speaker":"passenger","role":"protagonist","emotion":"desperate","text":"Stop. Please stop.","phrases":[{"text":"Stop.","pause_after":0.24},{"text":"Please stop.","pause_after":0.08}]},
+    {"id":"sealed_floor_context","start":22.65,"end":25.95,"speaker":"narrator","role":"narrator","emotion":"storytelling","text":"Below the lobby was a sealed service floor."},
+    {"id":"plea","start":26.7,"end":28.9,"speaker":"passenger","role":"protagonist","emotion":"terrified","text":"Please. Take me back up.","phrases":[{"text":"Please.","pause_after":0.14},{"text":"Take me back up.","pause_after":0.08}]},
+    {"id":"recipient","start":34.15,"end":36.8,"speaker":"narrator","role":"narrator","emotion":"storytelling","text":"Someone was waiting for that delivery."},
+    {"id":"refusal","start":37.1,"end":39.5,"speaker":"passenger","role":"protagonist","emotion":"resolute","text":"I'm not giving you the parcel."},
+    {"id":"figure_response","start":40.6,"end":42.55,"speaker":"shadow","role":"antagonist","emotion":"unsettling","text":"Keep it."},
+    {"id":"reversal","start":43.05,"end":44.95,"speaker":"shadow","role":"antagonist","emotion":"unsettling","text":"You're the delivery."}
+  ],
+  "continuity":"Physical endpoints and existing story facts stay unchanged. The new delivery reveal remains an editorial audio revision, not a ledger update.",
+  "review":"Distinct identities and objective mix/timing checks do not constitute approval of naturalness or emotional acting."
+}

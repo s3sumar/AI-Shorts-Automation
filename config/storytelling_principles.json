@@ -1,0 +1,20 @@
+{
+  "schema":1,
+  "minimum_choices":2,
+  "minimum_choice_consequences":2,
+  "minimum_surprises":1,
+  "minimum_tension_rise":3,
+  "maximum_beats":12,
+  "narrator_purposes":["context","belief","expectation","goal_change","interpretation","revelation"],
+  "character_purposes":["request","decision","test","refusal","reaction","answer"],
+  "rules":[
+    "Track established facts separately from assumptions and beliefs.",
+    "A character can act on a belief, but cannot use information they have not acquired.",
+    "Give each decision an immediate goal and an observable response or failure.",
+    "Narration should explain a motive, expectation, cost or changed interpretation rather than inventory visible actions.",
+    "New information should change a belief, a goal, the available choices or the stakes.",
+    "Reserve time for the audience to anticipate or interpret a development.",
+    "A cliffhanger must pay off an earlier clue and leave a specific connected question open.",
+    "Do not certify dramatic quality from structural checks; require editorial/listening review."
+  ]
+}

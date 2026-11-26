@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "creative_kings_mercy",
+  "title": "The King's Mercy",
+  "genre": "Historical conspiracy adventure",
+  "logline": "A brother buys a royal pardon, then risks his own freedom to discover where the pardoned prisoners go.",
+  "central_conflict": "A brother buys a royal pardon, then risks his own freedom to discover where the pardoned prisoners go.",
+  "theme": "A well-meant attempt to help carries a cost that forces a more difficult choice.",
+  "characters": [
+    {
+      "id": "ivo",
+      "role": "protagonist",
+      "name": "Ivo",
+      "personality": "Resourceful, emotionally invested, prepared to risk a clear cost.",
+      "desire": "Find his sister and bring her home alive.",
+      "flaw": "He trusts a signed document more than the people it supposedly protects.",
+      "voice_direction": "Natural and specific; composed intent turns to alarm through the consequences.",
+      "initial_knows": [
+        "pardon_owned"
+      ]
+    },
+    {
+      "id": "clerk",
+      "role": "antagonist",
+      "name": "Sera",
+      "personality": "A distinct counterpart with a practical objective, not a generic warning voice.",
+      "desire": "Keep her post and avoid punishment while deciding whether to help Ivo.",
+      "flaw": "Trusts procedure or immediate appearances before testing the implication.",
+      "voice_direction": "Clearly different timbre; measured, then personally unsettled by evidence.",
+      "initial_knows": [
+        "pardon_owned"
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "id": "royal_record_room",
+      "description": "A royal prison record office with a directly adjoining empty cell visible through an archway. The transfer book, seal, knife and corridor watch bell remain in consistent geography.",
+      "required_assets": [
+        "pardon",
+        "transfer_book",
+        "royal_seal",
+        "knife",
+        "watch_bell",
+        "empty_cell"
+      ]
+    }
+  ],
+  "initial_facts": {
+    "pardon_owned": {
+      "statement": "Ivo has obtained a royal pardon for his imprisoned sister.",
+      "status": "observed",
+      "basis": "paid document in his hand"
+    }
+  },
+  "mysteries": {
+    "central": {
+      "question": "Can Ivo reach the departing ship, and who turned pardons into a trafficking route?",
+      "writer_only_answer": "A royal minister has been commuting executions into coerced labor sales; Sera has recorded transfers without knowing their destination.",
+      "reveal_episode": 3
+    }
+  },
+  "season_arc": [
+    {
+      "episode": 1,
+      "goal": "Find his sister and bring her home alive.",
+      "conflict": "A brother buys a royal pardon, then risks his own freedom to discover where the pardoned prisoners go.",
+      "turn": "The transfer book names a sale and a ship leaving tonight.",
+      "payoff": "The first method fails and exposes the larger problem.",
+      "resolves": []
+    },
+    {
+      "episode": 2,
+      "goal": "Reach the prison ship before it leaves the harbor.",
+      "conflict": "Ivo is now wanted for breaking the royal seal; Sera can forge his passage only by signing her own name to the false manifest.",
+      "turn": "His sister has refused a chance to escape because another prisoner cannot walk.",
+      "payoff": "Sera chooses to betray her office; Ivo boards with a new obligation to rescue more than his sister.",
+      "resolves": []
+    },
+    {
+      "episode": 3,
+      "goal": "Free the prisoners and preserve proof of the pardon sales.",
+      "conflict": "The broker offers to release Ivo sister in exchange for the transfer book; surrendering it would leave the other prisoners to be sold.",
+      "turn": "A royal minister has been converting pardons into forced-labor sales and using cancelled execution notices to hide the missing people.",
+      "payoff": "Ivo and his sister choose a dangerous collective escape; Sera publicizes the duplicate ledger instead of accepting a private bargain.",
+      "resolves": [
+        "central"
+      ]
+    }
+  ]
+}

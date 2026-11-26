@@ -1,0 +1,953 @@
+{
+  "schema": 1,
+  "series_id": "creative_mapmakers_rain",
+  "episode": 1,
+  "duration": 45,
+  "prior_memory_sha256": "d5e9afd5074a91c47323aadd2f32b68616e1f1b401594f47019dbc8d4327d196",
+  "title": "The Mapmaker's Rain - Episode 1",
+  "synopsis": "A mapmaker brings water to a drought-stricken town, then discovers that erasing ink cannot undo a flood or silence another author. Nia recognizes her presumed-dead mother handwriting in marks she did not make.",
+  "narration": [
+    {
+      "id": "hook",
+      "start": 0.15,
+      "end": 5,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "Nia drew a river. The town's dry wells began to fill.",
+      "phrases": [
+        {
+          "text": "Nia drew a river. The town's dry wells began to fill.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "start": 5.5,
+      "end": 8.5,
+      "speaker": "apprentice",
+      "role": "antagonist",
+      "emotion": "hopeful",
+      "text": "Can you make it reach our street?",
+      "phrases": [
+        {
+          "text": "Can you make it reach our street?",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "meaning",
+      "start": 9,
+      "end": 14,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "She'd lost her mother to a river. This one would save the town.",
+      "phrases": [
+        {
+          "text": "She'd lost her mother to a river. This one would save the town.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "answer",
+      "start": 14.5,
+      "end": 17,
+      "speaker": "apprentice",
+      "role": "antagonist",
+      "emotion": "afraid",
+      "text": "The bridge is gone!",
+      "phrases": [
+        {
+          "text": "The bridge is gone!",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "reframe",
+      "start": 17.5,
+      "end": 22,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "The map had room for a river. The town didn't.",
+      "phrases": [
+        {
+          "text": "The map had room for a river. The town didn't.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "choose",
+      "start": 22.5,
+      "end": 25,
+      "speaker": "nia",
+      "role": "protagonist",
+      "emotion": "resolute",
+      "text": "Get everyone uphill. I'll erase it.",
+      "phrases": [
+        {
+          "text": "Get everyone uphill. I'll erase it.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "start": 25.5,
+      "end": 29,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "Erasing a line was easy. Undoing a river wasn't.",
+      "phrases": [
+        {
+          "text": "Erasing a line was easy. Undoing a river wasn't.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "test",
+      "start": 29.5,
+      "end": 32.3,
+      "speaker": "nia",
+      "role": "protagonist",
+      "emotion": "uneasy",
+      "text": "That ink's still moving.",
+      "phrases": [
+        {
+          "text": "That ink's still moving.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "consequence",
+      "start": 33,
+      "end": 36,
+      "speaker": "apprentice",
+      "role": "antagonist",
+      "emotion": "afraid",
+      "text": "That's not your handwriting.",
+      "phrases": [
+        {
+          "text": "That's not your handwriting.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "plea",
+      "start": 36.5,
+      "end": 40,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "Whoever held the other pen knew which house was hers.",
+      "phrases": [
+        {
+          "text": "Whoever held the other pen knew which house was hers.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "start": 42,
+      "end": 44.9,
+      "speaker": "nia",
+      "role": "protagonist",
+      "emotion": "awed",
+      "text": "That's my mother's handwriting.",
+      "phrases": [
+        {
+          "text": "That's my mother's handwriting.",
+          "pause_after": 0.08
+        }
+      ]
+    }
+  ],
+  "suspense": {
+    "schema": 1,
+    "archetype": "original_mapmakers_rain",
+    "strategy": "Test the apparent solution and accept a concrete cost when it fails.",
+    "strategy_description": "A mapmaker brings water to a drought-stricken town, then discovers that erasing ink cannot undo a flood or silence another author.",
+    "facts": {
+      "map_rule": {
+        "statement": "Lines drawn on the inherited map can alter the town landscape.",
+        "status": "observed",
+        "basis": "established magic"
+      },
+      "mother_lost": {
+        "statement": "Nia mother was lost in a river and has been presumed dead.",
+        "status": "claim",
+        "basis": "family report"
+      },
+      "water": {
+        "statement": "The first drawn river restores water to dry wells.",
+        "status": "observed",
+        "basis": "hook,ask"
+      },
+      "bridge": {
+        "statement": "The new river destroys the town bridge.",
+        "status": "observed",
+        "basis": "meaning,answer"
+      },
+      "evacuate": {
+        "statement": "Nia orders people uphill and chooses to erase the river.",
+        "status": "observed",
+        "basis": "reframe,choose"
+      },
+      "persists": {
+        "statement": "The river persists after Nia erases her line.",
+        "status": "observed",
+        "basis": "result"
+      },
+      "other_hand": {
+        "statement": "Fresh handwriting appears while neither present character draws.",
+        "status": "observed",
+        "basis": "test,consequence"
+      },
+      "home": {
+        "statement": "The new strokes direct the river toward Nia home.",
+        "status": "observed",
+        "basis": "plea"
+      },
+      "mother_hand": {
+        "statement": "Nia recognizes the new writing as her mother handwriting.",
+        "status": "observed",
+        "basis": "final",
+        "earliest_reveal": 41.8
+      }
+    },
+    "beliefs": {
+      "assumption": "Nia is the only person still drawing on this map."
+    },
+    "goals": {
+      "goal_nia": "Use the inherited map to bring the town safe drinking water.",
+      "goal_apprentice": "Bring water to the family street without losing the town bridge.",
+      "urgent": "Stop the flood and get the townspeople onto high ground.",
+      "cliff_goal": "Stop the flood while finding whether her mother is drawing from somewhere else."
+    },
+    "questions": {
+      "open": {
+        "question": "Is her mother alive, and why is the other pen steering water toward home?",
+        "arises_from": [
+          "mother_hand"
+        ]
+      }
+    },
+    "initial": {
+      "audience_knows": [],
+      "protagonist_knows": [
+        "map_rule",
+        "mother_lost"
+      ],
+      "audience_believes": [],
+      "protagonist_believes": [],
+      "goal": "goal_nia"
+    },
+    "beats": [
+      {
+        "id": "beat_0",
+        "start": 0,
+        "end": 8.8,
+        "tension": 2,
+        "cues": [
+          "hook",
+          "ask"
+        ],
+        "reveals": [
+          {
+            "fact": "water",
+            "at": 4.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Nia draws; the wells fill in an inset town view through the workshop window."
+          }
+        ],
+        "belief_changes": [
+          {
+            "at": 0,
+            "who": [
+              "audience",
+              "protagonist"
+            ],
+            "remove": [],
+            "add": [
+              "assumption"
+            ]
+          }
+        ],
+        "choices": [
+          {
+            "id": "draw",
+            "at": 0.1,
+            "goal": "goal_nia",
+            "action": "Draw a river to supply the wells.",
+            "reason": "The town needs water and the inherited map changes the landscape.",
+            "evidence": "Nia draws; the wells fill in an inset town view through the workshop window.",
+            "requires_known": [
+              "map_rule",
+              "mother_lost"
+            ],
+            "based_on_beliefs": [
+              "assumption"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "beat_1",
+        "start": 8.8,
+        "end": 17.2,
+        "tension": 4,
+        "cues": [
+          "meaning",
+          "answer"
+        ],
+        "reveals": [
+          {
+            "fact": "bridge",
+            "at": 16.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Tavi sees the bridge disappear under water while Nia looks at her mother old pen."
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "draw",
+            "at": 17,
+            "effect": "The river gives water but destroys a crossing.",
+            "meaning": "A rescue has become a threat, echoing the river that took her mother."
+          }
+        ]
+      },
+      {
+        "id": "beat_2",
+        "start": 17.2,
+        "end": 25.2,
+        "tension": 6,
+        "cues": [
+          "reframe",
+          "choose"
+        ],
+        "reveals": [
+          {
+            "fact": "evacuate",
+            "at": 24.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Nia sends Tavi to warn the street and reaches for an eraser."
+          }
+        ],
+        "goal_after": "urgent",
+        "goal_change_at": 17.2,
+        "choices": [
+          {
+            "id": "erase",
+            "at": 24.8,
+            "goal": "urgent",
+            "action": "Erase the river while Tavi sends people uphill.",
+            "reason": "She assumes removing the line will undo the dangerous water.",
+            "evidence": "Nia sends Tavi to warn the street and reaches for an eraser.",
+            "requires_known": [
+              "map_rule",
+              "mother_lost"
+            ],
+            "based_on_beliefs": [
+              "assumption"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "beat_3",
+        "start": 25.2,
+        "end": 29.2,
+        "tension": 7,
+        "cues": [
+          "result"
+        ],
+        "reveals": [
+          {
+            "fact": "persists",
+            "at": 28.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "The erased map line fades, but the view outside shows water still rising."
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "erase",
+            "at": 29,
+            "effect": "The flood continues after the erase attempt.",
+            "meaning": "Undoing the drawing does not reverse what it set in motion."
+          }
+        ]
+      },
+      {
+        "id": "beat_4",
+        "start": 29.2,
+        "end": 36.2,
+        "tension": 8,
+        "cues": [
+          "test",
+          "consequence"
+        ],
+        "reveals": [
+          {
+            "fact": "other_hand",
+            "at": 29.3,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Nia lifts both hands; new ink forms beside Tavi untouched pen."
+          }
+        ]
+      },
+      {
+        "id": "beat_5",
+        "start": 36.2,
+        "end": 41.8,
+        "tension": 9,
+        "cues": [
+          "plea"
+        ],
+        "reveals": [
+          {
+            "fact": "home",
+            "at": 39.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "The fresh river bends toward a house labeled with Nia family name."
+          }
+        ]
+      },
+      {
+        "id": "beat_6",
+        "start": 41.8,
+        "end": 45,
+        "tension": 10,
+        "cues": [
+          "final"
+        ],
+        "reveals": [
+          {
+            "fact": "mother_hand",
+            "at": 41.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "Nia recognizes the curled signature beside the fresh stroke and stops erasing."
+          }
+        ],
+        "surprise": {
+          "contradicts_belief": "assumption",
+          "revealed_by": "mother_hand"
+        },
+        "belief_changes": [
+          {
+            "at": 41.9,
+            "who": [
+              "audience",
+              "protagonist"
+            ],
+            "remove": [
+              "assumption"
+            ],
+            "add": []
+          }
+        ],
+        "goal_after": "cliff_goal",
+        "goal_change_at": 44.85
+      }
+    ],
+    "cue_links": {
+      "hook": {
+        "beat": "beat_0",
+        "purpose": "context",
+        "context_facts": [
+          "water"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_nia"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The first drawn river restores water to dry wells. Changes the character options rather than merely inventorying action."
+      },
+      "ask": {
+        "beat": "beat_0",
+        "purpose": "answer",
+        "context_facts": [
+          "water"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_nia"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The first drawn river restores water to dry wells. Changes the character options rather than merely inventorying action."
+      },
+      "meaning": {
+        "beat": "beat_1",
+        "purpose": "interpretation",
+        "context_facts": [
+          "bridge"
+        ],
+        "beliefs": [
+          "assumption"
+        ],
+        "goals": [
+          "goal_nia"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The new river destroys the town bridge. Changes the character options rather than merely inventorying action."
+      },
+      "answer": {
+        "beat": "beat_1",
+        "purpose": "answer",
+        "context_facts": [
+          "bridge"
+        ],
+        "beliefs": [],
+        "goals": [
+          "goal_nia"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The new river destroys the town bridge. Changes the character options rather than merely inventorying action."
+      },
+      "reframe": {
+        "beat": "beat_2",
+        "purpose": "interpretation",
+        "context_facts": [
+          "evacuate"
+        ],
+        "beliefs": [
+          "assumption"
+        ],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Nia orders people uphill and chooses to erase the river. Changes the character options rather than merely inventorying action."
+      },
+      "choose": {
+        "beat": "beat_2",
+        "purpose": "decision",
+        "context_facts": [
+          "evacuate"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Nia orders people uphill and chooses to erase the river. Changes the character options rather than merely inventorying action."
+      },
+      "result": {
+        "beat": "beat_3",
+        "purpose": "interpretation",
+        "context_facts": [
+          "persists"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The river persists after Nia erases her line. Changes the character options rather than merely inventorying action."
+      },
+      "test": {
+        "beat": "beat_4",
+        "purpose": "decision",
+        "context_facts": [
+          "other_hand"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Fresh handwriting appears while neither present character draws. Changes the character options rather than merely inventorying action."
+      },
+      "consequence": {
+        "beat": "beat_4",
+        "purpose": "answer",
+        "context_facts": [
+          "other_hand"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Fresh handwriting appears while neither present character draws. Changes the character options rather than merely inventorying action."
+      },
+      "plea": {
+        "beat": "beat_5",
+        "purpose": "interpretation",
+        "context_facts": [
+          "home"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "The new strokes direct the river toward Nia home. Changes the character options rather than merely inventorying action."
+      },
+      "final": {
+        "beat": "beat_6",
+        "purpose": "reaction",
+        "context_facts": [
+          "mother_hand"
+        ],
+        "beliefs": [],
+        "goals": [
+          "urgent"
+        ],
+        "requires_known": [],
+        "why_it_matters": "Nia recognizes the new writing as her mother handwriting. Changes the character options rather than merely inventorying action."
+      }
+    },
+    "protected_lines": {
+      "hook": "Nia drew a river. The town's dry wells began to fill.",
+      "final": "That's my mother's handwriting."
+    },
+    "cliffhanger": {
+      "cue_id": "final",
+      "fact": "mother_hand",
+      "payoff_of": [
+        "water",
+        "other_hand"
+      ],
+      "reframes_belief": "assumption",
+      "unresolved": [
+        "open"
+      ]
+    }
+  },
+  "shots": [
+    {
+      "id": "shot_0",
+      "start": 0,
+      "end": 8.8,
+      "environment_id": "map_workshop",
+      "framing": "wide",
+      "camera_move": "dolly",
+      "subject": "nia",
+      "action": "Nia draws; the wells fill in an inset town view through the workshop window.",
+      "motivation": "The first drawn river restores water to dry wells.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "water"
+      ],
+      "cue_ids": [
+        "hook",
+        "ask"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "look",
+          "start": 0.2,
+          "end": 8.600000000000001,
+          "target": "nia"
+        }
+      ]
+    },
+    {
+      "id": "shot_1",
+      "start": 8.8,
+      "end": 17.2,
+      "environment_id": "map_workshop",
+      "framing": "medium",
+      "camera_move": "static",
+      "subject": "pen",
+      "action": "Tavi sees the bridge disappear under water while Nia looks at her mother old pen.",
+      "motivation": "The new river destroys the town bridge.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "bridge"
+      ],
+      "cue_ids": [
+        "meaning",
+        "answer"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "reach",
+          "start": 9.0,
+          "end": 17.0,
+          "target": "pen"
+        }
+      ]
+    },
+    {
+      "id": "shot_2",
+      "start": 17.2,
+      "end": 25.2,
+      "environment_id": "map_workshop",
+      "framing": "detail",
+      "camera_move": "pan",
+      "subject": "nia",
+      "action": "Nia sends Tavi to warn the street and reaches for an eraser.",
+      "motivation": "Nia orders people uphill and chooses to erase the river.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "evacuate"
+      ],
+      "cue_ids": [
+        "reframe",
+        "choose"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "point",
+          "start": 17.4,
+          "end": 25.0,
+          "target": "nia"
+        }
+      ]
+    },
+    {
+      "id": "shot_3",
+      "start": 25.2,
+      "end": 29.2,
+      "environment_id": "map_workshop",
+      "framing": "close",
+      "camera_move": "dolly",
+      "subject": "window",
+      "action": "The erased map line fades, but the view outside shows water still rising.",
+      "motivation": "The river persists after Nia erases her line.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "persists"
+      ],
+      "cue_ids": [
+        "result"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "reach",
+          "start": 25.4,
+          "end": 29.0,
+          "target": "window"
+        }
+      ]
+    },
+    {
+      "id": "shot_4",
+      "start": 29.2,
+      "end": 36.2,
+      "environment_id": "map_workshop",
+      "framing": "medium",
+      "camera_move": "static",
+      "subject": "nia",
+      "action": "Nia lifts both hands; new ink forms beside Tavi untouched pen.",
+      "motivation": "Fresh handwriting appears while neither present character draws.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "other_hand"
+      ],
+      "cue_ids": [
+        "test",
+        "consequence"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "recoil",
+          "start": 29.4,
+          "end": 36.0,
+          "target": "nia"
+        }
+      ]
+    },
+    {
+      "id": "shot_5",
+      "start": 36.2,
+      "end": 41.8,
+      "environment_id": "map_workshop",
+      "framing": "close",
+      "camera_move": "pan",
+      "subject": "town_bridge",
+      "action": "The fresh river bends toward a house labeled with Nia family name.",
+      "motivation": "The new strokes direct the river toward Nia home.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [
+        "home"
+      ],
+      "cue_ids": [
+        "plea"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "look",
+          "start": 36.400000000000006,
+          "end": 41.599999999999994,
+          "target": "town_bridge"
+        }
+      ]
+    },
+    {
+      "id": "shot_6",
+      "start": 41.8,
+      "end": 45,
+      "environment_id": "map_workshop",
+      "framing": "detail",
+      "camera_move": "dolly",
+      "subject": "nia",
+      "action": "Nia recognizes the curled signature beside the fresh stroke and stops erasing.",
+      "motivation": "Nia recognizes the new writing as her mother handwriting.",
+      "transition": "Keep prop ownership and eye direction consistent with the preceding shot.",
+      "reveals": [],
+      "cue_ids": [
+        "final"
+      ],
+      "performances": [
+        {
+          "actor": "nia",
+          "action": "look",
+          "start": 42.0,
+          "end": 44.8,
+          "target": "nia"
+        }
+      ]
+    }
+  ],
+  "counterpart_state": {
+    "id": "apprentice",
+    "learns": [
+      {
+        "at": 4.9,
+        "fact": "water",
+        "evidence": "Nia draws; the wells fill in an inset town view through the workshop window."
+      },
+      {
+        "at": 16.9,
+        "fact": "bridge",
+        "evidence": "Tavi sees the bridge disappear under water while Nia looks at her mother old pen."
+      },
+      {
+        "at": 24.9,
+        "fact": "evacuate",
+        "evidence": "Nia sends Tavi to warn the street and reaches for an eraser."
+      },
+      {
+        "at": 28.9,
+        "fact": "persists",
+        "evidence": "The erased map line fades, but the view outside shows water still rising."
+      },
+      {
+        "at": 35.9,
+        "fact": "other_hand",
+        "evidence": "Nia lifts both hands; new ink forms beside Tavi untouched pen."
+      },
+      {
+        "at": 39.9,
+        "fact": "home",
+        "evidence": "The fresh river bends toward a house labeled with Nia family name."
+      },
+      {
+        "at": 41.9,
+        "fact": "mother_hand",
+        "evidence": "Nia recognizes the curled signature beside the fresh stroke and stops erasing."
+      },
+      {
+        "at": 32.9,
+        "fact": "other_hand",
+        "evidence": "Tavi sees a new stroke before speaking."
+      },
+      {
+        "at": 14.4,
+        "fact": "bridge",
+        "evidence": "Tavi observes the bridge flood before calling out."
+      }
+    ],
+    "beliefs": [],
+    "goal": "goal_apprentice"
+  },
+  "line_knowledge": {
+    "ask": [
+      "water"
+    ],
+    "answer": [
+      "bridge"
+    ],
+    "choose": [
+      "bridge"
+    ],
+    "test": [
+      "persists",
+      "other_hand"
+    ],
+    "consequence": [
+      "other_hand"
+    ],
+    "final": [
+      "mother_hand"
+    ]
+  },
+  "resolved_mysteries": [],
+  "sound_events": [
+    {
+      "category": "environment",
+      "start": 0,
+      "end": 45,
+      "gain": 0.025
+    },
+    {
+      "category": "transition",
+      "start": 17.2,
+      "end": 17.599999999999998,
+      "gain": 0.04
+    },
+    {
+      "category": "cliffhanger",
+      "start": 44.9,
+      "end": 45,
+      "gain": 0.04
+    }
+  ],
+  "visual_events": [
+    {
+      "target": "town_bridge",
+      "at": 14.4,
+      "property": "visible",
+      "value": false
+    },
+    {
+      "target": "living_map",
+      "at": 42.1,
+      "property": "text",
+      "value": "Mother's handwriting"
+    }
+  ]
+}

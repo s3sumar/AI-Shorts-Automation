@@ -1,0 +1,424 @@
+AI-SHORTS-AUTOMATION ? COMPLETE CLAUDE HANDOFF
+Prepared November 23, 2026 (America/Toronto)
+
+START HERE
+I am building an autonomous system that creates original cinematic, stylized 3D
+YouTube Shorts: story and season planning, narration and character dialogue,
+Blender animation, sound, captions, validation, cloud rendering and eventually
+scheduled private YouTube uploads. The long-term goal is a daily production
+system that works with my laptop off. The immediate priority is compelling
+writing and dependable quality, not increasing output volume.
+
+Work directly in this existing repository. Inspect and extend what is already
+implemented. Do not rebuild working features or assume the latest local work
+has been pushed. Separate working previews, technical success, editorial
+approval and publication readiness.
+
+1. LOCATION AND REPOSITORY STATE
+Local root:
+C:\Users\Shakeel\OneDrive\Documents\AI-Shorts-Automation
+GitHub:
+https://github.com/s3sumar/AI-Shorts-Automation
+
+Windows / PowerShell; Python 3.13; Blender 5.2.3 is the compatibility target.
+Main and the locally tracked origin/main currently point to:
+49706c20288de056f071cfcac29d85b0b07730f2
+Commit: Improve Episode 3 storytelling, acting, audio and quality checks
+https://github.com/s3sumar/AI-Shorts-Automation/commit/49706c20288de056f071cfcac29d85b0b07730f2
+
+Earlier deployed commits include:
+0d4a570 ? manual autonomous cloud production and durable checkpoints.
+962bbd2 ? Linux workflow checksum and early failure-summary fixes.
+
+There are substantial MODIFIED AND UNTRACKED LOCAL FILES after 49706c2.
+They include the three-voice system, suspense director, alternate Episode 3
+scripts, the new model-authored creative system and its review workflow.
+These latest improvements have NOT been committed/pushed. Run git status and
+review them; do not discard, reset or overwrite them. A preexisting user change
+includes a leading blank line in autonomy/pipeline.py. Preserve unrelated edits.
+The origin/main reference above is local tracking state, not a fresh remote API
+query performed for this handoff.
+
+2. NON-NEGOTIABLE WORKING RULES
+- Do not push, publish, upload videos, enable daily scheduling, enable paid
+  services or incur charges without explicit approval for that action.
+- Keep generated videos, audio, large renders, downloaded tools/models, local
+  databases, tokens and credentials out of Git.
+- The required small source asset assets/elevator_template.blend belongs in Git.
+- Do not overwrite original scenes, completed previews or working backups.
+  Use a fresh revision/output directory and reuse verified takes/frames.
+- Do not advance production episode checkpoints during writing, quality review,
+  benchmarks, audio comparisons or isolated tests.
+- Do not bypass tool/permission approval. Make routine design decisions without
+  repeatedly asking questions, but required approval is not optional.
+- Report actual tests and limitations. A mock provider is not a live model test.
+  Structural checks do not prove good writing; waveform checks do not prove
+  convincing acting or human listening approval.
+- Reference footage inspired general techniques only. Do not copy its plot,
+  dialogue, characters, designs or audio.
+
+Production remains deliberately paused in config/production_standards.json:
+episode_generation_paused=true; public_publishing_enabled=false;
+paid_services_enabled=false. The readiness gate distinguishes development
+previews from public-ready output. Published-quality target is native vertical
+1080x1920 at 24/30 FPS; 720x1280/24 FPS is a development test setting.
+
+3. WHAT ALREADY WORKS
+A. Blender production foundation
+- Existing elevator/corridor template and freight-lift variation.
+- Reusable scene/character assembly, named animation actions, doors, floor
+  display, head/body/limb motion, breathing, reactions, lighting and cameras.
+- Cold blue lighting, red transitions/flicker, floor 13 to -1, opening doors,
+  faceless silhouette and cinematic camera movement.
+- JSON story scores drive the supported scene grammar.
+- Audio preparation, frame rendering/resumption, H.264/AAC MP4 encoding,
+  scene checks, PNG integrity checks and full video decoding.
+- Scene/score and frame-plan hashes prevent mixing incompatible revisions.
+
+B. Autonomous foundation
+- Original offline director plans within a limited arrival/escape grammar.
+- Series bibles, stable characters, canon, season rollover and a small concept
+  library exist. This old default is procedural, not genuinely creative AI.
+- SQLite planning/reservation, transactional verified-media commits, retry
+  idempotency, stale-state rejection, concurrency controls and immutable backups.
+- GitHub Actions production workflow and durable autonomy-state branch.
+- Offline cloud rendering needs no live Blender MCP session or laptop.
+- Private-upload preparation/outbox exists, but real uploading and public
+  publishing remain disabled and unverified.
+
+C. Completed media and cloud milestone
+- Episode 1 and Episode 2 have complete playable 45-second local MP4 previews.
+- Their masters contain 1080 frames at 24 FPS; sampled development MP4s are
+  lower FPS/resolution, not final full-quality native 24 FPS productions.
+- A cloud acceptance test successfully generated global Episode 3 and saved
+  durable state. That global episode is series_002_e001, not pilot Episode 3.
+- Existing low-resolution cloud Episode 3 is preserved. It is not the later
+  revised courier script rendered as a complete final-quality episode.
+
+4. IMPORTANT EXISTING MEDIA PATHS
+All relative paths below resolve against the local root above.
+
+Episode 1:
+artifacts/episode_001/episode_001_master.blend
+artifacts/episode_001/episode_001_preview.mp4
+
+Episode 2 ? The Door That Listens:
+artifacts/autonomy/series_001_e002/episode_002_master.blend
+artifacts/autonomy/series_001_e002/episode_002_preview.mp4
+
+Original cloud Episode 3 download:
+artifacts/cloud_acceptance/downloaded_43558608330/artifacts/autonomy/series_002_e001/episode_003_master.blend
+artifacts/cloud_acceptance/downloaded_43558608330/artifacts/autonomy/series_002_e001/episode_003_preview.mp4
+The number in downloaded_43558608330 is not being asserted as an Actions run ID.
+
+Revised Episode 3 scene and three short HD samples:
+artifacts/story_review/episode3_v4_reviewed/episode3_story_v4.blend
+artifacts/story_review/episode3_v4_reviewed/previews/beginning/episode3_v4_beginning_720p24.mp4
+artifacts/story_review/episode3_v4_reviewed/previews/middle/episode3_v4_middle_720p24.mp4
+artifacts/story_review/episode3_v4_reviewed/previews/ending/episode3_v4_ending_720p24.mp4
+
+Full 45-second three-voice audio, earlier accepted voice system:
+artifacts/audio_previews/episode3_multivoice_v3/dialogue_and_sound_preview.mp3
+artifacts/audio_previews/episode3_multivoice_v3/audio/episode_mix.wav
+
+Latest two complete Episode 3 writing-comparison AUDIO previews:
+artifacts/audio_previews/episode3_writing_comparison/Episode3_A.mp3
+artifacts/audio_previews/episode3_writing_comparison/Episode3_B.mp3
+WAV copies, scripts and comparison_validation.json are in the same folder.
+These are audio-only. Existing video clips have not automatically received this
+new writing/audio. Do not claim there is a verified full 45-second revised HD
+video based on the short samples or audio files.
+
+5. STORY CHECKPOINT: DO NOT RESET OR ADVANCE IT
+The durable cloud production checkpoint has verified episodes through global
+Episode 3; its next production episode is Episode 4.
+Last verified remote blob SHA for checkpoint/story.json on autonomy-state:
+ebc61fecdc1c23ab1d1ed37f34973ab55d958c55
+
+The local state/story.sqlite3 matches the preserved checked-in seed: Episodes
+1/2 verified and Episode 3 planned. This LOCAL/CLOUD DIFFERENCE IS EXPECTED.
+Do not treat the local seed as authority to reset cloud progress. Recover the
+durable checkpoint before any future approved production execution.
+
+Editorial alternatives and proposed memories are not canonical checkpoints.
+The original production branch state and the new creative review memory are
+separate; neither should silently overwrite the other.
+
+6. PERFORMANCE AND VISUAL QUALITY FINDINGS
+- Native 720x1280/24 FPS cloud rendering on standard software-rendered GitHub
+  runners was too slow in the measured long benchmark.
+- Historical benchmark run:
+  https://github.com/s3sumar/AI-Shorts-Automation/actions/runs/43780166322
+- It consumed roughly 75 minutes and failed the bounded rendering budgets.
+  Native: 183/240 frames in 40 minutes. Hybrid: 139/156 in 30 minutes.
+  Approximately 13.2 seconds per native 720p frame in that measured setup.
+- Do not claim a completed 720p benchmark MP4 from that failed run.
+- A 45-second 24 FPS episode is 1080 frames; full native cloud rendering is
+  not yet demonstrated as practical at our desired quality/cost.
+- Selective rendering, reusable shots, cut-aware compositing and FFmpeg/hybrid
+  techniques were explored. Smooth motion/quality still needs proof rather
+  than inferring quality from the output container's FPS.
+- Reference-driven directing and 15-shot Episode 3 revisions exist, with short
+  beginning/middle/ending HD previews. Facial/hand motion and framing received
+  improvements but are not certified as finished professional animation.
+
+7. WRITING DIRECTION AND EPISODE 3 EDITORIAL STATUS
+The user considers exact word choice, narrative coherence and suspense more
+important than better voice synthesis. Writing must be interesting, clear and
+motivated rather than a factual inventory of visible actions.
+
+Approved overall voice structure:
+1) Narrator: calm, confident, mysterious; context, motives and changed meaning.
+2) Main character: natural emotional dialogue; decisions, questions, increasing
+   fear where appropriate, not unnatural lines that fill time.
+3) Occasional distinct counterpart/figure/dispatcher as the story needs.
+
+Episode 3 courier review premise:
+- Her delivery is marked complete while she still holds the parcel.
+- She tries to resolve it and reach the lobby; the lift goes to a sealed floor.
+- The figure wants her rather than the parcel. Its face stays unrevealed.
+- This is editorial content, not an automatically accepted canon revision.
+
+Protected opening in the current audio scripts:
+"Her last delivery was marked complete. She was still holding it."
+Current rendered audio ending: "You're the delivery."
+
+A: cancellation ? she tries to cancel, then refuses the parcel handoff.
+B: verification ? she asks who accepted it, tests the apparent recipient and
+asks "Then what did you order?" before the final reveal.
+
+LATEST USER SUGGESTION: "I ordered you" might be stronger. Codex recommended:
+COURIER: "Then what did you order?" / pause / FIGURE: "I ordered you."
+This wording was DISCUSSED, NOT IMPLEMENTED in the existing comparison audio.
+Do not assume the saved MP3s already contain it or that canon was changed.
+
+Source scripts:
+episodes/episode_003_dialogue.json
+episodes/episode_003_story_a.json and .txt
+episodes/episode_003_story_b.json and .txt
+
+8. THREE-VOICE AUDIO SYSTEM ? IMPLEMENTED LOCALLY
+Current pinned free local Piper identities:
+Narrator: john_storyteller_v1 / John medium.
+Protagonist: lj_character_v1 / LJ Speech high.
+Figure/counterpart: norman_figure_v1 / Norman medium.
+
+- Distinct source models, checksum-pinned models/configs and series voice locks.
+- Separate raw/delivered audio per line, speaker stems, phrases and timing data.
+- Pace, pauses, time-preserving pitch, gain and restrained tremor/filter/delay.
+- New curious/hopeful/urgent/awed/sad/amused profiles support non-horror genres.
+- Content/identity/delivery-aware take reuse with checksum checks.
+- Speech overruns fail rather than truncate words.
+- Engine-phoneme-derived word timings, exact text and synchronized SRT/ASS.
+- Environmental effects and ducking; measured loudness/true-peak normalization.
+- Last A/B checks: both decode to exactly 45 seconds, three voices, no caption
+  fallbacks, approximately -16 LUFS/-1.5 dBTP, no speech truncation.
+
+Piper is not a trained dramatic-acting model. Emotion labels do not establish
+convincing acting. Listening/pronunciation/phone/headphone review remains.
+The bank is currently fixed; casting new characters still needs review.
+Downloaded voice weights and runtime tooling live under ignored artifacts/.
+
+9. EXPLICIT SUSPENSE/INFORMATION MODEL ? IMPLEMENTED LOCALLY
+Tracks:
+- Audience knowledge versus protagonist knowledge and beliefs.
+- Immediate goal, choices with reasons, later consequences and changing goals.
+- When revelations occur, how beliefs are overturned and tension escalates.
+- Why each narrator/dialogue line matters.
+- Planted clues, protected late reveals and specific unanswered cliff questions.
+
+Validators reject declared unknown knowledge, unmotivated goal mismatches,
+consequences before choices, early reveals, unsupported cue purposes, timeline
+gaps, unplanted payoffs and inconsistent canonical staging. Proposed memory is
+serialized, but only the existing verified-production transaction commits canon.
+These are structural/declared-semantic checks, not a guarantee of good prose.
+
+10. NEW MODEL-AUTHORED CREATIVE DIRECTOR ? IMPLEMENTED, NOT LIVE-PROVEN
+The latest user request was to stop depending on fixed elevator patterns and
+make actual language models create original concepts, characters, conflicts,
+mysteries, season arcs, episode events, dialogue and shot/timing instructions.
+
+New path:
+- Model authors a series bible and 3?8 episode season arc from a creative brief.
+- Model authors the episode and its information-state treatment, not merely
+  alternative prose for an existing cue skeleton.
+- A separately configured critic scores nine editorial dimensions, gives
+  evidence and actionable issues; weak/invalid drafts get up to two revisions.
+- All scores must reach 4/5 with no outstanding issues. Failed review stops;
+  no silent procedural fallback or paid model fallback.
+- Genre-neutral schema supports different worlds and motives, while using the
+  current narrator/protagonist/counterpart voice-role interface.
+- Memory preserves facts vs claims, audience/character knowledge/beliefs/goals,
+  unresolved mysteries, hashes, history and frozen voice identities.
+- Stale state, repeated complete scripts, recasting, invalid time budgets,
+  unavailable speaker knowledge and scheduled-secret leaks are rejected.
+- End-of-season rollover can ask the model for a new independent series.
+
+Provider:
+config/creative_director.json
+Free-only OpenRouter writer: google/gemma-4-31b-it:free
+Separate critic: baidu/ernie-5.5-flash-preview:free
+
+Live public catalogue was checked November 21: selected IDs existed, had zero
+prompt/completion prices, sufficient context and JSON support. Availability is
+not being reasserted as freshly checked November 23. Verify before deployment.
+The adapter repeats zero-price checks, sends zero maximum prices, disables
+fallbacks, caps calls/tokens, handles bounded retries and writes sanitized receipts.
+
+REAL TEST STATUS:
+- No API keys or installed local LLM were available in the last inspection.
+- Direct and pipeline live-generation attempts stopped BEFORE inference because
+  OPENROUTER_API_KEY was missing: zero hosted creative inference calls.
+- There is no successful live creative model run or real model critique yet.
+- Unit tests use explicit doubles. They validate protocols, not creative quality.
+- Never reuse Git/Codex/application credentials as an inference API key.
+
+Provider research documented Gemini and Groq as alternatives, with quota/billing
+cautions. Only OpenRouter free inference is implemented in this new path.
+GitHub Models was retired July 30, 2026 according to official research; old
+GitHub Models tutorials are not a deployment strategy. GitHub Actions remains
+our workflow host. Provider details/sources are in CREATIVE_DIRECTOR.md.
+
+11. THREE ORIGINAL REVIEW SCRIPTS ? ASSISTANT-AUTHORED, NOT API OUTPUTS
+Each has a planned 45-second script, seven shots, a full bible/season arc,
+structured episode, input-memory fixture and provenance note:
+
+examples/creative/creative_kings_mercy/
+The King's Mercy: historical conspiracy. Ivo buys his sister's pardon, discovers
+an empty cell, risks prison by breaking a royal seal, then learns she has been
+sold onto a ship leaving tonight. Strongest current script: understandable goal,
+costly choice, useful revelations and an urgent new objective.
+
+examples/creative/creative_mapmakers_rain/
+The Mapmaker's Rain: community fantasy. Nia draws a river to relieve drought,
+floods the town, cannot erase the consequences and recognizes her presumed-dead
+mother's handwriting in new strokes. Strong emotional/visual potential; magical
+rules and the second pen must be made legible.
+
+examples/creative/creative_last_greenhouse/
+The Last Greenhouse: ecological science fiction. Mara tests a tree consuming
+colony oxygen and discovers it may be sustaining her own breathing. Strong stakes
+but the greatest explanatory burden; its final claim needs better causal proof.
+
+In each folder: script.txt, series_bible.json, episode_001.json,
+input_memory.json, PROVENANCE.txt. These are review examples and tests, not
+runtime templates, not canon, not audio, and not proof of autonomous model quality.
+
+12. CLOUD AND NEW-WORLD LIMITATIONS
+Existing production:
+.github/workflows/autonomous_production.yml
+Manual-only and still paused for quality. Existing Blender Cloud Render,
+Dynamic Blender Test and quality benchmark workflows also exist.
+
+New writing review:
+.github/workflows/creative_writing_review.yml
+Manual-only, read-only contents permission, Ubuntu/Python, no Blender/MCP/GPU,
+25-minute timeout, downloadable scripts/audits/proposals. Requires the Actions
+repository secret OPENROUTER_API_KEY. Not pushed or run in GitHub yet.
+No daily scheduling or YouTube steps are enabled.
+
+Pipeline review command (requires the key; choose a NEW output folder):
+python -m autonomy.pipeline creative-review --creative-brief "An original historical conspiracy about a costly act of loyalty" --review-out artifacts/creative_review/my_first_run
+
+Do not run production plan/produce to get around the pause. The creative-review
+lane deliberately does not instantiate the production database or reserve episodes.
+
+Optional accepted creative-memory recovery is read-only from:
+autonomy-state:checkpoint/creative/<creative_id>.json
+Missing/corrupt state fails rather than restarting a series. No new creative
+checkpoint has been seeded there. Proposed output does not install itself.
+Automatic verified-media commits for these new-world creative series are still
+an integration task; do not claim the new review workflow is the entire finished
+daily production system.
+
+Audio scores are compatible with existing cast preparation. Storyboards contain
+24 FPS, 720x1280, framing, camera movement, timed actions and required assets.
+BUT config/creative_assets.json is intentionally empty. The three new settings
+have NO registered Blender environments/rig/action adapters. Their renderability
+is false. Different-world storytelling is implemented; arbitrary-world animation
+production is not. Never silently turn a medieval prison or fantasy town into
+an elevator or call untested action intent finished Blender animation.
+
+13. LAST RECORDED TESTS / EVIDENCE
+- Clean-source full suite: 138 tests ran; 137 passed; one optional generated
+  Episode 1 audio fixture skipped because generated artifacts are excluded.
+- All 32 new creative tests passed independently in a fresh source-only export.
+- Source/deployment scan: 156 candidate files, no detected credentials or
+  generated media. A scan is not proof against every possible secret.
+- Existing production workflow checks passed.
+- Existing Episode 3 Blender and accepted audio hashes were preserved.
+- Local state matched the preserved seed and remote production checkpoint
+  blob remained unchanged at the last verification.
+- These are recorded results from the last implementation session, not a claim
+  that the suite or remote-state queries were rerun during this handoff.
+
+Evidence:
+artifacts/creative_director_review/HANDOFF.json
+artifacts/creative_director_review/clean_source_tests.log
+artifacts/creative_director_review/clean_cloud_subset.log
+artifacts/creative_director_review/live_attempt_001/run_status.json
+artifacts/creative_director_review/pipeline_live_attempt_002/run_status.json
+artifacts/audio_previews/episode3_writing_comparison/comparison_validation.json
+
+OneDrive can intermittently deny temporary atomic file renames on Windows.
+Clean-source exports outside OneDrive were used for independent regression tests.
+Do not delete user data or replace atomic writes with unsafe writes casually.
+
+14. SOURCE MAP FOR CLAUDE
+Read first:
+CREATIVE_DIRECTOR.md ? current creative API implementation, evidence and gaps.
+PRODUCTION_QUALITY.md ? audio, writing, rendering and readiness details.
+EPISODE_3_SCRIPT_REVIEW.md ? earlier full script and 15-shot directing review.
+CINEMATIC_REFERENCE_ANALYSIS.md ? reference-driven techniques and limits.
+AUTONOMY.md / DEPLOYMENT.md ? foundation and historical deployment details.
+README.md ? overview and media locations.
+
+Some older docs describe pre-cloud/pre-creative milestones. Later sections,
+current code, dated receipts and this handoff supersede stale descriptions.
+
+Core production:
+autonomy/director.py, compiler.py, store.py, checkpoint.py, pipeline.py
+production/common.py, characters.py, episode.py
+story_scene.py, legacy_story_scene.py
+assets/elevator_template.blend
+
+Narrative / creative:
+autonomy/dialogue.py, screenwriter.py, suspense.py
+autonomy/creative.py, creative_provider.py, creative_contract.py,
+creative_compile.py, creative_memory.py
+config/storytelling_principles.json, creative_director.json, creative_assets.json
+
+Audio:
+soundstage/narration.py, casting.py, pipeline.py, voice_contract.py,
+engine_alignment.py, aligned_captions.py, captions.py, events.py, take_cache.py
+config/voice_cast_local.json, series_voice_casts.json, multivoice_preview.json
+requirements-voice-cast.txt
+
+Tools / tests:
+tools/creative_director.py, recover_creative_memory.py, preview_dialogue.py,
+write_screenplay.py, setup_voice_cast.py, cloud_checkpoint.py,
+check_autonomy_workflow.py, review_deployment.py
+tests/test_creative.py, test_suspense.py, test_voice_cast.py plus existing suite.
+quality/production_gate.py and config/production_standards.json enforce readiness.
+
+15. RECOMMENDED NEXT WORK
+1) Inspect local changes and read the latest evidence before proposing a rebuild.
+2) Obtain/configure an authorized free-provider key through an environment or
+   repository secret. Do not paste/store/commit the key in source or chat.
+3) Run ONE bounded isolated real creative-generation test. Inspect the actual
+   writing and critique/revision trail. Compare clarity, originality, causality,
+   dialogue and cliffhanger quality honestly against the authored examples.
+4) Exercise continuation with accepted test memory, without touching production
+   checkpoints. Prove that new information and consequences carry forward.
+5) Refine weak prompts/contracts from real failures; do not replace creativity
+   with a larger hidden plot-template library or approve scripts via metadata alone.
+6) If returning to Episode 3, discuss/implement the proposed "I ordered you"
+   line in a fresh audio revision; preserve the existing A/B comparison files.
+7) Choose an approved world/script, then build verified environment/rig/action
+   adapters and test cheap representative frames before any full render.
+8) Review/stage source only and request fresh approval before pushing or running
+   cloud tests. Review Actions allowance before running jobs that could be billed.
+9) Scheduling and YouTube uploading remain later, separately approved milestones.
+
+This handoff is context for collaboration, not authorization to activate any
+previously disabled production, billing, uploading or deployment action.

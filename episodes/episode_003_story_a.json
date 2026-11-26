@@ -1,0 +1,935 @@
+{
+  "schema": 1,
+  "title": "Return to Sender",
+  "strategy": "withdrawal",
+  "narration": [
+    {
+      "id": "opening",
+      "start": 0.15,
+      "end": 4.5,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "Her last delivery was marked complete. She was still holding it.",
+      "phrases": [
+        {
+          "text": "Her last delivery was marked complete.",
+          "pause_after": 0.2
+        },
+        {
+          "text": "She was still holding it.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "hope",
+      "start": 4.95,
+      "end": 9.25,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "She blamed dispatch. One call, then the lobby and home.",
+      "phrases": [
+        {
+          "text": "She blamed dispatch.",
+          "pause_after": 0.18
+        },
+        {
+          "text": "One call, then the lobby and home.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "cancel",
+      "start": 9.5,
+      "end": 12.8,
+      "speaker": "passenger",
+      "role": "protagonist",
+      "emotion": "uneasy",
+      "text": "Cancel the delivery. I'll bring it back.",
+      "phrases": [
+        {
+          "text": "Cancel the delivery.",
+          "pause_after": 0.18
+        },
+        {
+          "text": "I'll bring it back.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "silence_meaning",
+      "start": 13.2,
+      "end": 18.7,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "She waited for an argument. An argument meant someone was listening.",
+      "phrases": [
+        {
+          "text": "She waited for an argument.",
+          "pause_after": 0.28
+        },
+        {
+          "text": "An argument meant someone was listening.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "stop",
+      "start": 19.1,
+      "end": 22.1,
+      "speaker": "passenger",
+      "role": "protagonist",
+      "emotion": "desperate",
+      "text": "Hello? Stop. Please stop.",
+      "phrases": [
+        {
+          "text": "Hello?",
+          "pause_after": 0.45
+        },
+        {
+          "text": "Stop.",
+          "pause_after": 0.18
+        },
+        {
+          "text": "Please stop.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "goal_changes",
+      "start": 22.5,
+      "end": 27.1,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "The lobby passed. She wasn't trying to finish the job anymore.",
+      "phrases": [
+        {
+          "text": "The lobby passed.",
+          "pause_after": 0.25
+        },
+        {
+          "text": "She wasn't trying to finish the job anymore.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "sealed",
+      "start": 27.5,
+      "end": 29.3,
+      "speaker": "passenger",
+      "role": "protagonist",
+      "emotion": "terrified",
+      "text": "Minus one? That's sealed.",
+      "phrases": [
+        {
+          "text": "Minus one?",
+          "pause_after": 0.1
+        },
+        {
+          "text": "That's sealed.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "last_hope",
+      "start": 33.6,
+      "end": 37.1,
+      "speaker": "narrator",
+      "role": "narrator",
+      "emotion": "storytelling",
+      "text": "Someone was waiting. She still thought she could cancel.",
+      "phrases": [
+        {
+          "text": "Someone was waiting.",
+          "pause_after": 0.22
+        },
+        {
+          "text": "She still thought she could cancel.",
+          "pause_after": 0.08
+        }
+      ]
+    },
+    {
+      "id": "refuse",
+      "start": 37.5,
+      "end": 39.7,
+      "speaker": "passenger",
+      "role": "protagonist",
+      "emotion": "resolute",
+      "text": "I'm taking the parcel back.",
+      "pace": 0.94
+    },
+    {
+      "id": "answer",
+      "start": 40.6,
+      "end": 42.55,
+      "speaker": "shadow",
+      "role": "antagonist",
+      "emotion": "unsettling",
+      "text": "Keep it."
+    },
+    {
+      "id": "reversal",
+      "start": 43.05,
+      "end": 44.95,
+      "speaker": "shadow",
+      "role": "antagonist",
+      "emotion": "unsettling",
+      "text": "You're the delivery."
+    }
+  ],
+  "suspense": {
+    "schema": 1,
+    "archetype": "delivery_trap",
+    "strategy": "withdrawal",
+    "strategy_description": "Attempt to withdraw from a seemingly reversible transaction.",
+    "facts": {
+      "job_complete": {
+        "statement": "The delivery is already marked complete.",
+        "basis": "opening clue"
+      },
+      "parcel_held": {
+        "statement": "The protagonist has not handed over the parcel.",
+        "basis": "visible opening contradiction"
+      },
+      "destination_lobby": {
+        "statement": "The intended recipient is in the lobby.",
+        "basis": "assignment context"
+      },
+      "radio_unanswered": {
+        "statement": "Dispatch supplies no answer.",
+        "basis": "failed request"
+      },
+      "stop_pressed": {
+        "statement": "The protagonist attempts to stop the lift.",
+        "basis": "existing control action"
+      },
+      "lobby_passed": {
+        "statement": "The lift passes the intended stopping point.",
+        "basis": "floor sequence",
+        "earliest_reveal": 23
+      },
+      "sealed_floor": {
+        "statement": "The lower service floor is sealed.",
+        "basis": "existing canon/status panel",
+        "earliest_reveal": 24
+      },
+      "figure_present": {
+        "statement": "A figure is waiting beyond the doors.",
+        "basis": "existing corridor reveal",
+        "earliest_reveal": 31
+      },
+      "parcel_not_wanted": {
+        "statement": "The figure permits keeping, or denies ordering, the parcel.",
+        "basis": "its answer",
+        "earliest_reveal": 37
+      },
+      "human_delivery_claim": {
+        "statement": "The figure identifies the protagonist as the delivery.",
+        "basis": "cliffhanger claim, not an explanation of its origin",
+        "earliest_reveal": 43
+      }
+    },
+    "beliefs": {
+      "dispatch_error": "The completed status is a clerical error a normal person can correct.",
+      "controls_work": "The protagonist can still choose the lobby or stop the lift.",
+      "ordinary_recipient": "The figure wants the parcel and can be dealt with as a customer."
+    },
+    "goals": {
+      "resolve_error": "Clear the impossible completion and finish the shift.",
+      "reach_recipient": "Obtain the recipient name to explain the status.",
+      "escape": "Get out safely while retaining control of the parcel."
+    },
+    "questions": {
+      "who_marked": {
+        "question": "Who arranged or confirmed the delivery?",
+        "arises_from": [
+          "job_complete"
+        ]
+      },
+      "why_this_person": {
+        "question": "Why was this courier selected?",
+        "arises_from": [
+          "human_delivery_claim"
+        ]
+      },
+      "escape": {
+        "question": "Can the courier refuse an already accepted delivery?",
+        "arises_from": [
+          "human_delivery_claim",
+          "lobby_passed"
+        ]
+      }
+    },
+    "initial": {
+      "audience_knows": [],
+      "protagonist_knows": [
+        "job_complete",
+        "parcel_held",
+        "destination_lobby"
+      ],
+      "audience_believes": [
+        "dispatch_error",
+        "controls_work"
+      ],
+      "protagonist_believes": [
+        "dispatch_error",
+        "controls_work"
+      ],
+      "goal": "resolve_error"
+    },
+    "beats": [
+      {
+        "id": "contradiction",
+        "start": 0,
+        "end": 4.6,
+        "tension": 2,
+        "cues": [
+          "opening"
+        ],
+        "reveals": [
+          {
+            "fact": "job_complete",
+            "at": 2.4,
+            "to": [
+              "audience"
+            ],
+            "evidence": "opening"
+          },
+          {
+            "fact": "parcel_held",
+            "at": 4.5,
+            "to": [
+              "audience"
+            ],
+            "evidence": "opening"
+          }
+        ]
+      },
+      {
+        "id": "reassurance_and_choice",
+        "start": 4.6,
+        "end": 13,
+        "tension": 3,
+        "cues": [
+          "hope",
+          "cancel"
+        ],
+        "reveals": [
+          {
+            "fact": "destination_lobby",
+            "at": 9.25,
+            "to": [
+              "audience"
+            ],
+            "evidence": "hope"
+          }
+        ],
+        "choices": [
+          {
+            "id": "cancel_job",
+            "at": 12.7,
+            "goal": "resolve_error",
+            "action": "Ask dispatch to cancel and return the parcel.",
+            "reason": "A clerical mistake should be reversible.",
+            "evidence": "cancel",
+            "requires_known": [
+              "job_complete",
+              "parcel_held"
+            ],
+            "based_on_beliefs": [
+              "dispatch_error"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "no_human_answer",
+        "start": 13,
+        "end": 22.5,
+        "tension": 4,
+        "cues": [
+          "silence_meaning",
+          "stop"
+        ],
+        "reveals": [
+          {
+            "fact": "radio_unanswered",
+            "at": 18.8,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "silence_meaning and unanswered radio"
+          },
+          {
+            "fact": "stop_pressed",
+            "at": 20.9,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "existing stop press / stop cue"
+          }
+        ],
+        "choices": [
+          {
+            "id": "try_stop",
+            "at": 20.9,
+            "goal": "resolve_error",
+            "action": "Try the stop control.",
+            "reason": "Dispatch has not answered, so use a physical control.",
+            "evidence": "existing button press",
+            "requires_known": [
+              "radio_unanswered"
+            ],
+            "based_on_beliefs": [
+              "controls_work"
+            ]
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "cancel_job",
+            "at": 18.8,
+            "effect": "No reply comes.",
+            "meaning": "The imagined normal argument would be reassuring; she cannot even reach it."
+          }
+        ]
+      },
+      {
+        "id": "escape_replaces_job",
+        "start": 22.5,
+        "end": 29.4,
+        "tension": 6,
+        "cues": [
+          "goal_changes",
+          "sealed"
+        ],
+        "reveals": [
+          {
+            "fact": "lobby_passed",
+            "at": 23.4,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "goal_changes and floor zero"
+          },
+          {
+            "fact": "sealed_floor",
+            "at": 25.2,
+            "to": [
+              "protagonist"
+            ],
+            "evidence": "minus-one status panel"
+          },
+          {
+            "fact": "sealed_floor",
+            "at": 29.2,
+            "to": [
+              "audience"
+            ],
+            "evidence": "sealed"
+          }
+        ],
+        "belief_changes": [
+          {
+            "at": 25.2,
+            "remove": [
+              "dispatch_error",
+              "controls_work"
+            ],
+            "add": [],
+            "who": [
+              "audience",
+              "protagonist"
+            ]
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "try_stop",
+            "at": 25.2,
+            "effect": "The lift passes the lobby and stops below it.",
+            "meaning": "The problem becomes personal safety rather than finishing a delivery."
+          }
+        ],
+        "surprise": {
+          "contradicts_belief": "controls_work",
+          "revealed_by": "lobby_passed"
+        },
+        "goal_after": "escape",
+        "goal_change_at": 23.4
+      },
+      {
+        "id": "last_normal_explanation",
+        "start": 29.4,
+        "end": 37.3,
+        "tension": 7,
+        "cues": [
+          "last_hope"
+        ],
+        "reveals": [
+          {
+            "fact": "figure_present",
+            "at": 35.5,
+            "to": [
+              "protagonist"
+            ],
+            "evidence": "opening doors"
+          },
+          {
+            "fact": "figure_present",
+            "at": 37.1,
+            "to": [
+              "audience"
+            ],
+            "evidence": "last_hope"
+          }
+        ],
+        "belief_changes": [
+          {
+            "at": 35.5,
+            "remove": [],
+            "add": [
+              "ordinary_recipient"
+            ],
+            "who": [
+              "audience",
+              "protagonist"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "refusal_fails",
+        "start": 37.3,
+        "end": 42.8,
+        "tension": 8,
+        "cues": [
+          "refuse",
+          "answer"
+        ],
+        "choices": [
+          {
+            "id": "refuse_handoff",
+            "at": 39.6,
+            "goal": "escape",
+            "action": "Refuse the parcel handoff.",
+            "reason": "Keeping the parcel should prevent an unwanted exchange.",
+            "evidence": "refuse",
+            "requires_known": [
+              "figure_present",
+              "parcel_held"
+            ],
+            "based_on_beliefs": [
+              "ordinary_recipient"
+            ]
+          }
+        ],
+        "reveals": [
+          {
+            "fact": "parcel_not_wanted",
+            "at": 42.55,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "answer"
+          }
+        ],
+        "consequences": [
+          {
+            "from_choice": "refuse_handoff",
+            "at": 42.55,
+            "effect": "The figure tells her to keep it.",
+            "meaning": "Refusing the object does not cancel what is happening."
+          }
+        ]
+      },
+      {
+        "id": "reversal",
+        "start": 42.8,
+        "end": 45,
+        "tension": 10,
+        "cues": [
+          "reversal"
+        ],
+        "reveals": [
+          {
+            "fact": "human_delivery_claim",
+            "at": 44.5,
+            "to": [
+              "audience",
+              "protagonist"
+            ],
+            "evidence": "reversal"
+          }
+        ],
+        "belief_changes": [
+          {
+            "at": 44.5,
+            "remove": [
+              "ordinary_recipient"
+            ],
+            "add": [],
+            "who": [
+              "audience",
+              "protagonist"
+            ]
+          }
+        ],
+        "surprise": {
+          "contradicts_belief": "ordinary_recipient",
+          "revealed_by": "human_delivery_claim"
+        }
+      }
+    ],
+    "cue_links": {
+      "opening": {
+        "beat": "contradiction",
+        "purpose": "context",
+        "context_facts": [
+          "job_complete",
+          "parcel_held"
+        ],
+        "beliefs": [],
+        "goals": [
+          "resolve_error"
+        ],
+        "requires_known": [],
+        "why_it_matters": "context links this cue to job_complete, parcel_held, resolve_error"
+      },
+      "hope": {
+        "beat": "reassurance_and_choice",
+        "purpose": "belief",
+        "context_facts": [
+          "destination_lobby"
+        ],
+        "beliefs": [
+          "dispatch_error"
+        ],
+        "goals": [
+          "resolve_error"
+        ],
+        "requires_known": [],
+        "why_it_matters": "belief links this cue to destination_lobby, dispatch_error, resolve_error"
+      },
+      "cancel": {
+        "beat": "reassurance_and_choice",
+        "purpose": "decision",
+        "context_facts": [],
+        "beliefs": [
+          "dispatch_error"
+        ],
+        "goals": [
+          "resolve_error"
+        ],
+        "requires_known": [
+          "job_complete",
+          "parcel_held"
+        ],
+        "why_it_matters": "decision links this cue to dispatch_error, resolve_error"
+      },
+      "silence_meaning": {
+        "beat": "no_human_answer",
+        "purpose": "interpretation",
+        "context_facts": [
+          "radio_unanswered"
+        ],
+        "beliefs": [],
+        "goals": [
+          "resolve_error"
+        ],
+        "requires_known": [],
+        "why_it_matters": "interpretation links this cue to radio_unanswered, resolve_error"
+      },
+      "stop": {
+        "beat": "no_human_answer",
+        "purpose": "request",
+        "context_facts": [],
+        "beliefs": [
+          "controls_work"
+        ],
+        "goals": [
+          "resolve_error"
+        ],
+        "requires_known": [],
+        "why_it_matters": "request links this cue to controls_work, resolve_error"
+      },
+      "goal_changes": {
+        "beat": "escape_replaces_job",
+        "purpose": "goal_change",
+        "context_facts": [
+          "lobby_passed"
+        ],
+        "beliefs": [],
+        "goals": [
+          "escape"
+        ],
+        "requires_known": [],
+        "why_it_matters": "goal_change links this cue to lobby_passed, escape"
+      },
+      "sealed": {
+        "beat": "escape_replaces_job",
+        "purpose": "reaction",
+        "context_facts": [
+          "sealed_floor"
+        ],
+        "beliefs": [],
+        "goals": [
+          "escape"
+        ],
+        "requires_known": [
+          "sealed_floor"
+        ],
+        "why_it_matters": "reaction links this cue to sealed_floor, escape"
+      },
+      "last_hope": {
+        "beat": "last_normal_explanation",
+        "purpose": "belief",
+        "context_facts": [
+          "figure_present"
+        ],
+        "beliefs": [
+          "ordinary_recipient"
+        ],
+        "goals": [
+          "escape"
+        ],
+        "requires_known": [],
+        "why_it_matters": "belief links this cue to figure_present, ordinary_recipient, escape"
+      },
+      "refuse": {
+        "beat": "refusal_fails",
+        "purpose": "refusal",
+        "context_facts": [],
+        "beliefs": [
+          "ordinary_recipient"
+        ],
+        "goals": [
+          "escape"
+        ],
+        "requires_known": [
+          "figure_present",
+          "parcel_held"
+        ],
+        "why_it_matters": "refusal links this cue to ordinary_recipient, escape"
+      },
+      "answer": {
+        "beat": "refusal_fails",
+        "purpose": "answer",
+        "context_facts": [
+          "parcel_not_wanted"
+        ],
+        "beliefs": [],
+        "goals": [
+          "escape"
+        ],
+        "requires_known": [],
+        "why_it_matters": "answer links this cue to parcel_not_wanted, escape"
+      },
+      "reversal": {
+        "beat": "reversal",
+        "purpose": "answer",
+        "context_facts": [
+          "human_delivery_claim"
+        ],
+        "beliefs": [],
+        "goals": [
+          "escape"
+        ],
+        "requires_known": [],
+        "why_it_matters": "answer links this cue to human_delivery_claim, escape"
+      }
+    },
+    "protected_lines": {
+      "opening": "Her last delivery was marked complete. She was still holding it.",
+      "reversal": "You're the delivery."
+    },
+    "cliffhanger": {
+      "cue_id": "reversal",
+      "fact": "human_delivery_claim",
+      "payoff_of": [
+        "job_complete",
+        "parcel_held"
+      ],
+      "reframes_belief": "ordinary_recipient",
+      "unresolved": [
+        "who_marked",
+        "why_this_person",
+        "escape"
+      ]
+    },
+    "continuity": {
+      "start_state": {
+        "floor": "13",
+        "doors": 0,
+        "lighting": "cold",
+        "passenger_position": [
+          -0.68,
+          -0.8,
+          0
+        ],
+        "passenger_head": [
+          0,
+          0,
+          -0.1
+        ],
+        "passenger_arms": [
+          0,
+          0,
+          0
+        ],
+        "shadow_position": [
+          0.5,
+          5.4,
+          0
+        ],
+        "shadow_head": [
+          0,
+          0,
+          0
+        ],
+        "shadow_leg_l": [
+          0,
+          0,
+          0
+        ],
+        "shadow_leg_r": [
+          0,
+          0,
+          0
+        ],
+        "shadow_visible": true,
+        "characters": {
+          "protagonist": {
+            "id": "passenger",
+            "name": "Courier",
+            "color": "#D5CAB5"
+          },
+          "antagonist": {
+            "id": "shadow",
+            "name": "The Dispatcher",
+            "face_revealed": false
+          }
+        },
+        "facts": [],
+        "location": "inside_lift"
+      },
+      "end_state": {
+        "floor": "-1",
+        "doors": 1,
+        "lighting": "red",
+        "passenger_position": [
+          -0.9,
+          -0.48,
+          0
+        ],
+        "passenger_head": [
+          -0.03,
+          0,
+          2.35
+        ],
+        "passenger_arms": [
+          -0.3,
+          0.3,
+          0
+        ],
+        "shadow_position": [
+          0.5,
+          4.85,
+          0
+        ],
+        "shadow_head": [
+          0.12,
+          0,
+          -0.12
+        ],
+        "shadow_leg_l": [
+          -0.08,
+          0,
+          0
+        ],
+        "shadow_leg_r": [
+          0.08,
+          0,
+          0
+        ],
+        "shadow_visible": true,
+        "characters": {
+          "protagonist": {
+            "id": "passenger",
+            "name": "Courier",
+            "color": "#D5CAB5"
+          },
+          "antagonist": {
+            "id": "shadow",
+            "name": "The Dispatcher",
+            "face_revealed": false
+          }
+        },
+        "facts": [
+          "The lower floor is sealed.",
+          "The figure recognizes the passenger.",
+          "Its face has not been seen."
+        ],
+        "location": "inside_lift"
+      },
+      "status": "Review treatment only; no canonical checkpoint mutation"
+    }
+  },
+  "structural_review": {
+    "passed": true,
+    "choices": 3,
+    "consequences": 3,
+    "surprises": 2,
+    "final_state": {
+      "audience_knows": [
+        "job_complete",
+        "parcel_held",
+        "destination_lobby",
+        "radio_unanswered",
+        "stop_pressed",
+        "lobby_passed",
+        "sealed_floor",
+        "figure_present",
+        "parcel_not_wanted",
+        "human_delivery_claim"
+      ],
+      "protagonist_knows": [
+        "job_complete",
+        "parcel_held",
+        "destination_lobby",
+        "radio_unanswered",
+        "stop_pressed",
+        "lobby_passed",
+        "sealed_floor",
+        "figure_present",
+        "parcel_not_wanted",
+        "human_delivery_claim"
+      ],
+      "audience_believes": [],
+      "protagonist_believes": [],
+      "goal": "escape"
+    },
+    "unresolved": {
+      "who_marked": "Who arranged or confirmed the delivery?",
+      "why_this_person": "Why was this courier selected?",
+      "escape": "Can the courier refuse an already accepted delivery?"
+    },
+    "scope": "Declared knowledge/causality/timing checks; semantic and dramatic quality still require review"
+  },
+  "editorial_status": "Human writing/listening review pending; not an automatic quality approval"
+}

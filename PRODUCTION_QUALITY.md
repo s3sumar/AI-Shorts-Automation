@@ -1,5 +1,120 @@
 # Episode 3: quality first, automation second
 
+## Implemented multi-voice audio (2026-11-21)
+
+The implemented cast replaces the one-voice workaround for opt-in audio
+production. The current playable audio-only preview is
+`artifacts/audio_previews/episode3_multivoice_v3/dialogue_and_sound_preview.mp3`;
+its exact-length master is `audio/episode_mix.wav` in that same directory.
+It contains the complete 45-second writing revision in
+`episodes/episode_003_dialogue.json`, with 13 individual delivered line WAVs,
+three speaker stems, ambience/effects stems and aligned SRT/ASS captions.
+Existing 3D previews retain their previous audio; no new animation was rendered.
+
+The writing pass establishes the impossible delivery status and her wish to get
+home, replaces obvious speed commentary with a cancellation attempt, explains
+the sealed floor and preserves the recipient/delivery double meaning for the
+last line. It is an editorial audio revision; story canon has not been updated.
+
+| Role | Stable identity | Local model |
+| --- | --- | --- |
+| Narrator | `john_storyteller_v1` | John medium |
+| Main character | `lj_character_v1` | LJ Speech high |
+| Figure | `norman_figure_v1` | Norman medium |
+
+These are three distinct voice models, not one voice with different labels.
+Their model/config SHA-256 hashes and repository revisions are pinned in
+`config/voice_cast_local.json`. The model cards document public-domain datasets:
+[John](https://huggingface.co/rhasspy/piper-voices/blob/e9c8a39444359388adaa94255becb37a5a2b8e51/en/en_US/john/medium/MODEL_CARD),
+[LJ Speech](https://huggingface.co/rhasspy/piper-voices/blob/6b9cfaacb4fb2e02a9621227e3c1a48bec9710c3/en/en_US/ljspeech/high/MODEL_CARD),
+and [Norman](https://huggingface.co/rhasspy/piper-voices/blob/e9c8a39444359388adaa94255becb37a5a2b8e51/en/en_US/norman/medium/MODEL_CARD).
+Model cards and provenance stay beside the ignored downloaded models. Piper is
+an optional GPL runtime dependency, not vendored project code. These voices run
+locally on CPU and can run on Linux; they do not require Windows SAPI or a live
+Blender MCP session. The old SAPI/single-narrator development path is preserved.
+
+### Delivery, timing and mixing
+
+Each line chooses a role and a bounded `emotion` profile: storytelling, uneasy,
+afraid, desperate, terrified, resolute or unsettling. Profiles control generated
+pace, phrase pauses, subtle time-preserving pitch adjustment, gain and optional
+small amplitude tremor. The figure also receives restrained filtering/delay.
+These are real applied signal/synthesis controls, but Piper is not an emotional
+acting model. A `terrified` label does not certify believable fear; naturalness
+and character performance still require listening review.
+
+Every line has its own raw take, delivered WAV, exact voice identity, word/phrase
+timings, delivery receipt and checksums. Matching takes are reused. A changed
+script/voice/style cannot silently reuse a different take. Speech overruns fail
+with a measured error rather than cutting off words. The figure's first slot was
+widened after a measured overrun, preserving its performance and final pause.
+
+Word boundaries come from the synthesized phoneme durations, not a guessed
+transcript. Where the phonemizer joins words, a constrained per-word phoneme
+mapping uses those same timed phonemes; high edit cost or unmappable words fail.
+This fixed the `was a` boundary case. Captions retain the exact authored words,
+speaker metadata and bounded reading holds. Balanced three/three-word splitting
+fixed the refusal caption's reading speed. Pronunciation and final boundary
+quality still need listening review, especially after pitch processing.
+
+Dialogue is centered in a stereo 48 kHz mix. Environmental effects follow the
+score's animation cues; other environments can supply explicit `sound_events`.
+Ambience/effects duck under actual speech. The written mix measures −16.07 LUFS,
+−1.50 dBTP and 6.3 LU loudness range; measured speech-over-bed margin is about
+31.1 dB. The WAV contains exactly 45 seconds. MP3 and WAV fully decode without
+errors. All 13 lines fit and all 24 subtitle chunks pass the 22-character/second
+reading-speed limit, with no ASR fallback phrases.
+
+### Reuse and autonomous pipeline integration
+
+`soundstage/voice_contract.py` validates dialogue and freezes model identities;
+`soundstage/casting.py` renders the cast. New series store a voice lock in their
+bible and pass it to future episode plans. The existing courier series has a
+source-controlled voice-only lock in `config/series_voice_casts.json`; this is
+not an episode checkpoint. Changed model/config hashes or role assignments
+require explicit recasting. Supporting roles can be added with their own pinned
+voices. A character need not speak in every episode just because it is cast.
+
+The director now produces role-tagged dialogue or accepts validated dialogue
+from an already installed local model. The offline dialogue remains a baseline
+for the supported lift story grammar; it is not an unlimited story writer or a
+guarantee of publication-quality prose. Compiler settings select the feature:
+
+```json
+"audio": {"mode": "cast", "cast_settings": "config/voice_cast_local.json"}
+```
+
+`config/multivoice_preview.json` supplies that opt-in configuration. Compilation
+normalizes speakers to stable character IDs. The existing `prepare_audio.py`,
+generated caption update, audio resume and quality-evidence path accept the
+cast. Each used voice still needs human identity approval for release readiness.
+Planning/production remain paused; the new profile does not bypass that pause,
+enable uploads or advance existing story checkpoints.
+
+The manual production workflow has an optional `audio_profile: cast` choice
+(default remains legacy). That path checks the pause before downloading any
+voices or restoring/reserving state, installs `requirements-voice-cast.txt`,
+verifies pinned assets and the FFmpeg pitch filter, then uses the cast settings.
+It has not been dispatched or tested on a hosted runner in this task.
+
+For a fresh machine, install the production and voice-cast requirements;
+install FFmpeg with the `rubberband` filter. Explicitly download free voices:
+
+```text
+python tools/setup_voice_cast.py
+python tools/preview_dialogue.py --score <compiled-score.json> --script <role-script.json> --out artifacts/audio_previews/<fresh-revision> --ffmpeg <ffmpeg-executable>
+```
+
+Synthesis never downloads models, contacts paid services or creates cloud jobs.
+Audio previews do not load Blender. Tests cover voice locks across two planned
+episodes, compiler integration, changed identities, invalid dialogue, timing,
+subtitle text, coarticulation and non-elevator environmental sound events.
+The production entry point also resumed the actual completed mix without
+changing its hash. This feature is locally tested; no new cloud voice run or
+public upload has been performed.
+
+The following sections retain the earlier one-voice audition history.
+
 Episode 3 remains the fixed benchmark. No additional episode was generated and
 no working scene, video or story checkpoint was replaced. The old production
 preview is **NOT READY**, even though its render/continuity checks passed.
@@ -205,3 +320,86 @@ choose/approve a voice after listening, review story edits and mix dynamics,
 perform real phone/headphone review, fix remaining art-direction issues, then
 benchmark/render a full native 1080p master and rerun the gate. No new cloud run
 is authorized merely by deploying these source changes.
+
+
+## Treatment-first suspense writer and Episode 3 writing comparison
+
+The director now builds a causal treatment before writing spoken cues. The
+versioned policy is `config/storytelling_principles.json`; `autonomy/suspense.py`
+tracks separate audience/protagonist knowledge, beliefs and the immediate goal
+through ordered revelation, decision, consequence and belief-change events.
+Every cue has a purpose and a beat. Choices cannot use unknown information or
+unstated beliefs; consequences must follow their originating choices. Structural
+checks reject premature protected reveals, an unplanted payoff, an unrelated
+open mystery, unsupported narrator purposes, broken timing and changed staging.
+These are declared information states and intended reveal times, not automatic
+semantic understanding or proof of good writing. Actual audio word times remain
+in the audio manifest and subtitle files.
+
+`autonomy/screenwriter.py` provides withdrawal and verification strategies for a
+delivery trap, plus a borrowed-voice arrival / silent-escape archetype. Selection
+uses series context and supported scene grammar, never an Episode 3 number.
+New plans serialize their treatment, cast and proposed narrative memory. The
+next episode receives prior observations/claims, beliefs and open questions;
+a delivery-trap successor explicitly recalls the human-delivery claim. The
+existing verified-media transaction still controls whether a proposed end state
+becomes canon. This work did not reserve or commit any production episode.
+Existing plans and stored checkpoints are not migrated or rewritten.
+
+With an explicitly configured, installed loopback local model, the same
+screenwriter sends the complete treatment, canon, policy and fixed cue skeleton
+before prose generation. New dialogue then receives one bounded critique/repair
+cycle, with identity, protected-line, staging and preliminary speech-budget
+checks. A response supplying only legacy radio lines uses the structural offline
+realization for multi-voice dialogue. The optional local-model protocol was
+exercised with scripted test doubles; no installed creative LLM was run here.
+Offline writing is a bounded grammar with finite variations. It does not promise
+unlimited original plots or professional editorial quality for arbitrary series.
+The compiler uses the new spoken script and treatment in the existing opt-in
+cast audio profile. Legacy audio compatibility and production pause remain.
+
+Review sources are `episodes/episode_003_story_a.json` and
+`episodes/episode_003_story_b.json`, with corresponding timestamped `.txt` files.
+Both preserve the accepted opening and "You're the delivery." They keep the
+same physical beginning/end, faceless figure and retained parcel; neither is a
+replacement production checkpoint. A attempts cancellation, then refuses a
+handoff. B seeks a recipient name, tests the apparent recipient and receives an
+answer to her own final question. Narrator passages establish her reasonable
+expectation, why silence matters, and when finishing the job gives way to escape.
+The planned speech-free reveal holds are 29.3-33.6 seconds (A) and 28.8-31.3 (B).
+
+Actual local audio-only previews, both 45 seconds, are kept in ignored folder
+`artifacts/audio_previews/episode3_writing_comparison/`:
+
+| Version | Playable files | Lines | Measured loudness | True peak | Max caption CPS |
+| --- | --- | --- | --- | --- | --- |
+| A: cancellation | Episode3_A.mp3 / Episode3_A.wav | 11 | -16.04 LUFS | -1.50 dBTP | 20.70 |
+| B: verification | Episode3_B.mp3 / Episode3_B.wav | 12 | -16.06 LUFS | -1.50 dBTP | 20.00 |
+
+Both use the existing John/LJ/Norman cast, per-line delivery, original environment
+sound, ducking, engine-derived subtitles and no caption fallbacks. All words fit
+inside their allotted speech windows, both WAV and MP3 decode to exactly 45
+seconds, and the final MP3s decode without errors. Signature- and checksum-based
+raw-take reuse preserves identity, text, phrases and delivery controls across cue
+indices. Processing revision 2 adds linear peak headroom rather than hard
+clipping a transient; completed prior previews are preserved. Audio testing
+caught a transient peak failure, an overlong request and captions above 22 CPS;
+headroom, cue length, wording and pacing changes resolved them without cutting
+spoken words. The repeated pause/phrase and final reveal takes were reused.
+
+Validation: 106 clean-source tests ran outside OneDrive: 105 passed, one skipped
+because the optional generated Episode 1 audio fixture is not exported. This
+includes 17 new suspense/cache/headroom tests and the existing continuity,
+checkpoint, cast and upload safety coverage. The first in-place suite encountered
+an intermittent OneDrive WinError 5 on an existing temporary atomic JSON rename;
+the independent clean-source run passed. The manual-workflow checker and source
+security/deployment scanner passed. Media checks and full comparison receipts are
+in `comparison_validation.json` beside the final audio. The prior accepted audio
+and Episode 3 Blender scene hashes still match; local story state matches the
+preserved seed and the remote autonomy-state checkpoint blob is unchanged.
+
+Remaining review: free TTS pacing/pitch/tremor is not dramatic acting; listening,
+pronunciation and editorial approval remain pending. No new visuals were rendered
+or retimed to these alternate scripts. The structural checker trusts declared
+semantic links and cannot replace human judgment. No cloud run, model download,
+paid inference, upload, schedule activation, commit or push was performed.

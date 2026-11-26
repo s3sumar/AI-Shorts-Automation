@@ -44,7 +44,7 @@ def timestamp(t,sep=','):
 
 def prepare(config,out):
     c=json.loads(config.read_text(encoding='utf-8'))
-    if c.get('audio_production',{}).get('schema')==2:
+    if c.get('audio_production',{}).get('schema') in [2,3]:
         from soundstage.pipeline import prepare as cinematic_prepare
         settings=json.loads((ROOT/c['audio_production']['narrator_settings']).read_text())
         ffmpeg=os.environ.get('FFMPEG_BIN') or shutil.which('ffmpeg')

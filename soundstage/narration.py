@@ -14,6 +14,12 @@ import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 
 
+def request_signature(identity,phrases,pace=1.0,delivery=None):
+    plan={'identity':identity,'phrases':phrases,'pace':pace}
+    if delivery is not None: plan['delivery']=delivery
+    return hashlib.sha256(json.dumps(plan,sort_keys=True).encode()).hexdigest()
+
+
 class Narrator:
     def __init__(self,settings,ffmpeg):
         self.settings=settings
@@ -34,6 +40,8 @@ class Narrator:
             sha=hashlib.sha256(model.read_bytes()).hexdigest()
             if sha!=settings['model_sha256']:
                 raise ValueError('Narrator model hash changed; identity review required')
+            if settings.get('config_sha256') and hashlib.sha256(Path(str(model)+'.json').read_bytes()).hexdigest()!=settings['config_sha256']:
+                raise ValueError('Voice configuration hash changed; identity review required')
             if settings.get('phoneme_alignment'):
                 sys.path.insert(0,str(ROOT/'artifacts/alignment_tooling'))
             self.voice=PiperVoice.load(str(model),use_cuda=False,include_alignments=settings.get('phoneme_alignment',False))
@@ -44,11 +52,10 @@ class Narrator:
         else:
             raise PermissionError('Only local piper/sapi providers are enabled. Paid providers require separate approval and implementation.')
 
-    def synthesize(self,phrases,out,pace=1.0):
+    def synthesize(self,phrases,out,pace=1.0,delivery=None):
         out=Path(out)
         out.mkdir(parents=True,exist_ok=True)
-        plan={'identity':self.identity,'phrases':phrases,'pace':pace}
-        signature=hashlib.sha256(json.dumps(plan,sort_keys=True).encode()).hexdigest()
+        signature=request_signature(self.identity,phrases,pace,delivery)
         result=out/'voice.wav'
         receipt=out/'voice.json'
         if receipt.exists() and result.exists():
@@ -69,7 +76,9 @@ class Narrator:
                 from piper import SynthesisConfig
                 with wave.open(str(path),'wb') as stream:
                     alignment=self.voice.synthesize_wav(phrase['text'],stream,syn_config=SynthesisConfig(
-                        length_scale=pace,noise_scale=.5,noise_w_scale=.65,normalize_audio=True),
+                        speaker_id=self.settings.get('speaker_id'),length_scale=pace,
+                        noise_scale=(delivery or {}).get('noise_scale',.5),
+                        noise_w_scale=(delivery or {}).get('noise_w_scale',.65),normalize_audio=True),
                         include_alignments=self.settings.get('phoneme_alignment',False))
             else:
                 request=out/f'phrase_{i:02d}.json'
@@ -86,7 +95,13 @@ class Narrator:
             audio=audio[trim_start:min(len(audio),active[-1]+int(.09*SR))]
             if self.settings.get('phoneme_alignment'):
                 if not alignment: raise ValueError('Engine did not return required phoneme timing; refusing fallback')
-                words=phoneme_words(phrase['text'],[{'phoneme':p.phoneme,'num_samples':int(p.num_samples)} for p in alignment],self.voice.config.sample_rate)
+                phone_marks=[{'phoneme':p.phoneme,'num_samples':int(p.num_samples)} for p in alignment]
+                (out/f'phonemes_{i:02d}.json').write_text(json.dumps(phone_marks,ensure_ascii=False),encoding='utf-8')
+                try:
+                    words=phoneme_words(phrase['text'],phone_marks,self.voice.config.sample_rate)
+                except ValueError:
+                    per_word=[sum(self.voice.phonemize(word),[]) for word in phrase['text'].split()]
+                    words=phoneme_words(phrase['text'],phone_marks,self.voice.config.sample_rate,word_phonemes=per_word)
                 for w in words:
                     w['start']=cursor+max(0,w['start']-trim_start/SR)
                     w['end']=cursor+min(len(audio)/SR,w['end']-trim_start/SR)

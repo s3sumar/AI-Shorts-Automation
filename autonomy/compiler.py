@@ -7,6 +7,26 @@ import json
 from .contracts import ROOT,digest,validate_plan
 
 
+def apply_cast_dialogue(c,plan,settings):
+    if settings.get('audio',{}).get('mode')!='cast': return c
+    from .dialogue import role_dialogue,initial_voice_lock
+    from soundstage.voice_contract import freeze_cast,validate_cast_lock,validate_dialogue
+    path=settings['audio']['cast_settings']
+    library=json.loads((ROOT/path).read_text())
+    lock=copy.deepcopy(plan.get('voice_cast') or initial_voice_lock(plan['series_id'],library))
+    validate_cast_lock(lock,library,plan['series_id'])
+    lines=copy.deepcopy(plan.get('dialogue') or role_dialogue(plan))
+    for line in lines:
+        role=line.get('role',line['speaker'])
+        if role=='narrator': line['speaker']='narrator'
+        elif role in ['protagonist','antagonist']: line['speaker']=plan['start_state']['characters'][role]['id']
+    validate_dialogue(lines,c['duration'])
+    c['narration']=lines;c['captions']=copy.deepcopy(lines)
+    if 'suspense' in plan: c['narrative_treatment']=copy.deepcopy(plan['suspense'])
+    c['audio_production']={'schema':3,'narrator_settings':path,'cast_lock':lock}
+    return c
+
+
 def compile_plan(plan,settings):
     validate_plan(plan)
     c=json.loads((ROOT/'episodes/episode_001.json').read_text(encoding='utf-8'))
@@ -29,7 +49,7 @@ def compile_plan(plan,settings):
         if settings.get('directing',{}).get('profile')=='original_lift_v1':
             from production.directing import lift_director_pass
             c=lift_director_pass(c)
-        return c
+        return apply_cast_dialogue(c,plan,settings)
     state=plan['start_state']
     end=plan['end_state']
     c['floor_events']=[[0,state['floor']],[21,''],[21.2,state['floor']],[24,'0']]
@@ -70,4 +90,4 @@ def compile_plan(plan,settings):
     c['effects']['fear_start']=37
     c['audio_cues']=[cue for cue in c['audio_cues'] if cue['type']!='knock']
     c['audio_cues'].append({'type':'doors','start':14,'end':19,'gain':.13})
-    return c
+    return apply_cast_dialogue(c,plan,settings)

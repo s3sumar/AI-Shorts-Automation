@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "id": "creative_mapmakers_rain",
+  "title": "The Mapmaker's Rain",
+  "genre": "Community fantasy adventure",
+  "logline": "A mapmaker brings water to a drought-stricken town, then discovers that erasing ink cannot undo a flood or silence another author.",
+  "central_conflict": "A mapmaker brings water to a drought-stricken town, then discovers that erasing ink cannot undo a flood or silence another author.",
+  "theme": "A well-meant attempt to help carries a cost that forces a more difficult choice.",
+  "characters": [
+    {
+      "id": "nia",
+      "role": "protagonist",
+      "name": "Nia",
+      "personality": "Resourceful, emotionally invested, prepared to risk a clear cost.",
+      "desire": "Use the inherited map to bring the town safe drinking water.",
+      "flaw": "She wants to rescue everyone to undo the guilt of losing her mother.",
+      "voice_direction": "Natural and specific; composed intent turns to alarm through the consequences.",
+      "initial_knows": [
+        "map_rule",
+        "mother_lost"
+      ]
+    },
+    {
+      "id": "apprentice",
+      "role": "antagonist",
+      "name": "Tavi",
+      "personality": "A distinct counterpart with a practical objective, not a generic warning voice.",
+      "desire": "Bring water to the family street without losing the town bridge.",
+      "flaw": "Trusts procedure or immediate appearances before testing the implication.",
+      "voice_direction": "Clearly different timbre; measured, then personally unsettled by evidence.",
+      "initial_knows": [
+        "map_rule",
+        "mother_lost"
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "id": "map_workshop",
+      "description": "A mapmaker brings water to a drought-stricken town, then discovers that erasing ink cannot undo a flood or silence another author. A readable, original setting with visible cause and effect.",
+      "required_assets": [
+        "living_map",
+        "pen",
+        "eraser",
+        "window",
+        "town_bridge",
+        "town_well",
+        "river",
+        "family_house"
+      ]
+    }
+  ],
+  "initial_facts": {
+    "map_rule": {
+      "statement": "Lines drawn on the inherited map can alter the town landscape.",
+      "status": "observed",
+      "basis": "established magic"
+    },
+    "mother_lost": {
+      "statement": "Nia mother was lost in a river and has been presumed dead.",
+      "status": "claim",
+      "basis": "family report"
+    }
+  },
+  "mysteries": {
+    "central": {
+      "question": "Is her mother alive, and why is the other pen steering water toward home?",
+      "writer_only_answer": "Her mother is trapped on the counterpart map; she is trying to join the two landscapes to escape, unaware that each rescue stroke floods the town.",
+      "reveal_episode": 3
+    }
+  },
+  "season_arc": [
+    {
+      "episode": 1,
+      "goal": "Use the inherited map to bring the town safe drinking water.",
+      "conflict": "A mapmaker brings water to a drought-stricken town, then discovers that erasing ink cannot undo a flood or silence another author.",
+      "turn": "Nia recognizes her presumed-dead mother handwriting in marks she did not make.",
+      "payoff": "The first method fails and exposes the larger problem.",
+      "resolves": []
+    },
+    {
+      "episode": 2,
+      "goal": "Stop the flood while finding who holds the second pen.",
+      "conflict": "Nia can protect the town by erasing the path to her home, but the handwriting begs her to keep that route open.",
+      "turn": "The second map shows a mother waiting in a dry copy of the riverbed, where every rescue stroke creates water in Nia town.",
+      "payoff": "Tavi evacuates the street while Nia tests a small shared landmark and confirms that someone can answer her.",
+      "resolves": []
+    },
+    {
+      "episode": 3,
+      "goal": "Bring her mother home without flooding the town.",
+      "conflict": "Joining the maps at the house would drown the inhabited street; the only safe meeting point is the abandoned quarry, and the old map must be torn to move it.",
+      "turn": "Her mother survived in the counterpart map, unaware that each attempt to draw an escape flooded the real town.",
+      "payoff": "Nia gives up the inherited intact map and the fantasy of effortless rescue; she and Tavi create a safe crossing at the cost of its power.",
+      "resolves": [
+        "central"
+      ]
+    }
+  ]
+}

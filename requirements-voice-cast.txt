@@ -1,0 +1,3 @@
+# Exact local synthesis/alignment only; no speech-recognition model is required.
+-r requirements-audio.txt
+onnx==1.23.2
