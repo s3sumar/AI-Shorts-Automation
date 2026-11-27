@@ -43,6 +43,11 @@ def refuse_regression(previous,current):
     if not {(r['run_key'],r['uid']) for r in old['runs']}<={(r['run_key'],r['uid']) for r in new['runs']}:raise ValueError('Creative run history regressed')
     reviews={r['uid']:r['receipt'] for r in new.get('reviews',[])}
     if any(reviews.get(r['uid'])!=r['receipt'] for r in old.get('reviews',[])):raise ValueError('Editorial provenance regressed')
+    uploads={r['uid']:json.loads(r['receipt']) for r in new.get('uploads',[])}
+    for r in old.get('uploads',[]):
+        before=json.loads(r['receipt']);after=uploads.get(r['uid'])
+        if not after or any(after.get(k)!=before.get(k) for k in ['video_sha256','attempt','privacy']):raise ValueError('Upload reservation was lost or rewritten')
+        if before['status'] in ['complete','uncertain'] and after!=before:raise ValueError('Final/uncertain upload state changed without reconciliation')
 
 
 def persist(api,state,receipt):

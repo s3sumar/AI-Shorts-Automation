@@ -125,6 +125,19 @@ class CreativeProductionTests(unittest.TestCase):
         self.assertGreater(actual['end'],line['end']);self.assertLessEqual(actual['end'],11.78)
         self.assertEqual(actual['text'],line['text']);self.assertEqual(actual['start'],line['start'])
 
+    def test_unauthored_neural_sentence_pause_is_replaced_before_speeding(self):
+        from autonomy.creative_media import fit_dialogue
+        library=json.loads((ROOT/'config/voice_cast_local.json').read_text())
+        line=copy.deepcopy(self.e['narration'][2]);score={'narration':[line],'narrative_treatment':self.e['suspense']}
+        first={'duration':4.15,'words':[{'start':.07,'end':1.2},{'start':2.67,'end':2.8},{'start':2.83,'end':3.34},{'start':3.4,'end':3.52},{'start':3.54,'end':4.0}]}
+        second={'duration':2.9,'words':[{'end':2.8}]}
+        with patch('soundstage.casting.VoiceCast') as cast,patch('soundstage.take_cache.seed_takes',return_value=[]):
+            cast.return_value.render_line.side_effect=[first,second]
+            fitted=fit_dialogue(score,library,self.folder,'unused')['narration'][0]
+        self.assertEqual(fitted['text'],line['text'])
+        self.assertEqual(len(fitted['phrases']),2);self.assertEqual(fitted['phrases'][0]['pause_after'],.18)
+        self.assertNotIn('pace',fitted)
+
     def test_fast_seven_word_caption_uses_readable_group_without_lost_words(self):
         from soundstage.aligned_captions import build
         words='Can you make it reach our street?'.split()
@@ -180,8 +193,10 @@ class CreativeProductionTests(unittest.TestCase):
         saves=[i for i,c in enumerate(commands) if 'cloud_creative_store.py save' in c]
         render=next(i for i,c in enumerate(commands) if 'creative_service produce' in c)
         self.assertLess(plan,saves[0]);self.assertLess(saves[0],render);self.assertGreater(saves[1],render)
-        self.assertIn("steps.reservation.outcome == 'success'",steps[saves[1]]['if'])
-        self.assertNotIn('youtube', '\n'.join(commands).lower())
+        self.assertIn("steps.reservation.outcome == 'success'",steps[saves[-1]]['if'])
+        upload=next(s for s in steps if 'creative_upload upload' in s.get('run',''))
+        self.assertIn('inputs.private_upload == true',upload['if'])
+        self.assertEqual(w['on']['workflow_dispatch']['inputs']['private_upload']['default'],'false')
 
 
 if __name__=='__main__':unittest.main()

@@ -29,6 +29,7 @@ class CreativeStore:
             evidence TEXT,error TEXT,UNIQUE(series_id,ordinal));
           CREATE TABLE IF NOT EXISTS runs(run_key TEXT PRIMARY KEY,uid TEXT NOT NULL REFERENCES episodes(uid));
           CREATE TABLE IF NOT EXISTS reviews(uid TEXT PRIMARY KEY REFERENCES episodes(uid),receipt TEXT NOT NULL);
+          CREATE TABLE IF NOT EXISTS uploads(uid TEXT PRIMARY KEY REFERENCES episodes(uid),receipt TEXT NOT NULL);
         ''')
 
     def close(self):self.db.close()
@@ -83,6 +84,36 @@ class CreativeStore:
         if row and json.loads(row['receipt'])!=receipt:raise ValueError('Cannot rewrite the editorial provenance of a reservation')
         if not row:self.db.execute('INSERT INTO reviews VALUES(?,?)',(uid,json.dumps(receipt)))
 
+    def reserve_upload(self,uid,video_sha,attempt):
+        self.db.execute('BEGIN IMMEDIATE')
+        try:
+            episode=self.db.execute('SELECT * FROM episodes WHERE uid=?',(uid,)).fetchone()
+            if not episode or episode['status']!='verified' or json.loads(episode['evidence'])['video_sha256']!=video_sha:
+                raise ValueError('Private upload requires matching verified media')
+            row=self.db.execute('SELECT receipt FROM uploads WHERE uid=?',(uid,)).fetchone()
+            if row:
+                receipt=json.loads(row['receipt'])
+                if receipt['status']=='complete' and receipt['video_sha256']==video_sha:
+                    self.db.execute('COMMIT');return receipt
+                raise RuntimeError('An earlier upload may have reached YouTube; reconcile it before retrying')
+            receipt={'status':'reserved','privacy':'private','video_sha256':video_sha,'attempt':attempt}
+            self.db.execute('INSERT INTO uploads VALUES(?,?)',(uid,json.dumps(receipt)));self.db.execute('COMMIT')
+            return receipt
+        except Exception:self.db.execute('ROLLBACK');raise
+
+    def upload_receipt(self,uid):
+        row=self.db.execute('SELECT receipt FROM uploads WHERE uid=?',(uid,)).fetchone()
+        return json.loads(row['receipt']) if row else None
+
+    def finish_upload(self,uid,status,result=None):
+        if status not in ['complete','uncertain']:raise ValueError('Invalid upload outcome')
+        old=self.upload_receipt(uid)
+        if not old or old['status']!='reserved':raise ValueError('Upload is not reserved')
+        if status=='complete' and (not result or result.get('privacy')!='private' or not result.get('video_id')):raise ValueError('Private upload not confirmed')
+        old.update(status=status)
+        if result:old.update(video_id=result['video_id'])
+        self.db.execute('UPDATE uploads SET receipt=? WHERE uid=?',(json.dumps(old),uid))
+
     def commit_verified(self,uid,evidence,video_path):
         if not all(evidence.get(k) is True for k in ['passed','scene_passed','audio_passed','full_decode_passed']):raise ValueError('Complete media verification required')
         if evidence.get('video_sha256')!=file_digest(video_path):raise ValueError('Verified video is missing or changed')
@@ -108,7 +139,8 @@ class CreativeStore:
             value={'schema':1,'series':[dict(r) for r in self.db.execute('SELECT * FROM series ORDER BY id')],
                    'episodes':[dict(r) for r in self.db.execute('SELECT * FROM episodes ORDER BY uid')],
                    'runs':[dict(r) for r in self.db.execute('SELECT * FROM runs ORDER BY run_key')],
-                   'reviews':[dict(r) for r in self.db.execute('SELECT * FROM reviews ORDER BY uid')]}
+                   'reviews':[dict(r) for r in self.db.execute('SELECT * FROM reviews ORDER BY uid')],
+                   'uploads':[dict(r) for r in self.db.execute('SELECT * FROM uploads ORDER BY uid')]}
             self.db.execute('COMMIT')
         except Exception:self.db.execute('ROLLBACK');raise
         validate_snapshot(value)
@@ -119,7 +151,7 @@ class CreativeStore:
         if self.db.execute('SELECT COUNT(*) FROM series').fetchone()[0]:raise FileExistsError('Restore only into an empty creative ledger')
         self.db.execute('BEGIN IMMEDIATE')
         try:
-            for table,columns in [('series',['id','bible','memory']),('episodes',['uid','series_id','ordinal','script','prior_hash','status','evidence','error']),('runs',['run_key','uid']),('reviews',['uid','receipt'])]:
+            for table,columns in [('series',['id','bible','memory']),('episodes',['uid','series_id','ordinal','script','prior_hash','status','evidence','error']),('runs',['run_key','uid']),('reviews',['uid','receipt']),('uploads',['uid','receipt'])]:
                 for row in state.get(table,[]):
                     self.db.execute('INSERT INTO '+table+' VALUES('+','.join('?' for _ in columns)+')',[row[c] for c in columns])
             self.db.execute('COMMIT')
@@ -155,6 +187,14 @@ def validate_snapshot(state):
         if row['uid'] not in ids or row['uid'] in reviewed:raise ValueError('Invalid snapshot editorial receipt')
         reviewed.add(row['uid']);receipt=json.loads(row['receipt'])
         if receipt.get('authorship') not in ['authored_development_example','hosted_model']:raise ValueError('Editorial provenance must identify authorship')
+    uploaded=set()
+    for row in state.get('uploads',[]):
+        if row['uid'] not in ids or row['uid'] in uploaded:raise ValueError('Invalid durable upload receipt')
+        uploaded.add(row['uid']);r=json.loads(row['receipt'])
+        if r['status'] not in ['reserved','uncertain','complete'] or r['privacy']!='private':raise ValueError('Invalid private upload state')
+        ep=next(e for e in state['episodes'] if e['uid']==row['uid'])
+        if ep['status']!='verified' or r['video_sha256']!=json.loads(ep['evidence'])['video_sha256']:raise ValueError('Upload receipt lost its media binding')
+        if r['status']=='complete' and not r.get('video_id'):raise ValueError('Completed upload has no video identity')
     return state
 
 

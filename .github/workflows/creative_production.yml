@@ -17,6 +17,10 @@ on:
         type: choice
         options: [live_ai, authored_demo]
         default: live_ai
+      private_upload:
+        description: Explicitly upload this development video privately (requires YouTube OAuth)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -46,6 +50,13 @@ jobs:
           python-version: '3.13'
       - name: Stop before expensive setup if credentials are missing
         run: python -c "import os; assert os.environ.get('SCRIPT_SOURCE') == 'authored_demo' or os.environ.get('OPENROUTER_API_KEY'), 'Missing OPENROUTER_API_KEY; no AI or render has started'"
+      - name: Check credentials for an explicitly selected private upload
+        if: inputs.private_upload == true
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: python -c "import os; assert all(os.environ.get(k) for k in ['YOUTUBE_CLIENT_ID','YOUTUBE_CLIENT_SECRET','YOUTUBE_REFRESH_TOKEN']), 'Missing YouTube OAuth; no upload, AI request or render has started'"
       - name: Install lightweight dependencies and run integration safeguards
         run: |
           python -m pip install -r requirements-production.txt
@@ -81,6 +92,29 @@ jobs:
       - name: Produce one complete sampled preview and verify it
         run: |
           xvfb-run -a python -m autonomy.creative_service produce --development --state artifacts/creative_cloud_state/ledger.sqlite3 --run-key "github-${GITHUB_RUN_ID}" --out "artifacts/creative_media/${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}" --blender "$GITHUB_WORKSPACE/blender-app/blender" --ffmpeg ffmpeg
+      - name: Reserve optional explicitly selected private upload
+        if: inputs.private_upload == true
+        env:
+          YOUTUBE_UPLOAD_APPROVED: YES_PRIVATE_UPLOAD
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python -m pip install -r requirements-youtube.txt
+          python -m autonomy.creative_upload reserve --state artifacts/creative_cloud_state/ledger.sqlite3 --job "artifacts/creative_media/${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}/youtube_private_upload.json" --attempt "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Persist private upload reservation before contacting YouTube
+        id: upload_reservation
+        if: inputs.private_upload == true
+        run: python tools/cloud_creative_store.py save
+      - name: Execute only the explicitly requested private upload
+        if: inputs.private_upload == true && steps.upload_reservation.outcome == 'success'
+        env:
+          YOUTUBE_UPLOAD_APPROVED: YES_PRIVATE_UPLOAD
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python -m autonomy.creative_upload upload --state artifacts/creative_cloud_state/ledger.sqlite3 --job "artifacts/creative_media/${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}/youtube_private_upload.json" --attempt "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --checkpoint-receipt artifacts/creative_cloud_state/recovery.json
       - name: Persist verified result or failure without losing the reservation
         if: always() && steps.reservation.outcome == 'success'
         run: python tools/cloud_creative_store.py save

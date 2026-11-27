@@ -27,7 +27,7 @@ def fit_dialogue(score,library,out,ffmpeg,reuse_sources=()):
         authored_end=line['end']
         seed_takes([line],library,out/'timing_probe'/f'line_{i:02d}',reuse_sources)
         pace=resolve_delivery(library,line)[2]['pace']
-        for attempt in range(3):
+        for attempt in range(4):
             folder=out/'timing_probe'/f'line_{i:02d}'/f'voice/take_{attempt:02d}'
             take=cast.render_line(line,folder)
             spoken=max(w['end'] for w in take['words']);available=line['end']-line['start']
@@ -38,9 +38,27 @@ def fit_dialogue(score,library,out,ffmpeg,reuse_sources=()):
             tail_limit=min(available+library['timing']['max_tail_overrun_seconds'],next_start-line['start']-.03)
             if spoken<=permitted and total<=tail_limit:
                 sources.append(folder.parent.parent);break
+            # Piper can invent >1s pauses between two sentences in a single
+            # phrase. Replace only those measured, unauthored gaps with explicit
+            # phrase pauses before accelerating speech. Authored pauses survive.
+            words=take['words'];authored=line['text'].split()
+            if len(line.get('phrases',[]))==1 and len(words)==len(authored) and attempt<3:
+                cuts=[j+1 for j in range(len(words)-1)
+                    if words[j+1].get('start',0)-words[j]['end']>.45
+                    and authored[j].rstrip(chr(34)+chr(39)).endswith(('.','!','?'))
+                    and authored[j].lower() not in ['dr.','mr.','mrs.','ms.','st.']]
+                if cuts and len(cuts)<8:
+                    boundaries=[0]+cuts+[len(authored)]
+                    pauses=line['phrases'][0].get('pause_after',.08)
+                    planned=[{'text':' '.join(authored[a:b]),'pause_after':.18 if b<len(authored) else pauses}
+                             for a,b in zip(boundaries,boundaries[1:])]
+                    if ' '.join(p['text'] for p in planned)==line['text']:
+                        line['phrases']=planned
+                        changes.append({'cue':line['id'],'reason':'replace measured unauthored sentence silence with explicit phrase pacing','phrases':planned})
+                        continue
             revised=round(max(.75,pace*min(permitted/max(spoken,.01),
                 tail_limit/max(total,.01))*.97),4)
-            if revised>=pace or attempt==2:
+            if revised>=pace or attempt==3:
                 treatment=score.get('narrative_treatment',{})
                 beat_id=treatment.get('cue_links',{}).get(line['id'],{}).get('beat')
                 beat=next((b for b in treatment.get('beats',[]) if b['id']==beat_id),None)
