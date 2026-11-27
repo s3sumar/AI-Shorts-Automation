@@ -1,0 +1,23 @@
+AI-Shorts-Automation ? current handoff, November 26, 2026
+
+Repository: C:\Users\Shakeel\OneDrive\Documents\AI-Shorts-Automation
+GitHub: https://github.com/s3sumar/AI-Shorts-Automation
+
+Read COMPLETION_REPORT_2026-11-26.md and AUTOMATION_STATUS.md first.
+The November 23 handoff is retained as history; its uncommitted/source and missing-scene-adapter descriptions are superseded. Latest code is pushed to main.
+
+A complete authored development episode passed GitHub Actions end to end:
+https://github.com/s3sumar/AI-Shorts-Automation/actions/runs/45938272806
+Duration 8m41s. Downloaded MP4 independently decoded and matched its hash.
+Two earlier timing failures preserved the same pending episode; three run keys now refer to one verified development episode. Development next=2.
+The original production checkpoint stayed unchanged; its next global episode remains 4. Do not replace cloud state with the older local seed.
+
+Complete revised courier Episode 3 MP4, new I-ordered-you audio, three original-world blockout movies, native 720p24 probe and cloud download are available through:
+artifacts/production_completion_20261126/REVIEW.html
+Generated media stays ignored/local, except the explicitly tested GitHub Actions artifact.
+
+Live model writing is NOT tested: no OpenRouter API key is configured. YouTube OAuth is NOT configured and no video has been uploaded there. Private upload code has durable reservation/uncertain/completed receipts and protocol tests, not a real OAuth test.
+Three new worlds now have simple typed scene adapters. They are blockout art, not publication-quality acting/visuals. Full native-HD production and final human review remain incomplete.
+Daily/public/paid services remain off. The 9AM Toronto scheduler is an inactive template outside .github/workflows and is gated on configuration/credentials/quality pause. Do not activate it casually.
+
+Preserve original scenes, videos and backups. Do not infer live AI creative quality from fixtures/doubles, do not silently render new worlds as elevators, and do not advance canonical checkpoints during reviews/benchmarks. Latest user gave broad implementation access; future publishing, billing and account consent must still respect actual owner authorization and credential availability.

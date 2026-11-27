@@ -1,5 +1,7 @@
 # AI Shorts Automation - Below Zero
 
+**[November 26 delivery report](COMPLETION_REPORT_2026-11-26.md):** verified cloud development production, a complete revised Episode 3 preview and three original-world preview movies. Live AI/YouTube credentials and final cinematic quality remain unfinished; daily/public/paid services remain off.
+
 **November 26 integration update:** the creative development pipeline now produces
 complete original-world Blender previews with three voices, subtitles, durable
 reservations/recovery and verified-media commits. Three actual 45-second blockout

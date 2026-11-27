@@ -186,7 +186,7 @@ class CreativeProductionTests(unittest.TestCase):
     def test_development_cloud_workflow_preserves_reservation_before_render(self):
         import yaml
         w=yaml.load((ROOT/'.github/workflows/creative_production.yml').read_text(),Loader=yaml.BaseLoader)
-        self.assertEqual(set(w['on']),{'workflow_dispatch'})
+        self.assertEqual(set(w['on']),{'workflow_dispatch','workflow_call'})
         self.assertEqual(w['concurrency']['cancel-in-progress'],'false')
         steps=w['jobs']['produce']['steps'];commands=[s.get('run','') for s in steps]
         plan=next(i for i,c in enumerate(commands) if 'creative_service plan' in c)
@@ -197,6 +197,22 @@ class CreativeProductionTests(unittest.TestCase):
         upload=next(s for s in steps if 'creative_upload upload' in s.get('run',''))
         self.assertIn('inputs.private_upload == true',upload['if'])
         self.assertEqual(w['on']['workflow_dispatch']['inputs']['private_upload']['default'],'false')
+
+    def test_daily_template_is_inactive_and_timezone_guard_is_valid_python(self):
+        import yaml
+        path=ROOT/'.github/workflow-templates/daily_creative.yml'
+        w=yaml.load(path.read_text(),Loader=yaml.BaseLoader)
+        self.assertFalse((ROOT/'.github/workflows/daily_creative.yml').exists())
+        self.assertEqual(w['on']['schedule'][0]['cron'],'0 13,14 * * *')
+        command=w['jobs']['readiness']['steps'][1]['run']
+        code=command.split("<<'PY'\n",1)[1].rsplit('\nPY',1)[0]
+        compile(code,'daily-readiness-template','exec')
+        self.assertIn('America/Toronto',code);self.assertIn('episode_generation_paused',code)
+        from contextlib import chdir
+        output=self.folder/'daily_outputs.txt'
+        with chdir(ROOT),patch.dict('os.environ',{'GITHUB_OUTPUT':str(output)}),patch('builtins.print'):
+            exec(compile(code,'daily-readiness-template','exec'),{})
+        self.assertEqual(output.read_text().splitlines(),['run=false','private_upload=false'])
 
 
 if __name__=='__main__':unittest.main()

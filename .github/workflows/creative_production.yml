@@ -2,6 +2,29 @@ name: Creative End-to-End Development Production
 
 # Deliberately manual. Canonical production, daily scheduling and upload stay off.
 on:
+  workflow_call:
+    inputs:
+      brief:
+        required: true
+        type: string
+      initialize:
+        type: boolean
+        default: false
+      script_source:
+        type: string
+        default: live_ai
+      private_upload:
+        type: boolean
+        default: false
+    secrets:
+      OPENROUTER_API_KEY:
+        required: false
+      YOUTUBE_CLIENT_ID:
+        required: false
+      YOUTUBE_CLIENT_SECRET:
+        required: false
+      YOUTUBE_REFRESH_TOKEN:
+        required: false
   workflow_dispatch:
     inputs:
       brief:
@@ -49,7 +72,7 @@ jobs:
         with:
           python-version: '3.13'
       - name: Stop before expensive setup if credentials are missing
-        run: python -c "import os; assert os.environ.get('SCRIPT_SOURCE') == 'authored_demo' or os.environ.get('OPENROUTER_API_KEY'), 'Missing OPENROUTER_API_KEY; no AI or render has started'"
+        run: python -c "import os; assert os.environ.get('SCRIPT_SOURCE') in ['live_ai','authored_demo']; assert os.environ.get('SCRIPT_SOURCE') == 'authored_demo' or os.environ.get('OPENROUTER_API_KEY'), 'Missing OPENROUTER_API_KEY; no AI or render has started'"
       - name: Check credentials for an explicitly selected private upload
         if: inputs.private_upload == true
         env:

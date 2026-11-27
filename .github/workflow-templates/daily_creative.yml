@@ -1,0 +1,63 @@
+# INACTIVE TEMPLATE: this directory is not executed by GitHub Actions.
+# Install as .github/workflows/daily_creative.yml only after credentials,
+# native production-quality approval and daily_enabled=true are in place.
+name: Daily Original Shorts (gated template)
+on:
+  schedule:
+    # 09:00 America/Toronto across DST. The gate selects the correct UTC slot.
+    - cron: '0 13,14 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-creative-dispatch
+  cancel-in-progress: false
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+      private_upload: ${{ steps.gate.outputs.private_upload }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - id: gate
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os,json,datetime
+          from zoneinfo import ZoneInfo
+          from pathlib import Path
+          settings=json.loads(Path('config/creative_production.json').read_text())
+          standards=json.loads(Path('config/production_standards.json').read_text())
+          local=datetime.datetime.now(ZoneInfo('America/Toronto'))
+          private=bool(settings['youtube']['enabled'])
+          oauth=all(os.environ.get(k) for k in ['YOUTUBE_CLIENT_ID','YOUTUBE_CLIENT_SECRET','YOUTUBE_REFRESH_TOKEN'])
+          ready=(settings['daily_enabled'] and not standards['episode_generation_paused']
+                 and bool(os.environ.get('OPENROUTER_API_KEY')) and (not private or oauth)
+                 and (os.environ.get('GITHUB_EVENT_NAME')=='workflow_dispatch' or local.hour==9))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('run='+str(ready).lower()+'\nprivate_upload='+str(private).lower()+'\n')
+          print('Daily generation gate:',ready,'local time:',local.isoformat())
+          PY
+  produce:
+    needs: readiness
+    if: needs.readiness.outputs.run == 'true'
+    uses: ./.github/workflows/creative_production.yml
+    with:
+      brief: Continue the original series with clear motives, escalating consequences and a connected cliffhanger.
+      initialize: false
+      script_source: live_ai
+      private_upload: ${{ needs.readiness.outputs.private_upload == 'true' }}
+    secrets:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
